@@ -1,0 +1,14 @@
+# top level directories
+Output/
+Papers/
+_export/
+# MATLAB binaries
+*.mat
+*.mexa64
+*.mexglx
+*.mexmaci
+*.mexmaci64
+*.mexw32
+*.mexw64
+*.zip
+*.asv
