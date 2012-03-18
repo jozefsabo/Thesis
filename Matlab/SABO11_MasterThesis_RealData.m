@@ -3,16 +3,18 @@
 global_settings; 
 
 % create a test directory and switch to it
-test_dirname = mk_test_dir(OUTPUT_PATH, 'SABO11_MasterThesis_RealData lena238'); 
+test_dirname = mk_test_dir(OUTPUT_PATH, 'SABO11_MasterThesis_RealData lena003'); 
 cd(test_dirname); 
 
 % create a report file
 rpt_file = mk_report_file([test_dirname '\'], 'report.txt'); 
 
-images   = {'lena238' }; %'lena226' 'lena238'}; 
+images   = {'lena003' }; %'lena226' 'lena238'}; 
 imrefs   = {'lena256' }; %'lena256' 'lena256'};
 
 % master reference image
+
+PSFs     = [17]; 
  
 
 for i=1:length(images)
@@ -23,7 +25,8 @@ for i=1:length(images)
     im_ref  = im2double(imread([imrefs{i} '.png' ])); 
     
     %determine the PSF size
-    PSFsize = size(im_ref,1) - size(im_orig,1) + 1;  
+    %PSFsize = size(im_ref,1) - size(im_orig,1) + 1;  
+    PSFsize = PSFs(i); 
     
     im_blur = im2double(imread([images{i} '_blur.png' ]));
     im_noise= im2double(imread([images{i} '_noise.png']));
