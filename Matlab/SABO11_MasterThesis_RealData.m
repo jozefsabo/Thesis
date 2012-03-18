@@ -94,8 +94,8 @@ for i=1:length(images)
     gamma      = est_gamma ({im_noise im_blur}, {psf_noise psf_blur}, [noise_std^2 blur_std^2]);
 
     
-    lambdas    = [10]; 
-    gammas     = [0.01]; 
+    lambdas    = [0.25.*lambda lambda 4.*lambda]; 
+    gammas     = [0.25.*gamma  gamma  4.*gamma ]; 
         
     
     for j=1:size(gammas,2)
