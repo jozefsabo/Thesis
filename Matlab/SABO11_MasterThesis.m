@@ -135,7 +135,9 @@ if ISO_MODE
                                 toc;
                                 % evaluate sroubek's method success
                                 %srou03_snr = eval_snr        (img_source, img_srou03); 
-                                srou03_isnr = eval_sroubek_snr(img_source, img_srou03);
+                                %srou03_isnr = eval_sroubek_snr(img_source, img_srou03);
+								srou03_isnr = eval_sroubek_snr_shift(img_source, img_srou03, PSFs(l));
+								
                                 %srou03_pmse= eval_pmse       (img_source, img_srou03);
                                 
                                 % estimated kernels
@@ -251,7 +253,8 @@ if ISO_MODE
                                 toc; 
                                 % evaluate sroubek's method success
                                 %srou03_snr = eval_snr        (img_source, img_srou03); 
-                                srou03_isnr = eval_sroubek_snr(img_source, img_srou03);
+                                %srou03_isnr = eval_sroubek_snr(img_source, img_srou03);
+								srou03_isnr = eval_sroubek_snr_shift(img_source, img_srou03, PSFs(l));
                                 %srou03_pmse= eval_pmse       (img_source, img_srou03);
 
                                 % estimated kernels
