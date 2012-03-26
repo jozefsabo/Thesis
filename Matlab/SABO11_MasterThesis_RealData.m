@@ -3,10 +3,10 @@
 global_settings; 
 
 % input and reference images
-images   = {'lena001'}; 
+images   = {'lena001' 'lena002' 'lena003'}; 
 
 % point spread function sizes
-PSFs     = [35]; 
+PSFs     = [31 21 17]; 
 
 % number of SROU03 iterations
 no_iter  = 1; 
@@ -17,11 +17,10 @@ run_tico09 = 1;
 run_srou03 = 1; 
 
 % equalize images?
-run_imeq   = 0; 
+run_imeq   = 1; 
 
 % create a test directory and switch to it
-%test_dirname = mk_test_dir(OUTPUT_PATH, 'SABO11_MasterThesis_RealData BM3D, TICO09 lena001 lena002 lena003'); 
-test_dirname = mk_test_dir(OUTPUT_PATH, sprintf('%s IMG %s PSF %d ITER %d',mfilename,images{:},PSFs(:),no_iter)); 
+test_dirname = mk_test_dir(OUTPUT_PATH, sprintf('%s equalized',mfilename)); 
 
 cd(test_dirname); 
 
@@ -103,7 +102,7 @@ for i=1:length(images)
 		fprintf(rpt_file, 'Average noise standard deviation for the bm3d image   : %8.7f \n'                     ,bm3d_n_std           ); 
    	
         % evalute BM3D SNR
-        fprintf(rpt_file, 'BM3D   SNR: %6.4f\n\n',eval_sroubek_snr_scan(im_orig, bm3d));
+        fprintf(rpt_file, 'BM3D   SNR: %6.4f\n\n',eval_sroubek_snr_shift(im_orig, bm3d, PSFsize));
         % write BM3D image
         imwrite(bm3d  ,[images{i} '_bm3d.png'  ],'png');
     end
