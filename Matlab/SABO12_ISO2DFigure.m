@@ -6,14 +6,18 @@ function fig_res = SABO12_ISO2DFigure(in_data, out_name)
 
     colormap(RGBmap);
     
-    image(in_data)
-	 
+    %image(in_data)
+	image(flipud(in_data))
+    
 	grid on
     
-    set(gca,'YTickLabel',{' ', '3',' ','7',' ','15',' ', '31'});
+    set(gca,'FontSize',15);
+    %set(gca,'YTickLabel',{' ', '3',' ','7',' ','15',' ', '31'});
+    set(gca,'YTickLabel',{' ', '31',' ','15',' ','7',' ', '3'});
+    
     set(gca,'XTickLabel',{'200','400','800','1600','3200','6400','12800','25600','102400'});
-   	xlabel(gca,'Input ISO');
-	ylabel(gca,'PSF size');
+   	%xlabel(gca,'Input ISO');
+	%ylabel(gca,'PSF size');
 	
     print(sprintf('-f%d',gcf),'-dpsc2',out_name);
 

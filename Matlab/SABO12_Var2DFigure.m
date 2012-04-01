@@ -6,14 +6,18 @@ function fig_res = SABO12_Var2DFigure(in_data, out_name)
 
     colormap(RGBmap);
     
-    image(in_data)
+    %image(in_data)
+	image(flipud(in_data))
 	 
 	grid on
 
-    set(gca,'YTickLabel',{' ','3',' ','7',' ','15',' ','31'});
+    set(gca,'FontSize',15);
+    %set(gca,'YTickLabel',{' ', '3',' ','7',' ','15',' ', '31'});
+    set(gca,'YTickLabel',{' ', '31',' ','15',' ','7',' ', '3'});
+    
 	set(gca,'XTickLabel',{' ', '0.0001',' ','0.001',' ','0.01',' ','0.1'});
-	xlabel(gca,'Noise variance');
-	ylabel(gca,'PSF size');
+	%xlabel(gca,'Noise variance');
+	%ylabel(gca,'PSF size');
     
     print(sprintf('-f%d',gcf),'-dpsc2',out_name);
 

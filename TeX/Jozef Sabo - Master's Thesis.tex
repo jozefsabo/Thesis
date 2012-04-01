@@ -18,6 +18,9 @@
 
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
+\usepackage[small]{caption}
+\usepackage{hyperref}
+\usepackage{subfig}
 \usepackage[pdftex]{graphicx}
 \usepackage{dsfont}
 \usepackage{amsmath}
@@ -29,9 +32,7 @@
 \usepackage{graphicx} % nezbytné pro standardní vkládání obrázků do dokumentu
 
 \usepackage[left=4cm]{geometry} % nastavení dané velikosti okrajů
-\usepackage[small]{caption}
-\usepackage{hyperref}
-\newtheorem{problem}{Problem}
+%\newtheorem{problem}{Problem}
 
 \addtolength\textheight {0.1\textheight}
 
@@ -879,7 +880,7 @@ Of the total of $256$ experiments performed in variance mode, Šroubek's algorit
 
 Both of the two marginally successful results of Tico's algorithm in variance mode were achieved in conditions of extreme noise in the noisy image (variance 0.1) and extreme blurring in the other (PSF sizes 15 and 31), one of which is illustrated by figure \ref{fig:tico09_var_success}. The SNR of Tico's result was 5.3947 compared to Šroubek's 2.5659 and 5.0676 for the BM3D algorithm. 
 
-%%%
+
 \begin{figure}[htb]
  \begin{center}
   \includegraphics[width=12cm]{tico09_iso_success.png}
@@ -887,9 +888,9 @@ Both of the two marginally successful results of Tico's algorithm in variance mo
  \caption{Top row: the blurred and noisy image pair for the successful result of the Tico's algorithm in ISO mode. Bottom row: the results of Tico's and Šroubek's methods and the BM3D algorithm.}
  \label{fig:tico09_iso_success}
 \end{figure}
-%%%
 
-%%%
+
+
 \begin{figure}[htb]
  \begin{center}
   \includegraphics[width=12cm]{tico09_var_success.png}
@@ -897,8 +898,122 @@ Both of the two marginally successful results of Tico's algorithm in variance mo
  \caption{Top row: the blurred and noisy image pair for the successful result of the Tico's algorithm in variance mode. Bottom row: the results of Tico's and Šroubek's methods and the BM3D algorithm.}
  \label{fig:tico09_var_success}
 \end{figure}
-%%%
 
+\clearpage
+
+
+\begin{figure}[htb]
+  \begin{center}
+	  \subfloat[]{\label{fig:iso_lena256_line}\includegraphics[width=0.5\textwidth]{iso_lena256_line.pdf}}
+	  \subfloat[]{\label{fig:iso_lena256_blurkernel7}\includegraphics[width=0.5\textwidth]{iso_lena256_blurkernel7.pdf}}
+
+	  \subfloat[]{\label{fig:iso_lena256_blurkernel8}\includegraphics[width=0.5\textwidth]{iso_lena256_blurkernel8.pdf}}
+	  \subfloat[]{\label{fig:iso_lena256_blurkernel10}\includegraphics[width=0.5\textwidth]{iso_lena256_blurkernel10.pdf}}
+  \caption[Results for the lena image in ISO mode]{Results of the simulated data experiment on the lena image in ISO mode.}
+  \end{center}
+  \label{fig:iso_lena256}
+\end{figure}
+
+
+
+\begin{figure}[htb]
+  \begin{center}
+	  \subfloat[]{\label{fig:var_lena256_line}\includegraphics[width=0.5\textwidth]{var_lena256_line.pdf}}
+	  \subfloat[]{\label{fig:var_lena256_blurkernel7}\includegraphics[width=0.5\textwidth]{var_lena256_blurkernel7.pdf}}
+
+	  \subfloat[]{\label{fig:var_lena256_blurkernel8}\includegraphics[width=0.5\textwidth]{var_lena256_blurkernel8.pdf}}
+	  \subfloat[]{\label{fig:var_lena256_blurkernel10}\includegraphics[width=0.5\textwidth]{var_lena256_blurkernel10.pdf}}
+  \caption[Results for the lena image in variance mode]{Results of the simulated data experiment on the lena image in variance mode.}
+  \end{center}
+  \label{fig:var_lena256}
+\end{figure}
+
+\clearpage
+
+\begin{figure}[htb]
+  \begin{center}
+	  \subfloat[]{\label{fig:iso_castle256_line}\includegraphics[width=0.5\textwidth]{iso_castle256_line.pdf}}
+	  \subfloat[]{\label{fig:iso_castle256_blurkernel7}\includegraphics[width=0.5\textwidth]{iso_castle256_blurkernel7.pdf}}
+
+	  \subfloat[]{\label{fig:iso_castle256_blurkernel8}\includegraphics[width=0.5\textwidth]{iso_castle256_blurkernel8.pdf}}
+	  \subfloat[]{\label{fig:iso_castle256_blurkernel10}\includegraphics[width=0.5\textwidth]{iso_castle256_blurkernel10.pdf}}
+  \caption[Results for the castle image in ISO mode]{Results of the simulated data experiment on the castle image in ISO mode.}
+  \end{center}
+  \label{fig:iso_castle256}
+\end{figure}
+
+
+
+\begin{figure}[htb]
+  \begin{center}
+	  \subfloat[]{\label{fig:var_castle256_line}\includegraphics[width=0.5\textwidth]{var_castle256_line.pdf}}
+	  \subfloat[]{\label{fig:var_castle256_blurkernel7}\includegraphics[width=0.5\textwidth]{var_castle256_blurkernel7.pdf}}
+
+	  \subfloat[]{\label{fig:var_castle256_blurkernel8}\includegraphics[width=0.5\textwidth]{var_castle256_blurkernel8.pdf}}
+	  \subfloat[]{\label{fig:var_castle256_blurkernel10}\includegraphics[width=0.5\textwidth]{var_castle256_blurkernel10.pdf}}
+  \caption[Results for the castle image in variance mode]{Results of the simulated data experiment on the castle image in variance mode.}
+  \end{center}
+  \label{fig:var_castle256}
+\end{figure}
+
+\clearpage
+
+\begin{figure}[htb]
+  \begin{center}
+	  \subfloat[]{\label{fig:iso_text256_line}\includegraphics[width=0.5\textwidth]{iso_text256_line.pdf}}
+	  \subfloat[]{\label{fig:iso_text256_blurkernel7}\includegraphics[width=0.5\textwidth]{iso_text256_blurkernel7.pdf}}
+
+	  \subfloat[]{\label{fig:iso_text256_blurkernel8}\includegraphics[width=0.5\textwidth]{iso_text256_blurkernel8.pdf}}
+	  \subfloat[]{\label{fig:iso_text256_blurkernel10}\includegraphics[width=0.5\textwidth]{iso_text256_blurkernel10.pdf}}
+  \caption[Results for the text image in ISO mode]{Results of the simulated data experiment on the text image in ISO mode.}
+  \end{center}
+  \label{fig:iso_text256}
+\end{figure}
+
+
+
+\begin{figure}[htb]
+  \begin{center}
+	  \subfloat[]{\label{fig:var_text256_line}\includegraphics[width=0.5\textwidth]{var_text256_line.pdf}}
+	  \subfloat[]{\label{fig:var_text256_blurkernel7}\includegraphics[width=0.5\textwidth]{var_text256_blurkernel7.pdf}}
+
+	  \subfloat[]{\label{fig:var_text256_blurkernel8}\includegraphics[width=0.5\textwidth]{var_text256_blurkernel8.pdf}}
+	  \subfloat[]{\label{fig:var_text256_blurkernel10}\includegraphics[width=0.5\textwidth]{var_text256_blurkernel10.pdf}}
+  \caption[Results for the text image in variance mode]{Results of the simulated data experiment on the text image in variance mode.}
+  \end{center}
+  \label{fig:var_text256}
+\end{figure}
+
+
+\clearpage
+
+\begin{figure}[htb]
+  \begin{center}
+	  \subfloat[]{\label{fig:iso_tree256_line}\includegraphics[width=0.5\textwidth]{iso_tree256_line.pdf}}
+	  \subfloat[]{\label{fig:iso_tree256_blurkernel7}\includegraphics[width=0.5\textwidth]{iso_tree256_blurkernel7.pdf}}
+
+	  \subfloat[]{\label{fig:iso_tree256_blurkernel8}\includegraphics[width=0.5\textwidth]{iso_tree256_blurkernel8.pdf}}
+	  \subfloat[]{\label{fig:iso_tree256_blurkernel10}\includegraphics[width=0.5\textwidth]{iso_tree256_blurkernel10.pdf}}
+  \caption[Results for the tree image in ISO mode]{Results of the simulated data experiment on the tree image in ISO mode.}
+  \end{center}
+  \label{fig:iso_tree256}
+\end{figure}
+
+
+
+\begin{figure}[htb]
+  \begin{center}
+	  \subfloat[]{\label{fig:var_tree256_line}\includegraphics[width=0.5\textwidth]{var_tree256_line.pdf}}
+	  \subfloat[]{\label{fig:var_tree256_blurkernel7}\includegraphics[width=0.5\textwidth]{var_tree256_blurkernel7.pdf}}
+
+	  \subfloat[]{\label{fig:var_tree256_blurkernel8}\includegraphics[width=0.5\textwidth]{var_tree256_blurkernel8.pdf}}
+	  \subfloat[]{\label{fig:var_tree256_blurkernel10}\includegraphics[width=0.5\textwidth]{var_tree256_blurkernel10.pdf}}
+  \caption[Results for the tree image in variance mode]{Results of the simulated data experiment on the tree image in variance mode.}
+  \end{center}
+  \label{fig:var_tree256}
+\end{figure}
+
+\clearpage
 
 \section{Results for real-world data}
 \label{sec:real_world_data}
@@ -930,7 +1045,7 @@ In this experiment, we simulated extremely low-light conditions, which is eviden
 %%%
 
 %%%
-\begin{table}
+\begin{table}[htb]
   \begin{center}
   \begin{tabular}{ | l | c | c | c | c | c | c | }
     \hline
@@ -980,7 +1095,7 @@ In this case, the blurred image was obtained using the ISO setting of 100 and 1 
 %%%
 
 %%%
-\begin{table}
+\begin{table}[htb]
   \begin{center}
   \begin{tabular}{ | l | c | c | c | c | c | c | }
     \hline
@@ -1029,9 +1144,9 @@ The blurred image was taken using the ISO setting of 100 and $1/3$ second exposu
 %%%
 
 %%%
-\begin{table}
-  \begin{center}
-  \begin{tabular}{ | l | c | c | c | c | c | c | }
+\begin{table}[htb]
+	\begin{center}
+	\begin{tabular}{ | l | c | c | c | c | c | c | }
 	\hline
 		& Original & Blurred & Noisy & Šroubek & Tico & BM3D \\ \hline 
 	Mean & 0.4884 & 0.7700 & 0.6879 &  & 0.6879 & 0.6879 \\ \hline 
@@ -1046,10 +1161,10 @@ The blurred image was taken using the ISO setting of 100 and $1/3$ second exposu
 	Gamma & - & - & - &  & - & - \\ \hline 
 	Lambda & - & - & - &  & - & - \\ \hline 
 
-  \end{tabular}
-  \end{center}
-  \caption{Image statistics for experiment 3.}
-  \label{tab:experiment_003_statistics}
+	\end{tabular}
+	\end{center}
+	\caption{Image statistics for experiment 3.}
+	\label{tab:experiment_003_statistics}
 \end{table}
 %%%
 
@@ -1061,7 +1176,7 @@ From simulated experimental data, we observe that on average, the presence of no
 %%%
 \begin{figure}[htb]
  \begin{center}
-  \includegraphics[width=12cm]{avg_methods_vs_var.png}
+  \includegraphics[width=12cm]{avg_methods_vs_var.pdf}
  \end{center}
  \caption{Average dependence of tested algorithms on the level of noise.}
  \label{fig:avg_methods_vs_var}
@@ -1071,7 +1186,7 @@ From simulated experimental data, we observe that on average, the presence of no
 %%%
 \begin{figure}[htb]
  \begin{center}
-  \includegraphics[width=12cm]{avg_methods_vs_ISO.png}
+  \includegraphics[width=12cm]{avg_methods_vs_ISO.pdf}
  \end{center}
  \caption{Average dependence of tested algorithms on the input ISO.}
  \label{fig:avg_methods_vs_ISO}
@@ -1081,7 +1196,7 @@ From simulated experimental data, we observe that on average, the presence of no
 %%%
 \begin{figure}[htb]
  \begin{center}
-  \includegraphics[width=12cm]{avg_methods_vs_psf_size.png}
+  \includegraphics[width=12cm]{avg_methods_vs_var_psf_size.pdf}
  \end{center}
  \caption{Average dependence of tested algorithms on the size of blurring (for variance data).}
  \label{fig:avg_methods_vs_psf_size}
@@ -1091,14 +1206,14 @@ From simulated experimental data, we observe that on average, the presence of no
 %%%
 \begin{figure}[htb]
  \begin{center}
-  \includegraphics[width=12cm]{avg_methods_vs_ISO_psf_size.png}
+  \includegraphics[width=12cm]{avg_methods_vs_ISO_psf_size.pdf}
  \end{center}
  \caption{Average dependence of tested algorithms on the size of blurring (for ISO data).}
  \label{fig:avg_methods_vs_ISO_psf_size}
 \end{figure}
 %%%
 
-
+\clearpage
 
 
 
