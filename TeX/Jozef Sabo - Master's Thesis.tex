@@ -441,7 +441,7 @@ Since the BM3D algorithm is not the focus of this thesis and has only been reuse
  \begin{center}
   \includegraphics[width=12cm]{bm3d_matching_blocks.png}
  \end{center}
- \caption{Cutaways of {\em Lena}, {\em House}, {\em Boats} and {\em Barbara} images corrupted by zero-mean additive Gaussian noise of $\sigma = 15/255$. A reference block {\em R} and a few of its matched ones illustrate block matching. Taken from \cite{bm3d}.}
+ \caption[The BM3D algorithm.]{The BM3D algorithm. The images show cutaways of {\em Lena}, {\em House}, {\em Boats} and {\em Barbara} images corrupted by zero-mean additive Gaussian noise of $\sigma = 15/255$. A reference block {\em R} and a few of its matched ones illustrate block matching. Taken from \cite{bm3d}.}
  \label{fig:bm3d_example}
 \end{figure}
 
@@ -783,7 +783,7 @@ We have used a set of 4 point spread functions (see figure \ref{fig:used_psfs}) 
  \begin{center}
   \includegraphics[width=12cm]{used_psfs.png}
  \end{center}
- \caption{Point-spread functions selected for use in testing}
+ \caption{Point-spread functions selected for use in testing.}
  \label{fig:used_psfs}
 \end{figure}
 %%%
@@ -791,7 +791,7 @@ We have used a set of 4 point spread functions (see figure \ref{fig:used_psfs}) 
  \begin{center}
   \includegraphics[width=12cm]{used_images.png}
  \end{center}
- \caption{Images selected for use in testing}
+ \caption{Images selected for use in testing.}
  \label{fig:used_images}
 \end{figure}
 
@@ -820,7 +820,7 @@ Real-world experiments were performed by projecting the Lena image on a vertical
  \begin{center}
   \includegraphics[width=12cm]{testing_setup.png}
  \end{center}
- \caption{Setup for real-world testing}
+ \caption{Setup for real-world testing.}
  \label{fig:testing_setup}
 \end{figure}
 %%%
@@ -828,7 +828,7 @@ Real-world experiments were performed by projecting the Lena image on a vertical
  \begin{center}
   \includegraphics[width=12cm]{testing_image_control_points.png}
  \end{center}
- \caption{An example of a testing image with control features}
+ \caption{An example of a testing image with control features.}
  \label{fig:testing_image_control_points}
 \end{figure}
 %%%
@@ -889,6 +889,25 @@ Both of the two marginally successful results of Tico's algorithm in variance mo
  \label{fig:tico09_iso_success}
 \end{figure}
 
+% subfloat version
+\begin{figure}[htb]
+  \begin{center}
+	  \subfloat[]{\label{fig:tico09_iso_success_blurred}\includegraphics[width=0.3\textwidth]{tico09_iso_success_blurred.png}}
+	  ~
+	  \subfloat[]{\label{fig:tico09_iso_success_psfs}\includegraphics[width=0.3\textwidth]{tico09_iso_success_psfs.png}}
+	  ~
+	  \subfloat[]{\label{fig:tico09_iso_success_noisy}\includegraphics[width=0.3\textwidth]{tico09_iso_success_noisy.png}}
+
+	  \subfloat[]{\label{fig:tico09_iso_success_tico09}\includegraphics[width=0.3\textwidth]{tico09_iso_success_tico09.png}}
+	  ~
+	  \subfloat[]{\label{fig:tico09_iso_success_srou03}\includegraphics[width=0.3\textwidth]{tico09_iso_success_srou03.png}}
+	  ~
+	  \subfloat[]{\label{fig:tico09_iso_success_bm3d}\includegraphics[width=0.3\textwidth]{tico09_iso_success_bm3d.png}}
+  \caption[The successful result of the Tico's algorithm in ISO mode.]{The successful result of the Tico's algorithm in ISO mode. Top row: the blurred and noisy image pair for the successful result of the Tico's algorithm in ISO mode. Bottom row: the results of Tico's and Šroubek's methods and the BM3D algorithm.}
+  \end{center}
+  \label{fig:tico09_iso_success}
+\end{figure}
+
 
 
 \begin{figure}[htb]
@@ -898,6 +917,26 @@ Both of the two marginally successful results of Tico's algorithm in variance mo
  \caption{Top row: the blurred and noisy image pair for the successful result of the Tico's algorithm in variance mode. Bottom row: the results of Tico's and Šroubek's methods and the BM3D algorithm.}
  \label{fig:tico09_var_success}
 \end{figure}
+
+%% subfloat version
+\begin{figure}[htb]
+  \begin{center}
+	  \subfloat[]{\label{fig:tico09_var_success_blurred}\includegraphics[width=0.3\textwidth]{tico09_var_success_blurred.png}}
+	  ~
+	  \subfloat[]{\label{fig:tico09_var_success_psfs}\includegraphics[width=0.3\textwidth]{tico09_var_success_psfs.png}}
+	  ~
+	  \subfloat[]{\label{fig:tico09_var_success_noisy}\includegraphics[width=0.3\textwidth]{tico09_var_success_noisy.png}}
+
+	  \subfloat[]{\label{fig:tico09_var_success_tico09}\includegraphics[width=0.3\textwidth]{tico09_var_success_tico09.png}}
+	  ~
+	  \subfloat[]{\label{fig:tico09_var_success_srou03}\includegraphics[width=0.3\textwidth]{tico09_var_success_srou03.png}}
+	  ~
+	  \subfloat[]{\label{fig:tico09_var_success_bm3d}\includegraphics[width=0.3\textwidth]{tico09_var_success_bm3d.png}}
+  \caption[The successful result of the Tico's algorithm in variance mode.]{The successful result of the Tico's algorithm in variance mode. Top row: the blurred and noisy image pair for the successful result of the Tico's algorithm in ISO mode. Bottom row: the results of Tico's and Šroubek's methods and the BM3D algorithm.}
+  \end{center}
+  \label{fig:tico09_var_success}
+\end{figure}
+
 
 \clearpage
 
@@ -909,7 +948,7 @@ Both of the two marginally successful results of Tico's algorithm in variance mo
 
 	  \subfloat[]{\label{fig:iso_lena256_blurkernel8}\includegraphics[width=0.5\textwidth]{iso_lena256_blurkernel8.pdf}}
 	  \subfloat[]{\label{fig:iso_lena256_blurkernel10}\includegraphics[width=0.5\textwidth]{iso_lena256_blurkernel10.pdf}}
-  \caption[Results for the lena image in ISO mode]{Results of the simulated data experiment on the lena image in ISO mode.}
+  \caption[Results for the lena image in ISO mode.]{Results of the simulated data experiment on the lena image in ISO mode.}
   \end{center}
   \label{fig:iso_lena256}
 \end{figure}
@@ -923,7 +962,7 @@ Both of the two marginally successful results of Tico's algorithm in variance mo
 
 	  \subfloat[]{\label{fig:var_lena256_blurkernel8}\includegraphics[width=0.5\textwidth]{var_lena256_blurkernel8.pdf}}
 	  \subfloat[]{\label{fig:var_lena256_blurkernel10}\includegraphics[width=0.5\textwidth]{var_lena256_blurkernel10.pdf}}
-  \caption[Results for the lena image in variance mode]{Results of the simulated data experiment on the lena image in variance mode.}
+  \caption[Results for the lena image in variance mode.]{Results of the simulated data experiment on the lena image in variance mode.}
   \end{center}
   \label{fig:var_lena256}
 \end{figure}
@@ -937,7 +976,7 @@ Both of the two marginally successful results of Tico's algorithm in variance mo
 
 	  \subfloat[]{\label{fig:iso_castle256_blurkernel8}\includegraphics[width=0.5\textwidth]{iso_castle256_blurkernel8.pdf}}
 	  \subfloat[]{\label{fig:iso_castle256_blurkernel10}\includegraphics[width=0.5\textwidth]{iso_castle256_blurkernel10.pdf}}
-  \caption[Results for the castle image in ISO mode]{Results of the simulated data experiment on the castle image in ISO mode.}
+  \caption[Results for the castle image in ISO mode.]{Results of the simulated data experiment on the castle image in ISO mode.}
   \end{center}
   \label{fig:iso_castle256}
 \end{figure}
@@ -951,7 +990,7 @@ Both of the two marginally successful results of Tico's algorithm in variance mo
 
 	  \subfloat[]{\label{fig:var_castle256_blurkernel8}\includegraphics[width=0.5\textwidth]{var_castle256_blurkernel8.pdf}}
 	  \subfloat[]{\label{fig:var_castle256_blurkernel10}\includegraphics[width=0.5\textwidth]{var_castle256_blurkernel10.pdf}}
-  \caption[Results for the castle image in variance mode]{Results of the simulated data experiment on the castle image in variance mode.}
+  \caption[Results for the castle image in variance mode.]{Results of the simulated data experiment on the castle image in variance mode.}
   \end{center}
   \label{fig:var_castle256}
 \end{figure}
@@ -965,7 +1004,7 @@ Both of the two marginally successful results of Tico's algorithm in variance mo
 
 	  \subfloat[]{\label{fig:iso_text256_blurkernel8}\includegraphics[width=0.5\textwidth]{iso_text256_blurkernel8.pdf}}
 	  \subfloat[]{\label{fig:iso_text256_blurkernel10}\includegraphics[width=0.5\textwidth]{iso_text256_blurkernel10.pdf}}
-  \caption[Results for the text image in ISO mode]{Results of the simulated data experiment on the text image in ISO mode.}
+  \caption[Results for the text image in ISO mode.]{Results of the simulated data experiment on the text image in ISO mode.}
   \end{center}
   \label{fig:iso_text256}
 \end{figure}
@@ -979,7 +1018,7 @@ Both of the two marginally successful results of Tico's algorithm in variance mo
 
 	  \subfloat[]{\label{fig:var_text256_blurkernel8}\includegraphics[width=0.5\textwidth]{var_text256_blurkernel8.pdf}}
 	  \subfloat[]{\label{fig:var_text256_blurkernel10}\includegraphics[width=0.5\textwidth]{var_text256_blurkernel10.pdf}}
-  \caption[Results for the text image in variance mode]{Results of the simulated data experiment on the text image in variance mode.}
+  \caption[Results for the text image in variance mode.]{Results of the simulated data experiment on the text image in variance mode.}
   \end{center}
   \label{fig:var_text256}
 \end{figure}
@@ -994,7 +1033,7 @@ Both of the two marginally successful results of Tico's algorithm in variance mo
 
 	  \subfloat[]{\label{fig:iso_tree256_blurkernel8}\includegraphics[width=0.5\textwidth]{iso_tree256_blurkernel8.pdf}}
 	  \subfloat[]{\label{fig:iso_tree256_blurkernel10}\includegraphics[width=0.5\textwidth]{iso_tree256_blurkernel10.pdf}}
-  \caption[Results for the tree image in ISO mode]{Results of the simulated data experiment on the tree image in ISO mode.}
+  \caption[Results for the tree image in ISO mode.]{Results of the simulated data experiment on the tree image in ISO mode.}
   \end{center}
   \label{fig:iso_tree256}
 \end{figure}
@@ -1008,7 +1047,7 @@ Both of the two marginally successful results of Tico's algorithm in variance mo
 
 	  \subfloat[]{\label{fig:var_tree256_blurkernel8}\includegraphics[width=0.5\textwidth]{var_tree256_blurkernel8.pdf}}
 	  \subfloat[]{\label{fig:var_tree256_blurkernel10}\includegraphics[width=0.5\textwidth]{var_tree256_blurkernel10.pdf}}
-  \caption[Results for the tree image in variance mode]{Results of the simulated data experiment on the tree image in variance mode.}
+  \caption[Results for the tree image in variance mode.]{Results of the simulated data experiment on the tree image in variance mode.}
   \end{center}
   \label{fig:var_tree256}
 \end{figure}
@@ -1034,15 +1073,35 @@ In this experiment, we simulated extremely low-light conditions, which is eviden
 \end{figure}
 %%%
 
-%%%
+%%
+% \begin{figure}[htb]
+ % \begin{center}
+  % \includegraphics[width=12cm]{experiment_001_complete.png}
+ % \end{center}
+ % \caption{Experiment 1.}
+ % \label{fig:experiment_001_complete}
+% \end{figure}
+%%
+
+%% subfloat version
 \begin{figure}[htb]
- \begin{center}
-  \includegraphics[width=12cm]{experiment_001_complete.png}
- \end{center}
- \caption{Experiment 1.}
- \label{fig:experiment_001_complete}
+  \begin{center}
+	  \subfloat[]{\label{fig:experiment_001_blurred}\includegraphics[width=0.3\textwidth]{experiment_001_blurred.png}}
+	  ~
+	  \subfloat[]{\label{fig:experiment_001_psfs}\includegraphics[width=0.3\textwidth]{experiment_001_psfs.png}}
+	  ~
+	  \subfloat[]{\label{fig:experiment_001_noisy}\includegraphics[width=0.3\textwidth]{experiment_001_noisy.png}}
+
+	  \subfloat[]{\label{fig:experiment_001_tico09}\includegraphics[width=0.3\textwidth]{experiment_001_tico09.png}}
+	  ~
+	  \subfloat[]{\label{fig:experiment_001_srou03}\includegraphics[width=0.3\textwidth]{experiment_001_srou03.png}}
+	  ~
+	  \subfloat[]{\label{fig:experiment_001_bm3d}\includegraphics[width=0.3\textwidth]{experiment_001_bm3d.png}}
+  \caption[Experiment 1.]{Experiment 1.}
+  \end{center}
+  \label{fig:experiment_001_complete}
 \end{figure}
-%%%
+
 
 %%%
 \begin{table}[htb]
@@ -1084,15 +1143,36 @@ In this case, the blurred image was obtained using the ISO setting of 100 and 1 
 \end{figure}
 %%%
 
-%%%
+%%
+% \begin{figure}[htb]
+ % \begin{center}
+  % \includegraphics[width=12cm]{experiment_002_complete.png}
+ % \end{center}
+ % \caption{Experiment 2.}
+ % \label{fig:experiment_002_complete}
+% \end{figure}
+%%
+
+%% subfloat version
 \begin{figure}[htb]
- \begin{center}
-  \includegraphics[width=12cm]{experiment_002_complete.png}
- \end{center}
- \caption{Experiment 2.}
- \label{fig:experiment_002_complete}
+  \begin{center}
+	  \subfloat[]{\label{fig:experiment_002_blurred}\includegraphics[width=0.3\textwidth]{experiment_002_blurred.png}}
+	  ~
+	  \subfloat[]{\label{fig:experiment_002_psfs}\includegraphics[width=0.3\textwidth]{experiment_002_psfs.png}}
+	  ~
+	  \subfloat[]{\label{fig:experiment_002_noisy}\includegraphics[width=0.3\textwidth]{experiment_002_noisy.png}}
+
+	  \subfloat[]{\label{fig:experiment_002_tico09}\includegraphics[width=0.3\textwidth]{experiment_002_tico09.png}}
+	  ~
+	  \subfloat[]{\label{fig:experiment_002_srou03}\includegraphics[width=0.3\textwidth]{experiment_002_srou03.png}}
+	  ~
+	  \subfloat[]{\label{fig:experiment_002_bm3d}\includegraphics[width=0.3\textwidth]{experiment_002_bm3d.png}}
+  \caption[Experiment 2.]{Experiment 2.}
+  \end{center}
+  \label{fig:experiment_002_complete}
 \end{figure}
-%%%
+
+
 
 %%%
 \begin{table}[htb]
@@ -1133,15 +1213,35 @@ The blurred image was taken using the ISO setting of 100 and $1/3$ second exposu
 \end{figure}
 %%%
 
-%%%
+%%
+% \begin{figure}[htb]
+ % \begin{center}
+  % \includegraphics[width=12cm]{experiment_003_complete.png}
+ % \end{center}
+ % \caption{Experiment 3.}
+ % \label{fig:experiment_003_complete}
+% \end{figure}
+%%
+
+%% subfloat version
 \begin{figure}[htb]
- \begin{center}
-  \includegraphics[width=12cm]{experiment_003_complete.png}
- \end{center}
- \caption{Experiment 3.}
- \label{fig:experiment_003_complete}
+  \begin{center}
+	  \subfloat[]{\label{fig:experiment_003_blurred}\includegraphics[width=0.3\textwidth]{experiment_003_blurred.png}}
+	  ~
+	  \subfloat[]{\label{fig:experiment_003_psfs}\includegraphics[width=0.3\textwidth]{experiment_003_psfs.png}}
+	  ~
+	  \subfloat[]{\label{fig:experiment_003_noisy}\includegraphics[width=0.3\textwidth]{experiment_003_noisy.png}}
+
+	  \subfloat[]{\label{fig:experiment_003_tico09}\includegraphics[width=0.3\textwidth]{experiment_003_tico09.png}}
+	  ~
+	  \subfloat[]{\label{fig:experiment_003_srou03}\includegraphics[width=0.3\textwidth]{experiment_003_srou03.png}}
+	  ~
+	  \subfloat[]{\label{fig:experiment_003_bm3d}\includegraphics[width=0.3\textwidth]{experiment_003_bm3d.png}}
+  \caption[Experiment 3.]{Experiment 3.}
+  \end{center}
+  \label{fig:experiment_003_complete}
 \end{figure}
-%%%
+
 
 %%%
 \begin{table}[htb]
@@ -1218,7 +1318,26 @@ From simulated experimental data, we observe that on average, the presence of no
 
 
 
-We've observed that the BM3D denoising algorithm provides consistent results irrespective of the underlying image (also of the type and size of the blur PSF, since blurred images were not denoised); the only exception to this rule are images that exhibit self-similar (fractal) behavior, such the as tree image used in our tests. These features disrupt the block matching process as more matching blocks are found all across the image than is normally the case. The performance of this algorithm is also dependent on the type of noise present and the precision of the estimation of noise standard deviation $\sigma$. The algorithm performs very well in case of zero mean-Gaussian additive noise (even for variances as high as 0.01) and also for most ISO values, where the noise roughly corresponds to Gaussian. In case of high variance, or non-Gaussian noise, block-matching artifacts become more evident, resulting in reduced performance, as can be seen figure \ref{fig:bm3d_fail}, which also illustrates the lowered performance on an image containing self-similarity. 
+We've observed that the BM3D denoising algorithm provides consistent results irrespective of the underlying image (also of the type and size of the blur PSF, since blurred images were not denoised); the only exception to this rule are images that exhibit self-similar (fractal) behavior, such the as tree image used in our tests. These features disrupt the block matching process as more matching blocks are found all across the image than is normally the case. The performance of this algorithm is also dependent on the type of noise present and the precision of the estimation of noise standard deviation $\sigma$. The algorithm performs very well in case of zero mean-Gaussian additive noise (even for variances as high as 0.01) and also for most ISO values, where the noise roughly corresponds to Gaussian. In case of high variance, or non-Gaussian noise, block-matching artifacts become more evident, resulting in reduced performance, as can be seen figure \ref{fig:bm3d_failure}, which also illustrates the lowered performance on an image containing self-similarity. 
+
+%% subfloat version
+\begin{figure}[htb]
+  \begin{center}
+	  \subfloat[]{\label{fig:bm3d_failure_tree}\includegraphics[width=0.3\textwidth]{bm3d_failure_tree.png}}
+	  ~
+	  \subfloat[]{\label{fig:bm3d_failure_ISO_102400}\includegraphics[width=0.3\textwidth]{bm3d_failure_ISO_102400.png}}
+	  ~
+	  \subfloat[]{\label{fig:bm3d_failure_var_ISO_102400}\includegraphics[width=0.3\textwidth]{bm3d_failure_var_ISO_102400.png}}
+
+	  \subfloat[]{\label{fig:bm3d_failure_tree_res}\includegraphics[width=0.3\textwidth]{bm3d_failure_tree_res.png}}
+	  ~
+	  \subfloat[]{\label{fig:bm3d_failure_ISO_102400_res}\includegraphics[width=0.3\textwidth]{bm3d_failure_ISO_102400_res.png}}
+	  ~
+	  \subfloat[]{\label{fig:bm3d_failure_var_ISO_102400_res}\includegraphics[width=0.3\textwidth]{bm3d_failure_var_ISO_102400_res.png}}
+  \caption[Failures of the BM3D algorithm.]{Failures of the BM3D algorithm.}
+  \end{center}
+  \label{fig:bm3d_failure}
+\end{figure}
 
 
 
@@ -1226,7 +1345,7 @@ The added value of deconvolution in case of Šroubek's algorithm is apparent in 
 
 
 
-Although the output of Tico's algorithm is plagued by artifacts at high noise values the algorithm itself has never outperformed      
+Although the output of Tico's algorithm is plagued by artifacts at high noise values the algorithm itself has outperformed either Tico's or      
 
 
 
