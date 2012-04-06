@@ -796,7 +796,7 @@ We have used a set of 4 point spread functions (see figure \ref{fig:used_psfs}) 
 	  \subfloat[]{\label{fig:blurkernel8}\includegraphics[width=0.225\textwidth]{blurkernel8.png}}
 	  ~
 	  \subfloat[]{\label{fig:blurkernel10}\includegraphics[width=0.225\textwidth]{blurkernel10.png}}
-  \caption[Point-spread functions selected for use in testing.]{Point-spread functions selected for use in testing.}
+  \caption[Point-spread functions selected for use in testing.]{Point-spread functions selected for use in testing. \ref{fig:line}) 1 pixel thick diagonal line-shaped blur kernel (the line shown is thicker in order to be visible in print). \ref{fig:blurkernel7}) Blur kernel 7. \ref{fig:blurkernel8}) Blur kernel 8. \ref{fig:blurkernel10}) Blur kernel 10. Blur kernels \ref{fig:blurkernel7}) through \ref{fig:blurkernel10}) were taken from \cite{yuan07}.}
   \label{fig:used_psfs}
 \end{figure}
 
@@ -818,7 +818,7 @@ We have used a set of 4 point spread functions (see figure \ref{fig:used_psfs}) 
 	  \subfloat[]{\label{fig:text}\includegraphics[width=0.225\textwidth]{text256.png}}
 	  ~
 	  \subfloat[]{\label{fig:castle}\includegraphics[width=0.225\textwidth]{castle256.png}}
-  \caption[Images selected for use in testing.]{Images selected for use in testing.}
+  \caption[Images selected for use in testing.]{Images selected for use in testing. \ref{fig:lena}) Lena image, taken from  \cite{uscimgdb}. \ref{fig:tree}) Tree image, provided by the thesis supervisor. \ref{fig:text}) Printed text, a screenshot from one of the cited papers. \ref{fig:castle}) Castle image.}
   \label{fig:used_images}
 \end{figure}
 
@@ -899,9 +899,47 @@ Three experiments were carried out, one for each multiplier value. In each exper
 \section{Results for simulated data}
 \label{sec:simulated_data}
 
-From the total of $576$ experiments performed in ISO mode, our modification of the Šroubek's algorithm provided the best results in terms of SNR in 182 cases. Of those 182 cases, 122 were marked with a difference greater than 1 dB from the result of the BM3D algorithm, which provided the best result in 393 cases (277 of which with a difference greater than 1 dB from the result of Šroubek's algorithm). Tico's algorithm provided the best result in a single case (Lena image, diagonal-line shaped PSF of size 3 for the blurred image and ISO 102400 for the noisy image), which is illustrated by figure \ref{fig:tico09_iso_success}.  The SNR of Tico's result was 14.2735 compared to Šroubek's 13.813 and 13.7881 for the BM3D algorithm.
+From the total of $576$ experiments performed in ISO mode, our modification of the Šroubek's algorithm provided the best results in terms of SNR in 182 cases. Of those 182 cases, 122 were marked with a difference greater than 1 dB from the result of the BM3D algorithm, which provided the best result in 393 cases (277 of which with a difference greater than 1 dB from the result of Šroubek's algorithm). Tico's algorithm provided the best result in a single case (Lena image, diagonal-line shaped PSF of size 3 for the blurred image and ISO 102400 for the noisy image), which is illustrated by figure \ref{fig:tico09_iso_success}.  The SNR of Tico's result was 14.2735 compared to Šroubek's 13.813 and 13.7881 for the BM3D algorithm. A breakdown of individual methods' success rates can be found in table \ref{tab:iso_mode_breakdown}, which provides the number of successful results for Tico's, Šroubek's and the BM3D algorithm for a given combination of input ISO and PSF size, regardless of the type of image or blurring. The most successful algorithm for a given input combination is emphasized in bold. The same layout is used for variance mode test results, to be found in table \ref{tab:var_mode_breakdown}. A detailed overview of the most successful methods for every image, blur kernel, kernel size and input ISO is provided by figures \ref{fig:iso_lena256}, \ref{fig:iso_tree256}, \ref{fig:iso_text256} and \ref{fig:iso_castle256}. Blue color is reserved for Šroubek's, green for Tico's and red for the BM3D algorithm.       
 
-Of the total of $256$ experiments performed in variance mode, Šroubek's algorithm provided the best results in terms of SNR in 126 (88) cases, the BM3D was more successful in 128 (85) cases and Tico's algorithm in 2. The relatively higher success rate of Šroubek's algorithm can be explained by lower performance of the BM3D algorithm in extremely noisy conditions (variances 0.01 and 0.1) which were not achieved by ISO simulation. In comparison, the simulated ISO of 25600 corresponds to AWGN variance of about 0.003 for all images, the extreme simulated ISO value of 102400, which is only encountered in high end digital SLRs, corresponds to AWGN\footnote[6]{Additive white Gaussian noise.} variance of about 0.02, which is still an order of magnitude less than the highest value used in variance mode. 
+%%%
+\begin{table}[htb]
+  \centering
+  \begin{tabular}{ | l | c | c | c | c | c | c | c | c | c |}
+    \hline
+		   & 3 & 7 & 15 & 31 \\ \hline
+	200    & 0 - 0 - \textbf{16} & 0 - 0 - \textbf{16} & 0 - 0 - \textbf{16} & 0 - 0 - \textbf{16} \\ \hline
+	400    & 0 - 3 - \textbf{13} & 0 - 0 - \textbf{16} & 0 - 0 - \textbf{16} & 0 - 0 - \textbf{16} \\ \hline
+	800    & 0 - \textbf{8} - \textbf{8}  & 0 - 0 - \textbf{16} & 0 - 0 - \textbf{16} & 0 - 0 - \textbf{16} \\ \hline
+	1600   & 0 - \textbf{15} - 1 & 0 - 0 - \textbf{16} & 0 - 0 - \textbf{16} & 0 - 0 - \textbf{16} \\ \hline
+	3200   & 0 - \textbf{15} - 1 & 0 - 0 - \textbf{16} & 0 - 0 - \textbf{16} & 0 - 0 - \textbf{16} \\ \hline
+	6400   & 0 - \textbf{16} - 0 & 0 - 2 - \textbf{14} & 0 - 0 - \textbf{16} & 0 - 0 - \textbf{16} \\ \hline
+	12800  & 0 - \textbf{16} - 0 & 0 - \textbf{10} - 6 & 0 - 4 - \textbf{12} & 0 - 0 - \textbf{16} \\ \hline
+	25600  & 0 - \textbf{16} - 0 & 0 - \textbf{15} - 1 & 0 - \textbf{10} - 6 & 0 - 4 - \textbf{12} \\ \hline
+	102400 & 1 - \textbf{15} - 0 & 0 - \textbf{13} - 3 & 0 - \textbf{12} - 4 & 0 - \textbf{8} - \textbf{8} \\ \hline
+  \end{tabular}
+  \caption{A detailed breakdown of methods' success rates in ISO mode.}
+  \label{tab:iso_mode_breakdown}
+\end{table}
+%%%
+
+Of the total of $256$ experiments performed in variance mode, Šroubek's algorithm provided the best results in terms of SNR in 126 (88) cases, the BM3D was more successful in 128 (85) cases and Tico's algorithm in 2. The relatively higher success rate of Šroubek's algorithm can be explained by lower performance of the BM3D algorithm in extremely noisy conditions (variances 0.01 and 0.1) which were not achieved by ISO simulation. In comparison, the simulated ISO of 25600 corresponds to AWGN variance of about 0.003 for all images, the extreme simulated ISO value of 102400, which is only encountered in high end digital SLRs, if at all, corresponds to AWGN\footnote[6]{Additive white Gaussian noise.} variance of about 0.02, which is still an order of magnitude less than the highest value used in variance mode. Similarly to ISO mode, a more detailed breakdown of individual methods' success rates is given in table \ref{tab:var_mode_breakdown}. A complete overview of the most successful methods for every image, blur kernel, kernel size and input variance is shown in figures \ref{fig:var_lena256}, \ref{fig:var_tree256}, \ref{fig:var_text256} and \ref{fig:var_castle256}. The color scheme used is the same as in ISO mode.
+
+%%%
+\begin{table}[htb]
+  \centering
+  \begin{tabular}{ | l | c | c | c | c |}
+    \hline
+		   & 3 & 7 & 15 & 31 \\ \hline
+	0.0001 & 0 - \textbf{11} - 5 & 0 - 0 - \textbf{16} & 0 - 0 - \textbf{16} & 0 - 0 - \textbf{16} \\ \hline
+	0.001  & 0 - \textbf{15} - 1 & 0 - 5 - \textbf{11} & 0 - 1 - \textbf{15} & 0 - 0 - \textbf{16} \\ \hline
+	0.01   & 0 - \textbf{16} - 0 & 0 - \textbf{13} - 3 & 0 - \textbf{12} - 4 & 0 - 6 - \textbf{10} \\ \hline
+	0.1    & 0 - \textbf{16} - 0 & 0 - \textbf{12} - 4 & 1 - \textbf{13} - 2 & 1 - 6 - \textbf{9} \\ \hline
+  \end{tabular}
+  \caption{A detailed breakdown of methods' success rates in variance mode.}
+  \label{tab:var_mode_breakdown}
+\end{table}
+%%%	
+	
 
 Both of the two marginally successful results of Tico's algorithm in variance mode were achieved in conditions of extreme noise in the noisy image (variance 0.1) and extreme blurring in the other (PSF sizes 15 and 31), one of which is illustrated by figure \ref{fig:tico09_var_success}. The SNR of Tico's result was 5.3947 compared to Šroubek's 2.5659 and 5.0676 for the BM3D algorithm. 
 
@@ -966,46 +1004,19 @@ Both of the two marginally successful results of Tico's algorithm in variance mo
 
 	  \subfloat[]{\label{fig:iso_lena256_blurkernel8}\includegraphics[width=0.5\textwidth]{iso_lena256_blurkernel8.pdf}}
 	  \subfloat[]{\label{fig:iso_lena256_blurkernel10}\includegraphics[width=0.5\textwidth]{iso_lena256_blurkernel10.pdf}}
-  \caption[Results for the lena image in ISO mode.]{Results of the simulated data experiment on the lena image in ISO mode.}
+  \caption[Results for the lena image in ISO mode.]{Results of the simulated data experiment on the lena image in ISO mode. \ref{fig:iso_lena256_line} Results for diagonal line-shaped blur kernel. \ref{fig:iso_lena256_blurkernel7} Results for blur kernel 7. \ref{fig:iso_lena256_blurkernel8} Results for blur kernel 8. \ref{fig:iso_lena256_blurkernel10} Results for blur kernel 10.}
   \label{fig:iso_lena256}
 \end{figure}
 
-
-
 \begin{figure}[htb]
   \centering
-	  \subfloat[]{\label{fig:var_lena256_line}\includegraphics[width=0.5\textwidth]{var_lena256_line.pdf}}
-	  \subfloat[]{\label{fig:var_lena256_blurkernel7}\includegraphics[width=0.5\textwidth]{var_lena256_blurkernel7.pdf}}
+	  \subfloat[]{\label{fig:iso_tree256_line}\includegraphics[width=0.5\textwidth]{iso_tree256_line.pdf}}
+	  \subfloat[]{\label{fig:iso_tree256_blurkernel7}\includegraphics[width=0.5\textwidth]{iso_tree256_blurkernel7.pdf}}
 
-	  \subfloat[]{\label{fig:var_lena256_blurkernel8}\includegraphics[width=0.5\textwidth]{var_lena256_blurkernel8.pdf}}
-	  \subfloat[]{\label{fig:var_lena256_blurkernel10}\includegraphics[width=0.5\textwidth]{var_lena256_blurkernel10.pdf}}
-  \caption[Results for the lena image in variance mode.]{Results of the simulated data experiment on the lena image in variance mode.}
-  \label{fig:var_lena256}
-\end{figure}
-
-\clearpage
-
-\begin{figure}[htb]
-  \centering
-	  \subfloat[]{\label{fig:iso_castle256_line}\includegraphics[width=0.5\textwidth]{iso_castle256_line.pdf}}
-	  \subfloat[]{\label{fig:iso_castle256_blurkernel7}\includegraphics[width=0.5\textwidth]{iso_castle256_blurkernel7.pdf}}
-
-	  \subfloat[]{\label{fig:iso_castle256_blurkernel8}\includegraphics[width=0.5\textwidth]{iso_castle256_blurkernel8.pdf}}
-	  \subfloat[]{\label{fig:iso_castle256_blurkernel10}\includegraphics[width=0.5\textwidth]{iso_castle256_blurkernel10.pdf}}
-  \caption[Results for the castle image in ISO mode.]{Results of the simulated data experiment on the castle image in ISO mode.}
-  \label{fig:iso_castle256}
-\end{figure}
-
-
-\begin{figure}[htb]
-  \centering
-	  \subfloat[]{\label{fig:var_castle256_line}\includegraphics[width=0.5\textwidth]{var_castle256_line.pdf}}
-	  \subfloat[]{\label{fig:var_castle256_blurkernel7}\includegraphics[width=0.5\textwidth]{var_castle256_blurkernel7.pdf}}
-
-	  \subfloat[]{\label{fig:var_castle256_blurkernel8}\includegraphics[width=0.5\textwidth]{var_castle256_blurkernel8.pdf}}
-	  \subfloat[]{\label{fig:var_castle256_blurkernel10}\includegraphics[width=0.5\textwidth]{var_castle256_blurkernel10.pdf}}
-  \caption[Results for the castle image in variance mode.]{Results of the simulated data experiment on the castle image in variance mode.}
-  \label{fig:var_castle256}
+	  \subfloat[]{\label{fig:iso_tree256_blurkernel8}\includegraphics[width=0.5\textwidth]{iso_tree256_blurkernel8.pdf}}
+	  \subfloat[]{\label{fig:iso_tree256_blurkernel10}\includegraphics[width=0.5\textwidth]{iso_tree256_blurkernel10.pdf}}
+  \caption[Results for the tree image in ISO mode.]{Results of the simulated data experiment on the tree image in ISO mode. \ref{fig:iso_lena256_line} Results for diagonal line-shaped blur kernel. \ref{fig:iso_lena256_blurkernel7} Results for blur kernel 7. \ref{fig:iso_lena256_blurkernel8} Results for blur kernel 8. \ref{fig:iso_lena256_blurkernel10} Results for blur kernel 10.}
+  \label{fig:iso_tree256}
 \end{figure}
 
 \clearpage
@@ -1017,37 +1028,33 @@ Both of the two marginally successful results of Tico's algorithm in variance mo
 
 	  \subfloat[]{\label{fig:iso_text256_blurkernel8}\includegraphics[width=0.5\textwidth]{iso_text256_blurkernel8.pdf}}
 	  \subfloat[]{\label{fig:iso_text256_blurkernel10}\includegraphics[width=0.5\textwidth]{iso_text256_blurkernel10.pdf}}
-  \caption[Results for the text image in ISO mode.]{Results of the simulated data experiment on the text image in ISO mode.}
+  \caption[Results for the text image in ISO mode.]{Results of the simulated data experiment on the text image in ISO mode. \ref{fig:iso_lena256_line} Results for diagonal line-shaped blur kernel. \ref{fig:iso_lena256_blurkernel7} Results for blur kernel 7. \ref{fig:iso_lena256_blurkernel8} Results for blur kernel 8. \ref{fig:iso_lena256_blurkernel10} Results for blur kernel 10.}
   \label{fig:iso_text256}
 \end{figure}
 
-
-
 \begin{figure}[htb]
   \centering
-	  \subfloat[]{\label{fig:var_text256_line}\includegraphics[width=0.5\textwidth]{var_text256_line.pdf}}
-	  \subfloat[]{\label{fig:var_text256_blurkernel7}\includegraphics[width=0.5\textwidth]{var_text256_blurkernel7.pdf}}
+	  \subfloat[]{\label{fig:iso_castle256_line}\includegraphics[width=0.5\textwidth]{iso_castle256_line.pdf}}
+	  \subfloat[]{\label{fig:iso_castle256_blurkernel7}\includegraphics[width=0.5\textwidth]{iso_castle256_blurkernel7.pdf}}
 
-	  \subfloat[]{\label{fig:var_text256_blurkernel8}\includegraphics[width=0.5\textwidth]{var_text256_blurkernel8.pdf}}
-	  \subfloat[]{\label{fig:var_text256_blurkernel10}\includegraphics[width=0.5\textwidth]{var_text256_blurkernel10.pdf}}
-  \caption[Results for the text image in variance mode.]{Results of the simulated data experiment on the text image in variance mode.}
-  \label{fig:var_text256}
+	  \subfloat[]{\label{fig:iso_castle256_blurkernel8}\includegraphics[width=0.5\textwidth]{iso_castle256_blurkernel8.pdf}}
+	  \subfloat[]{\label{fig:iso_castle256_blurkernel10}\includegraphics[width=0.5\textwidth]{iso_castle256_blurkernel10.pdf}}
+  \caption[Results for the castle image in ISO mode.]{Results of the simulated data experiment on the castle image in ISO mode. \ref{fig:iso_lena256_line} Results for diagonal line-shaped blur kernel. \ref{fig:iso_lena256_blurkernel7} Results for blur kernel 7. \ref{fig:iso_lena256_blurkernel8} Results for blur kernel 8. \ref{fig:iso_lena256_blurkernel10} Results for blur kernel 10.}
+  \label{fig:iso_castle256}
 \end{figure}
 
 \clearpage
 
 \begin{figure}[htb]
   \centering
-	  \subfloat[]{\label{fig:iso_tree256_line}\includegraphics[width=0.5\textwidth]{iso_tree256_line.pdf}}
-	  \subfloat[]{\label{fig:iso_tree256_blurkernel7}\includegraphics[width=0.5\textwidth]{iso_tree256_blurkernel7.pdf}}
+	  \subfloat[]{\label{fig:var_lena256_line}\includegraphics[width=0.5\textwidth]{var_lena256_line.pdf}}
+	  \subfloat[]{\label{fig:var_lena256_blurkernel7}\includegraphics[width=0.5\textwidth]{var_lena256_blurkernel7.pdf}}
 
-	  \subfloat[]{\label{fig:iso_tree256_blurkernel8}\includegraphics[width=0.5\textwidth]{iso_tree256_blurkernel8.pdf}}
-	  \subfloat[]{\label{fig:iso_tree256_blurkernel10}\includegraphics[width=0.5\textwidth]{iso_tree256_blurkernel10.pdf}}
-  \caption[Results for the tree image in ISO mode.]{Results of the simulated data experiment on the tree image in ISO mode.}
-  \label{fig:iso_tree256}
+	  \subfloat[]{\label{fig:var_lena256_blurkernel8}\includegraphics[width=0.5\textwidth]{var_lena256_blurkernel8.pdf}}
+	  \subfloat[]{\label{fig:var_lena256_blurkernel10}\includegraphics[width=0.5\textwidth]{var_lena256_blurkernel10.pdf}}
+  \caption[Results for the lena image in variance mode.]{Results of the simulated data experiment on the lena image in variance mode. \ref{fig:iso_lena256_line} Results for diagonal line-shaped blur kernel. \ref{fig:iso_lena256_blurkernel7} Results for blur kernel 7. \ref{fig:iso_lena256_blurkernel8} Results for blur kernel 8. \ref{fig:iso_lena256_blurkernel10} Results for blur kernel 10.}
+  \label{fig:var_lena256}
 \end{figure}
-
-
 
 \begin{figure}[htb]
   \centering
@@ -1056,8 +1063,32 @@ Both of the two marginally successful results of Tico's algorithm in variance mo
 
 	  \subfloat[]{\label{fig:var_tree256_blurkernel8}\includegraphics[width=0.5\textwidth]{var_tree256_blurkernel8.pdf}}
 	  \subfloat[]{\label{fig:var_tree256_blurkernel10}\includegraphics[width=0.5\textwidth]{var_tree256_blurkernel10.pdf}}
-  \caption[Results for the tree image in variance mode.]{Results of the simulated data experiment on the tree image in variance mode.}
+  \caption[Results for the tree image in variance mode.]{Results of the simulated data experiment on the tree image in variance mode. \ref{fig:iso_lena256_line} Results for diagonal line-shaped blur kernel. \ref{fig:iso_lena256_blurkernel7} Results for blur kernel 7. \ref{fig:iso_lena256_blurkernel8} Results for blur kernel 8. \ref{fig:iso_lena256_blurkernel10} Results for blur kernel 10.}
   \label{fig:var_tree256}
+\end{figure}
+
+\clearpage
+
+\begin{figure}[htb]
+  \centering
+	  \subfloat[]{\label{fig:var_text256_line}\includegraphics[width=0.5\textwidth]{var_text256_line.pdf}}
+	  \subfloat[]{\label{fig:var_text256_blurkernel7}\includegraphics[width=0.5\textwidth]{var_text256_blurkernel7.pdf}}
+
+	  \subfloat[]{\label{fig:var_text256_blurkernel8}\includegraphics[width=0.5\textwidth]{var_text256_blurkernel8.pdf}}
+	  \subfloat[]{\label{fig:var_text256_blurkernel10}\includegraphics[width=0.5\textwidth]{var_text256_blurkernel10.pdf}}
+  \caption[Results for the text image in variance mode.]{Results of the simulated data experiment on the text image in variance mode. \ref{fig:iso_lena256_line} Results for diagonal line-shaped blur kernel. \ref{fig:iso_lena256_blurkernel7} Results for blur kernel 7. \ref{fig:iso_lena256_blurkernel8} Results for blur kernel 8. \ref{fig:iso_lena256_blurkernel10} Results for blur kernel 10.}
+  \label{fig:var_text256}
+\end{figure}
+
+\begin{figure}[htb]
+  \centering
+	  \subfloat[]{\label{fig:var_castle256_line}\includegraphics[width=0.5\textwidth]{var_castle256_line.pdf}}
+	  \subfloat[]{\label{fig:var_castle256_blurkernel7}\includegraphics[width=0.5\textwidth]{var_castle256_blurkernel7.pdf}}
+
+	  \subfloat[]{\label{fig:var_castle256_blurkernel8}\includegraphics[width=0.5\textwidth]{var_castle256_blurkernel8.pdf}}
+	  \subfloat[]{\label{fig:var_castle256_blurkernel10}\includegraphics[width=0.5\textwidth]{var_castle256_blurkernel10.pdf}}
+  \caption[Results for the castle image in variance mode.]{Results of the simulated data experiment on the castle image in variance mode. \ref{fig:iso_lena256_line} Results for diagonal line-shaped blur kernel. \ref{fig:iso_lena256_blurkernel7} Results for blur kernel 7. \ref{fig:iso_lena256_blurkernel8} Results for blur kernel 8. \ref{fig:iso_lena256_blurkernel10} Results for blur kernel 10.}
+  \label{fig:var_castle256}
 \end{figure}
 
 \clearpage
@@ -1106,7 +1137,7 @@ In this experiment, we simulated extremely low-light conditions, which is eviden
   \centering
 	  \subfloat[]{\label{fig:experiment_001_blurred}\includegraphics[width=0.3\textwidth]{experiment_001_blurred.png}}
 	  ~
-	  \subfloat[]{\label{fig:experiment_001_psfs}\includegraphics[width=0.3\textwidth]{experiment_001_psfs.png}}
+  	  \subfloat[]{\label{fig:experiment_001_psfs}\includegraphics[width=0.3\textwidth]{experiment_001_psfs.png}}
 	  ~
 	  \subfloat[]{\label{fig:experiment_001_noisy}\includegraphics[width=0.3\textwidth]{experiment_001_noisy.png}}
 
@@ -1125,18 +1156,18 @@ In this experiment, we simulated extremely low-light conditions, which is eviden
   \centering
   \begin{tabular}{ | l | c | c | c | c | c | c | }
     \hline
-		& Original & Blurred & Noisy & Šroubek & Tico & BM3D \\ \hline
-	Mean & 0.4884 & 0.5751 & 0.5256 &  & 0.5256 & 0.5256 \\ \hline
-	Std & 0.1859 & 0.1466 & 0.1903 &  & 0.1890 & 0.1899 \\ \hline
-	IMM96 std & 0.0093 & 0.0032 & 0.0090 &  & 0.0041 & 0.0019 \\ \hline
-	TAI98 std  & 0.0062 & 0.0029 & 0.0079 &  & 0.0035 & 0.0013 \\ \hline
-	DWT07 std  & 0.0087 & 0.0058 & 0.0145 &  & 0.0083 & 0.0062 \\ \hline
-	SWT07 std & 0.0087 & 0.0058 & 0.0145 &  & 0.0085 & 0.0063 \\ \hline
-	Avg est std & 0.0082 & 0.0044 & 0.0115 &  & 0.0061 & 0.0039 \\ \hline
-	Exp std & - &  &  & - & - & - \\ \hline
-	SNR     & - & 3.4323 & 11.0442 &  & 11.5003 & 11.7639 \\ \hline
-	Gamma & - & - & - &  & - & - \\ \hline
-	Lambda & - & - & - &  & - & - \\ \hline
+		        & Original & Blurred & Noisy   & Šroubek & Tico    & BM3D    \\ \hline
+	Mean        & 0.4884   & 0.5751  & 0.5256  & 0.5697  & 0.5256  & 0.5256  \\ \hline
+	Std         & 0.1859   & 0.1466  & 0.1903  & 0.2059  & 0.1890  & 0.1899  \\ \hline
+	IMM96 std   & 0.0093   & 0.0032  & 0.0090  & 0.0043  & 0.0041  & 0.0019  \\ \hline
+	TAI98 std   & 0.0062   & 0.0029  & 0.0079  & 0.0023  & 0.0035  & 0.0013  \\ \hline
+	DWT07 std   & 0.0087   & 0.0058  & 0.0145  & 0.0109  & 0.0083  & 0.0062  \\ \hline
+	SWT07 std   & 0.0087   & 0.0058  & 0.0145  & 0.0109  & 0.0085  & 0.0063  \\ \hline
+	Avg est std & 0.0082   & 0.0044  & 0.0115  & 0.0071  & 0.0061  & 0.0039  \\ \hline
+	Exp std     & -        &         &         & -       & -       & -       \\ \hline
+	SNR         & -        & 3.4323  & 11.0442 & 9.5644  & 11.5003 & 11.7639 \\ \hline
+	Gamma       & -        & -       & -       & 25.0000 & -       & -       \\ \hline
+	Lambda      & -        & -       & -       & 0.0005  & -       & -       \\ \hline
 
   \end{tabular}
   \caption{Image statistics for experiment 1.}
@@ -1206,18 +1237,18 @@ In this case, the blurred image was obtained using the ISO setting of 100 and 1 
   \centering
   \begin{tabular}{ | l | c | c | c | c | c | c | }
     \hline
-		& Original & Blurred & Noisy & Šroubek & Tico & BM3D \\ \hline
-	Mean & 0.4884 & 0.6560 & 0.6488 &  & 0.6488 & 0.6488 \\ \hline
-	Std & 0.1859 & 0.1977 & 0.2422 &  & 0.2401 & 0.2419 \\ \hline
-	IMM96 std & 0.0093 & 0.0031 & 0.0095 &  & 0.0052 & 0.0042 \\ \hline
-	TAI98 std  & 0.0062 & 0.0026 & 0.0077 &  & 0.0041 & 0.0027 \\ \hline
-	DWT07 std  & 0.0087 & 0.0058 & 0.0116 &  & 0.0079 & 0.0067 \\ \hline
-	SWT07 std & 0.0087 & 0.0058 & 0.0116 &  & 0.0081 & 0.0067 \\ \hline
-	Avg est std & 0.0082 & 0.0043 & 0.0101 &  & 0.0063 & 0.0051 \\ \hline
-	Exp std & - &  &  & - & - & - \\ \hline
-	SNR     & - & 4.8812 & 10.5967 &  & 10.7121 & 10.7885 \\ \hline
-	Gamma & - & - & - &  & - & - \\ \hline
-	Lambda & - & - & - &  & - & - \\ \hline
+		        & Original & Blurred & Noisy   & Šroubek & Tico    & BM3D    \\ \hline
+	Mean        & 0.4884   & 0.6560  & 0.6488  & 0.6665  & 0.6488  & 0.6488  \\ \hline
+	Std         & 0.1859   & 0.1977  & 0.2422  & 0.2393  & 0.2401  & 0.2419  \\ \hline
+	IMM96 std   & 0.0093   & 0.0031  & 0.0095  & 0.0073  & 0.0052  & 0.0042  \\ \hline
+	TAI98 std   & 0.0062   & 0.0026  & 0.0077  & 0.0048  & 0.0041  & 0.0027  \\ \hline
+	DWT07 std   & 0.0087   & 0.0058  & 0.0116  & 0.0095  & 0.0079  & 0.0067  \\ \hline
+	SWT07 std   & 0.0087   & 0.0058  & 0.0116  & 0.0095  & 0.0081  & 0.0067  \\ \hline
+	Avg est std & 0.0082   & 0.0043  & 0.0101  & 0.0078  & 0.0063  & 0.0051  \\ \hline
+	Exp std     & -        &         &         & -       & -       & -       \\ \hline
+	SNR         & -        & 4.8812  & 10.5967 & 10.4295 & 10.7121 & 10.7885 \\ \hline
+	Gamma       & -        & -       & -       & 50.0000 & -       & -       \\ \hline
+	Lambda      & -        & -       & -       & 0.0010  & -       & -       \\ \hline
 
   \end{tabular}
   \caption{Image statistics for experiment 2.}
@@ -1283,18 +1314,18 @@ The blurred image was taken using the ISO setting of 100 and $1/3$ second exposu
 	\centering
 	\begin{tabular}{ | l | c | c | c | c | c | c | }
 	\hline
-		& Original & Blurred & Noisy & Šroubek & Tico & BM3D \\ \hline 
-	Mean & 0.4884 & 0.7700 & 0.6879 &  & 0.6879 & 0.6879 \\ \hline 
-	Std & 0.1859 & 0.1798 & 0.2304 &  & 0.2286 & 0.2302 \\ \hline 
-	IMM96 std & 0.0093 & 0.0030 & 0.0074 &  & 0.0049 & 0.0032 \\ \hline 
-	TAI98 std  & 0.0062 & 0.0025 & 0.0057 &  & 0.0037 & 0.0019 \\ \hline 
-	DWT07 std  & 0.0087 & 0.0058 & 0.0116 &  & 0.0072 & 0.0056 \\ \hline 
-	SWT07 std & 0.0087 & 0.0058 & 0.0116 &  & 0.0074 & 0.0057 \\ \hline 
-	Avg est std & 0.0082 & 0.0043 & 0.0091 &  & 0.0058 & 0.0041 \\ \hline 
-	Exp std & - &  &  & - & - & - \\ \hline 
-	SNR     & - & 3.8498 & 9.1393 &  & 9.1761 & 9.1493 \\ \hline 
-	Gamma & - & - & - &  & - & - \\ \hline 
-	Lambda & - & - & - &  & - & - \\ \hline 
+		        & Original & Blurred & Noisy  & Šroubek & Tico   & BM3D   \\ \hline 
+	Mean        & 0.4884   & 0.7700  & 0.6879 & 0.7425  & 0.6879 & 0.6879 \\ \hline 
+	Std         & 0.1859   & 0.1798  & 0.2304 & 0.2109  & 0.2286 & 0.2302 \\ \hline 
+	IMM96 std   & 0.0093   & 0.0030  & 0.0074 & 0.0042  & 0.0049 & 0.0032 \\ \hline 
+	TAI98 std   & 0.0062   & 0.0025  & 0.0057 & 0.0021  & 0.0037 & 0.0019 \\ \hline 
+	DWT07 std   & 0.0087   & 0.0058  & 0.0116 & 0.0069  & 0.0072 & 0.0056 \\ \hline 
+	SWT07 std   & 0.0087   & 0.0058  & 0.0116 & 0.0069  & 0.0074 & 0.0057 \\ \hline 
+	Avg est std & 0.0082   & 0.0043  & 0.0091 & 0.0051  & 0.0058 & 0.0041 \\ \hline 
+	Exp std     & -        &         &        & -       & -      & -      \\ \hline 
+	SNR         & -        & 3.8498  & 9.1393 & 8.2007  & 9.8502 & 9.8939 \\ \hline 
+	Gamma       & -        & -       & -      &         & -      & -      \\ \hline 
+	Lambda      & -        & -       & -      &         & -      & -      \\ \hline 
 
 	\end{tabular}
 	\caption{Image statistics for experiment 3.}
@@ -1305,7 +1336,7 @@ The blurred image was taken using the ISO setting of 100 and $1/3$ second exposu
 \section{Evaluation}
 \label{sec:evaluation}
 
-From simulated experimental data, we observe that on average, the presence of noise has a greater influence on the eventual outcome of a particular method than the extent of blurring does. This is evident from figures \ref{fig:avg_methods_vs_var}, \ref{fig:avg_methods_vs_ISO}, \ref{fig:avg_methods_vs_psf_size} and \ref{fig:avg_methods_vs_ISO_psf_size}. Results of the BM3D denoising algorithm are completely independent of the blur PSF size, since the algorithm is executed solely on the noisy, blurless image. 
+From simulated experimental data, we observe that on average, the presence of noise has a greater influence on the eventual outcome of a particular method than the extent of blurring does. This is evident from figures \ref{fig:avg_methods_vs_var}, \ref{fig:avg_methods_vs_ISO}, \ref{fig:avg_methods_vs_psf_size} and \ref{fig:avg_methods_vs_ISO_psf_size}. Results of the BM3D denoising algorithm are completely independent of the blur PSF size, since the algorithm is executed solely on the noisy, blurless image.
 
 %%%
 \begin{figure}[htb]
@@ -1370,12 +1401,10 @@ We've observed that the BM3D denoising algorithm provides consistent results irr
 
 
 
-The added value of deconvolution in case of Šroubek's algorithm is apparent in the setting of little to moderate blurring in the long-exposed image and high noise in the short exposed image. Here, the blurred image contributes information that the BM3D algorithm simply cannot obtain. In rare cases, Šroubek's algorithm outperforms the BM3D algorithm even for highly blurred images. However, a significant disadvantage of Šroubek's algorithm is the need to fine-tune the $\lambda$ and $\gamma$ parameters, since the theoretically computed ones do not produce satisfying results, as we've observed in real-world data.
+The added value of deconvolution in case of Šroubek's algorithm is apparent in the setting of little to moderate blurring in the long-exposed image and high noise in the short exposed image. Here, the blurred image contributes information that the BM3D algorithm simply cannot obtain. In rare cases, Šroubek's algorithm outperforms the BM3D algorithm even for highly blurred images. However, a significant disadvantage of Šroubek's algorithm is the need to fine-tune the $\lambda$ and $\gamma$ parameters, since the theoretically computed ones do not produce satisfying results, as we've observed in real-world data. There are, however, other parameters to be tweaked (such as the number of iterations, both external and internal) that expand the space that could potentially be searched for the best result. 
 
 
-
-Although the output of Tico's algorithm is plagued by artifacts at high noise values the algorithm itself has outperformed either Tico's or      
-
+Although the output of Tico's algorithm is plagued by artifacts at high noise values which lower its potential, the algorithm itself has outperformed either Šroubek's or the BM3D algorithm on only 3 occasions, none of which occured in the real-world setting. This may at first seem statistically insignificant and lead us to quick conclusions; however, the gap between the results of Šroubek's, BM3D and Tico's algorithm is much narrower in real-world experiments, where it even outperforms Šroubek's algorithm. This can be attributed to its internal design which makes it less sensitive to space-variant blurring and statistical variations, which did not occur in simulations yet can never be completely avoided in real-world experiments. These properties would make Tico's algorithm well suited for lower-fidelity equipment, such as camera phones, where high noise levels could pose diffulties for the BM3D algorithm. On the other hand, obtaining a suitable image pair with low fidelity equipment presents yet another obstacle. The better the available equipment is, the lower the noise levels are which again makes the BM3D algorithm a more suitable candidate, especially if the long-exposure image is highly blurred.              
 
 
 \chapter{Conclusion}
