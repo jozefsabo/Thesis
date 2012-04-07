@@ -96,7 +96,7 @@ Department of Software and Computer Science Education\\ % doplňte název katedr
 
 
 \begin{center}
-2011 % doplňte rok vzniku vaší bakalářské práce
+2012 % doplňte rok vzniku vaší bakalářské práce
 \end{center}
 
 \end{titlepage} % zde končí úvodní strana
@@ -132,7 +132,7 @@ Department of Software and Computer Science Education\\ % doplňte název katedr
 \textbf{Vedoucí diplomové práce:} Ing. Filip Šroubek, Ph.D.\\
 \textbf{e-mail vedoucího:} sroubekf@utia.cas.cz\\
 
-\noindent \textbf{Abstrakt:} V předložené práci studujeme metody odstranění rozmazání pomocí dvou snímků stejné předlohy s různou dobou expozicie, přičemž se soustřeďujeme na dvě hlavní kategorie těchto metod, tzv. dekonvoluční a nedekonvoluční. U obou kategorií rozebíráme jejich teoretické základy a zkoumáme jejich výhody a omezení. Samostatnou kapitolu věnujeme vyhodnocení a srovnání kategorií metod na testovacích datech (obrázky), k testování používáme metody implementovány v jazyku MATLAB. Účinnost zkoumaných metod srovnáváme i s vybraným odšumovacím algoritmem pracujícím s jedním vstupním obrázkem. Nesoustředíme se na výpočetní složitost srovnávaných algoritmů a pracujeme pouze se šedotónovými obrázky.\\
+\noindent \textbf{Abstrakt:} V předložené práci studujeme metody odstranění rozmazání pomocí dvou snímků stejné předlohy s různou dobou expozicie, přičemž se soustředíme na dvě hlavní kategorie těchto metod, tzv. dekonvoluční a nedekonvoluční. U obou kategorií rozebíráme jejich teoretické základy a zkoumáme jejich výhody a omezení. Samostatnou kapitolu věnujeme vyhodnocení a srovnání kategorií metod na testovacích datech (obrázky), k testování používáme metody implementovány v jazyku MATLAB. Účinnost zkoumaných metod srovnáváme i s vybraným odšumovacím algoritmem pracujícím s jedním vstupním obrázkem. Nesoustředíme se na výpočetní složitost srovnávaných algoritmů a pracujeme pouze se šedotónovými obrázky.\\
 
 \noindent \textbf{Klíčová slova:} krátká a dlouhá, expozice, odstranění rozmazání, šum,  odšumení, dekonvoluce
 
@@ -169,8 +169,8 @@ According to \cite{jia04}, there are essentially two categories of approaches to
 
 In image processing, motion blur is modeled by discrete convolution. If a convolution operator (usually called {\em point-spread function} or {\em PSF}, sometimes more simply {\em kernel}) of motion blur is known (this applies to camera motion as local blurring caused by movement of objects in the scene tend to lead to {\em PSF} that is location-dependent - which is beyond the scope of this thesis; however, some of the methods to be mentioned below are capable of handling space-variant blurring naturally) the original image can be recovered by a deconvolution algorithm, such as Lucy-Richardson \cite{rich72}. In most cases, there is little or no prior information on blur PSF which requires us to employ a {\em blind deconvolution} algorithm. First, a PSF is estimated from a given image or a set of images and subsequently, an existing {\em non-blind deconvolution} algorithm is used. 
 
-{\em Blind deconvolution} from a single image is a highly ill-posed problem that lacks a general solution. Blind deconvolution from multiple images (more commonly known as {\em multichannel blind deconvolution}) of the same scene subject to varying degrees of degradation (blur, noise), is better posed and leads to better results. The subject of this thesis is a special case of the multichannel blind deconvolution problem where we obtain two images of the same scene using different exposure times. The first image is taken using a long exposure time resulting in proper level of lighting but is degraded by motion blur caused by camera shake, whereas the second image is taken using a short exposure time and is not affected by motion blur, but may be darker.  Both images are affected by noise (the short exposure image is more noisy), which is dependent on the {\em ISO} sensitivity setting of the digital camera; we elaborate on this in greater detail in section \ref{sec:image_noise_in_photography}. 
-
+{\em Blind deconvolution} from a single image is a highly ill-posed problem that lacks a general solution. Blind deconvolution from multiple images (more commonly known as {\em multichannel blind deconvolution}) of the same scene subject to varying degrees of degradation (blur, noise), is better posed and leads to better results. The subject of this thesis is a special case of the multichannel blind deconvolution problem where we obtain two images of the same scene using different exposure times. The first image is taken using a long exposure time resulting in proper level of lighting but is degraded by motion blur caused by camera shake, whereas the second image is taken using a short exposure time and is not affected by motion blur, but may be darker.  Both images are affected by noise (the short exposure image is more noisy), which is dependent on the {\em ISO} sensitivity setting of the digital camera; we elaborate on this in greater detail in section \ref{sec:image_noise_in_photography}. In practice, such a pair of images is easy to obtain by using a feature called {\em ISO bracketing} which is commonly available in digital SLRs.
+ 
 There are several approaches how to restore the original image from the short and long exposure image pairs. These broadly fall in two categories – the {\em non-deconvolution} and {\em deconvolution} methods. The former do not perform deconvolution at any stage and try to utilize the image information in other ways as opposed to the latter, where deconvolution is performed at some point. Both categories feature methods with varying complexity, computational cost and efficiency, some of which will be described below. Section \ref{sec:the_deconvolution_problem} elaborates on the problem of deconvolution. 
 
 The aim of this thesis is to analyze selected methods and evaluate their degree of suitability in various circumstances in terms of exposure times, signal-to-noise ratio improvements and other indicators based on experimental results. Methods are compared against themselves and we also compare them with a chosen single-image denoising algorithm to evaluate the benefits of additional image information in the form of improved quality of the restored image. We do not attempt to implement computationally effective algorithms at all costs nor do we provide an exhaustive list of all available methods. We perform experiments on both real-world and simulated data but focus on the latter, which allow the best degree of control over the experiment. Images are assumed to be gray-scale\footnote[2]{Methods can be extended to process color images simply by applying them to each color channel separately. This is, however, not the subject of this thesis.} and registered. Real-world experiment images are registered manually if needed.
@@ -180,7 +180,7 @@ The aim of this thesis is to analyze selected methods and evaluate their degree 
 \chapter{Research}
 \label{chap:research}
 
-In this chapter, we present a theoretical background to a wide array of subjects that are related to the problem of image restoration from the blurred - noisy (long and short exposure) image pair. We begin by presenting the model of our situation in section \ref{sec:model}, which follows this introduction. We briefly describe several methods of solving the the problem in section \ref{sec:blurred_noisy}. Since one of the methods we test makes use of deconvolution, we elaborate more on the subject in section \ref{sec:the_deconvolution_problem}. To be able to generate testing data, we need to understand the nature of noise in digital photography and its relationship to digital camera settings. We discuss this matter in section  \ref{sec:image_noise_in_photography}. The BM3D algorithm, which we use as a reference alongside other two methods, is briefly described in section \ref{sec:bm3d_denoising_algorithm}. Both BM3D denoising algorithm and our extension of the Šroubek's multichannel blind deconvolution method assume image noise to be known a priori; we have therefore studied and used several methods to estimate it from images, which are desribed in section \ref{sec:estimation_of_noise_from_images}. The chapter is concluded with the description of Tico's wavelet image fusion algorithm, which we've chosen as a representative non-deconvolution method and Šroubek's multichannel blind deconvolution method including our extension, which enables it to operate on data featuring different noise in each channel.    
+In this chapter, we present a theoretical background to a wide array of subjects that are related to the problem of image restoration from the blurred - noisy (long and short exposure) image pair. We begin by presenting the model of our situation in section \ref{sec:model}, which follows this introduction. We briefly describe several methods of solving the the problem in section \ref{sec:blurred_noisy}. Since one of the methods we test makes use of deconvolution, we elaborate more on the subject in section \ref{sec:the_deconvolution_problem}. To be able to generate testing data, we need to understand the nature of noise in digital photography and its relationship to digital camera settings. We discuss this matter in section  \ref{sec:image_noise_in_photography}. The BM3D algorithm, which we use as a reference alongside the other two methods, is briefly described in section \ref{sec:bm3d_denoising_algorithm}. Both BM3D denoising algorithm and our extension of the Šroubek's multichannel blind deconvolution method assume image noise to be known a priori; we have therefore studied and used several methods to estimate it from images, which are desribed in section \ref{sec:estimation_of_noise_from_images}. The chapter is concluded with the description of Tico's wavelet image fusion algorithm, which we've chosen as a representative non-deconvolution method and Šroubek's multichannel blind deconvolution method including our extension, which enables it to operate on data featuring different noise in each channel.    
 
 \clearpage
 
@@ -212,7 +212,7 @@ Several approaches can be taken:
 	\item Enhance the short-exposure (noisy) image $g_1$ by removing noise, not considering the long-exposure (blurred) image $g_2$ at all. The BM3D denoising algorithm \cite{bm3d}, used as a reference, fits into this category.
 	\item Enhance the short-exposure (noisy) image $g_1$ by using image statistics (standard deviation, mean) of the long-exposure (blurred) image $g_2$. This is the approach taken by Reinhard et al. \cite{rein01}. A similar approach, aimed at enhancing image brightness and contrast by successive applications of 2 specialized functions is used by Razligh and Kehtarnavaz \cite{razl07}. Since noise is present and is amplified by both methods, noise removal is necessary. 
 	\item Regardless of $\alpha$, perform blind deconvolution of the long-exposure (blurred) image $g_2$ making use of the image information present in short-exposure image $g_1$. Attempting blind deconvolution using only image $g_2$ is an underdetermined problem yielding unsatisfactory results. This is the approach taken by Lim and Silverstein \cite{lim08}, Tico in his 2006 and 2007 papers \cite{tico06} \cite{tico07},  Babacan et al. \cite{baba09}, Yuan et al. \cite{yuan07} and others. The MCAM algoritm of Šroubek and Flusser \cite{srou03}, used in this thesis, is a multi-channel, multi-PSF generalization of the long-short exposure image pair problem, and is extended to accomodate different levels of noise in each channel. A more detailed description of the deconvolution problem is presented in section \ref{sec:the_deconvolution_problem}, Šroubek and Flusser's MCAM algorithm is presented in section \ref{sec:srou03}.
-	\item Fuse images $g_1$ and $g_2$ without using deconvolution. The wavelet-based image fusion by Tico \cite{tico09}, described in section \ref{sec:tico09} and used in this thesis, is a fitting example. The primary advantage of this algorithm stems from its ihnerent independence on the type of blurring, which can even be localized (movement of individual objects) or space-variant.
+	\item Fuse images $g_1$ and $g_2$ without using deconvolution. The wavelet-based image fusion by Tico \cite{tico09}, described in section \ref{sec:tico09} and used in this thesis, is a fitting example. The primary advantage of this algorithm stems from its inherent independence on the type of blurring, which can even be local (movement of individual objects) or space-variant.
 \end{enumerate}  
 
 
@@ -262,7 +262,7 @@ From the properties of conditional probability, we can write
 %%%
 \begin{equation}
 	\label{eq:posterior_prob_prop}
-		 p(f,d_1 \dots d_P |g_1 \dots g_P) = \frac{p(g_1 \dots g_P|f,d_1 \dots d_P)}{p(g_1 \dots g_P)}
+		 p(f,d_1 \dots d_P |g_1 \dots g_P) = \frac{p(g_1 \dots g_P|f,d_1 \dots d_P)p(f)p(d_1 \dots d_P)}{p(g_1 \dots g_P)}
 \end{equation}
 %%%
 
@@ -378,7 +378,7 @@ and employ polynomial fitting (MATLAB's \texttt{polyfit} and \texttt{polyval} fu
 
 The BM3D denoising algorithm, described in section \ref{sec:bm3d_denoising_algorithm} as well as our extension of the Šroubek and Flusser's MCAM algorithm (see section \ref{sec:srou03_extension}) both require noise standard deviation(s) $\sigma$ as one of its input parameters. Hence, several methods to estimate $\sigma$ from images are presented. Zero mean Gaussian noise is assumed in all cases. We present the methods in order of increasing complexity. 
 
-\noindent \textbf{Immerkaer's method} \cite{imm96}, published in 1996, is a simple and fast method that first smoothes the image using the Laplacian operator
+\noindent \textbf{Immerkaer's method} \cite{imm96}, published in 1996, is a simple and fast method that first applies the Laplacian operator on the image 
 %%%
 \begin{equation}
 \label{eq:imm96_matrix}
@@ -396,7 +396,7 @@ and follows with a direct estimation of the noise standard deviation $\sigma$ us
 	\sigma = \sqrt{\frac{\pi}{2}} \frac{1}{6(W-2)(H-2)}\sum_{\mathbf{x} \in I}^{}\left|I(\mathbf{x}) \star N \right|  
 \end{equation}
 %%%%
-Altough the method is fast, its inherent simplicity causes it to perceive fine details (lines etc.) as noise, especially in highly textured images. An adaptive approach is therefore needed. 
+where $W$ is the width of the image and $H$ its height. Altough the method is fast, its inherent simplicity causes it to perceive fine details (lines etc.) as noise, especially in highly textured images. An adaptive approach is therefore needed. 
 
 \noindent \textbf{Tai and Yang's method} \cite{tai08}, published in 1998, is an extension of the previous approach. First, the Sobel operator
 %%%%
@@ -439,8 +439,8 @@ Since the BM3D algorithm is not the focus of this thesis and has only been reuse
 %%%
 \begin{figure}[htb]
  \centering
-  \includegraphics[width=12cm]{bm3d_matching_blocks.png}
- \caption[The BM3D algorithm.]{The BM3D algorithm. The images show cutaways of {\em Lena}, {\em House}, {\em Boats} and {\em Barbara} images corrupted by zero-mean additive Gaussian noise of $\sigma = 15/255$. A reference block {\em R} and a few of its matched ones illustrate block matching. Taken from \cite{bm3d}.}
+  \includegraphics[width=0.9\textwidth]{bm3d_matching_blocks.png}
+ \caption[The BM3D algorithm]{The BM3D algorithm. The images show cutaways of {\em Lena}, {\em House}, {\em Boats} and {\em Barbara} images corrupted by zero-mean additive Gaussian noise of $\sigma = 15/255$. A reference block {\em R} and a few of its matched ones illustrate block matching. Taken from \cite{bm3d}.}
  \label{fig:bm3d_example}
 \end{figure}
 
@@ -763,6 +763,15 @@ and of the lambda estimate
 %%%
 We use the theoretically computed values of $\gamma$ and $\lambda$ in experiments for both simulated and real-world data.  
 
+Since mathematical properties of the original algorithm permit solutions to both point spread function(s) and the original image to be shifted by a constant $\xi$, we need to modify the algorithm further to prevent the solutions to PSFs from  gradually ``running away''. This was achieved by computing the center of gravity of blur PSFs after each iteration by using the formula
+%%%
+\begin{equation}
+\label{eq:srou03_cog}
+	M_\mathbf{d} = \frac{1}{\sum_{x,y \in \Omega}\mathbf{d}(x,y) } \sum_{x,y \in \Omega} x y \mathbf{d}(x,y)
+\end{equation}
+%%%
+and shifting them so that computed centers of gravity match the centers of blur PSF support $\Omega$.    
+
 \chapter{Results}
 \label{chap:results}
 
@@ -796,7 +805,7 @@ We have used a set of 4 point spread functions (see figure \ref{fig:used_psfs}) 
 	  \subfloat[]{\label{fig:blurkernel8}\includegraphics[width=0.225\textwidth]{blurkernel8.png}}
 	  ~
 	  \subfloat[]{\label{fig:blurkernel10}\includegraphics[width=0.225\textwidth]{blurkernel10.png}}
-  \caption[Point-spread functions selected for use in testing.]{Point-spread functions selected for use in testing. \ref{fig:line}) 1 pixel thick diagonal line-shaped blur kernel (the line shown is thicker in order to be visible in print). \ref{fig:blurkernel7}) Blur kernel 7. \ref{fig:blurkernel8}) Blur kernel 8. \ref{fig:blurkernel10}) Blur kernel 10. Blur kernels \ref{fig:blurkernel7}) through \ref{fig:blurkernel10}) were taken from \cite{yuan07}.}
+  \caption[Point-spread functions selected for use in testing]{Point-spread functions selected for use in testing. \ref{fig:line}) 1 pixel thick diagonal line-shaped blur kernel (the line shown is thicker in order to be visible in print). \ref{fig:blurkernel7}) Blur kernel 7. \ref{fig:blurkernel8}) Blur kernel 8. \ref{fig:blurkernel10}) Blur kernel 10. Blur kernels \ref{fig:blurkernel7}) through \ref{fig:blurkernel10}) were taken from \cite{yuan07}.}
   \label{fig:used_psfs}
 \end{figure}
 
@@ -818,7 +827,7 @@ We have used a set of 4 point spread functions (see figure \ref{fig:used_psfs}) 
 	  \subfloat[]{\label{fig:text}\includegraphics[width=0.225\textwidth]{text256.png}}
 	  ~
 	  \subfloat[]{\label{fig:castle}\includegraphics[width=0.225\textwidth]{castle256.png}}
-  \caption[Images selected for use in testing.]{Images selected for use in testing. \ref{fig:lena}) Lena image, taken from  \cite{uscimgdb}. \ref{fig:tree}) Tree image, provided by the thesis supervisor. \ref{fig:text}) Printed text, a screenshot from one of the cited papers. \ref{fig:castle}) Castle image.}
+  \caption[Images selected for use in testing]{Images selected for use in testing. \ref{fig:lena}) Lena image, taken from  \cite{uscimgdb}. \ref{fig:tree}) Tree image, provided by the thesis supervisor. \ref{fig:text}) Printed text, a screenshot from one of the cited papers. \ref{fig:castle}) Castle image.}
   \label{fig:used_images}
 \end{figure}
 
@@ -828,13 +837,13 @@ Testing images used were 256 by 256 pixels in size. We avoided the use of larger
 
 Since Ojala in \cite{ojal08} demonstrated that temperature and exposure time have very little influence on the level of noise present in a digital photograph, we chose to abandon these parameters completely, leaving ISO as the only parameter. ISO 100 was chosen as the base value for both generated and real-world data. 
 
-In case of generated data, the pair of ISO values is chosen in advance, one of the values being 100 for the blurred, less noisy image. The other value is set to $100*2^i$, where $i$ is an integer greater than 1. This corresponds to ISO settings usually present in digital cameras; however, as of 2011, ISO settings over 25600 are rarely encountered in commercially available products, requiring us to use a value of $i$ no greater than 8. We have, however, also used the $i$ value of 10 (ISO 102400) to generate noise which cannot be simply approximated as a zero-mean Gaussian and thus pose potential difficulty for the BM3D denoising algorithm.  
+In case of generated data, the pair of ISO values is chosen in advance, one of the values being 100 for the blurred, less noisy image. The other value is set to $100*2^i$, where $i$ is an integer greater than 1. This corresponds to ISO settings usually present in digital cameras; however, as of 2011, ISO settings over 25600 are rarely encountered in commercially available products, requiring us to use a value of $i$ no greater than 8. We have, however, also used the $i$ value of 10 (ISO 102400) to generate noise which cannot be simply approximated as a zero-mean Gaussian to observe its effect on the outcome of individual methods.  
 
-Fixing the low ISO value at 100, the choice of the high ISO value depends on the level of illumination we wish to emulate. The lower the amount of light in the photographed scene, the higher ISO we need to compensate for the potentially longer exposure time (and thus larger blurring) needed for the camera to capture enough light. For example, given a 2 second exposure time to achieve a proper level of lighting at ISO 100, we might even need to go to ISO 12800 to achieve a potentially blur-less exposure at $1/60$ seconds. To achieve approximately the same level of illumination in both short and long exposure images, their ISO and shutter speed settings need to satisfy the equation $ISO_s t_s = ISO_l t_l$. Dynamic ranges of images taken in real-world experiments have confirmed this rule with a sufficient degree of precision.  
+Fixing the low ISO value at 100, the choice of the high ISO value depends on the level of illumination we wish to emulate. The lower the amount of light in the photographed scene, the higher ISO we need to compensate for the potentially longer exposure time (and thus larger blurring) needed for the camera to capture enough light. For example, given a 2 second exposure time to achieve a proper level of lighting at ISO 100, we might even need to go to ISO 12800 to achieve a potentially blur-less exposure at $1/60$ seconds. To achieve approximately the same level of illumination in both short and long exposure images $s$ and $l$, their ISO and shutter speed settings need to satisfy the equation $ISO_s t_s = ISO_l t_l$. Dynamic ranges of images taken in real-world experiments have confirmed this rule with a sufficient degree of precision.  
 
 In total, we've used 4 different images, 4 different blur PSFs at 4 different sizes and 9 different ISO settings, totalling 576 testing scenarios. 
 
-For each experiment, the input is a tuple ({\em input image}, {\em input PSF}, {\em input PSF size}, {\em noisy image ISO}). The ISO value for the blurred image is fixed at 100. We first read the input image, create two copies, one of which is subject to ISO simulation at the {\em noisy ISO} value, the other is blurred using the {\em input PSF} resized to {\em input PSF size} and subject to ISO simulation at ISO 100. In the next step, noise standard deviation is estimated from both noisy and blurred image as the standard deviation of the difference between the noisy and the original image and blurred and noisy and blurred and noiseless image, respectively. We proceed to remove noise from the noisy image using the BM3D algorithm using the estimated noise variance and to execute both Šroubek's and Tico's algorithms on the blurred - noisy image pair. The noisy and blurred images and the images resulting from the three other methods are written into separate files, as is the initial estimate of the blur PSF and the resulting blur PSFs from Šroubek's algorithm. We then compute signal to noise ratios from all images. A record of each experiment is also written to an output *.csv file. The record features the name of the image and PSF used, the PSF size, the ISO value used for blurred and noisy image, the values of estimated noise standard deviations, the $\lambda$ and $\gamma$ parameters used by Šroubek's algorithm and signal-to-noise ratios for the blurred, noisy and other resulting images.  
+For each experiment, the input is a tuple ({\em input image}, {\em input PSF}, {\em input PSF size}, {\em noisy image ISO}). The ISO value for the blurred image is fixed at 100. We first read the input image $f$, create two copies, one of which is subject to ISO simulation at the {\em noisy ISO} value yielding the noisy image $g_1$, the other is blurred using the {\em input PSF} resized to {\em input PSF size} (we denote this intermediate image as $f_b$) and subject to ISO simulation at ISO 100 to obtain the blurred image $g_2$. In the next step, noise standard deviation for the noisy image is estimated as the standard deviation of the difference signal between $g$ and $f$, that is $\hat{\sigma}_1 = std(g - f)$; standard deviation of noise in the blurred image is estimated as standard deviation of the difference signal between $g_2$ and $f_b$, or in other words $\hat{\sigma}_2 = std(g_2 - f_b)$. We then proceed to remove noise from the noisy image using the BM3D algorithm with the estimated noise variance $\hat{\sigma}_1^2$ and to execute both Šroubek's and Tico's algorithms on the blurred - noisy image pair. The noisy and blurred images and the images resulting from the three other methods are written into separate files, as is the initial estimate of the blur PSF and the resulting blur PSFs from Šroubek's algorithm. We then compute signal to noise ratios from all images. A record of each experiment is also written to an output *.csv file. The record features the name of the image and PSF used, the PSF size, the ISO value used for blurred and noisy image, the values of estimated noise standard deviations, the $\lambda$ and $\gamma$ parameters used by Šroubek's algorithm and signal-to-noise ratios for the blurred, noisy and other resulting images.  
 
 As we've mentioned earlier, we had also performed experiments using the same images and blur PSFs in variance mode, where the images were corrupted by additive white Gaussian noise of variances $10^{-i}$, $i$ being in range $\lbrace 1 \dots 4 \rbrace$. The base image was corrupted by additive white Gaussian noise of variance $10^{-5}$. Again, there were 4 input images, 4 different blur PSFs at 4 different sizes and 4 noise levels, bringing the total to 256 experiments. Similarly to the ISO mode, the input of each experiment is a tuple ({\em input image}, {\em input PSF}, {\em input PSF size}, {\em noisy image variance}) and noise variance of the blurred (base) image is fixed at $10^{-5}$. We do not need to estimate noise standard deviation in any of the images as it is already given. The format of output files and the record written to *.csv file differs only in ISO being replaced by noise variance and the estimates of noise standard deviation not being present at all. 
 
@@ -843,19 +852,20 @@ The resulting *.csv report files are then processed to obtain useful data. The i
 \subsection{Setup for real-world data}
 \label{sec:setup_for_real_world_data}
 
-Real-world experiments were performed by projecting the Lena image on a vertical white wall $2.6$ by $2.6$ metres in size and taking images of it with a Canon EOS 5D digital SLR camera using an $85$ mm lens at a distance of $5$ meters. The projector's optical axis was not perpendicular to the projecting wall; however, a dedicated setting of the projector was used to compensate. The projected image was $70$ by $70$ centimeters in size and was carefully measured vertically, horizontally and diagonally to rule out any spatial distortion.  Sources of light other than the projector itself were blocked out to prevent light pollution and color interference. Control over the level of illumination was achieved by multiplying the image function by a constant; $0.5$, $0.25$ and $0.125$ were the values used (the resulting images were too bright for multiplier $1$ - the original Lena image). Projector settings were kept unchanged throughout the experiment. Since the projector's output resolution was $800$ by $600$ pixels and the used image was $256$ by $256$ pixels in size, it was possible to insert control features (pixels and crosses) in the otherwise unused part of the projected space (see \ref{fig:testing_image_control_points}). These features were used to align the obtained images and to directly observe PSF shapes. 
+Real-world experiments were performed by projecting (using the Acer X110P projector) the Lena image on a vertical white wall $2.6$ by $2.6$ metres in size and taking images of it with a Canon EOS 5D digital SLR camera using an $85$ mm lens at a distance of $5$ meters. The projector's optical axis was not perpendicular to the projecting wall; however, a dedicated setting of the projector was used to compensate. The projected image was $70$ by $70$ centimeters in size and was carefully measured vertically, horizontally and diagonally to rule out any spatial distortion.  Sources of light other than the projector itself were blocked out to prevent light pollution and color interference. Control over the level of illumination was achieved by multiplying the image function by a constant; $0.5$, $0.25$ and $0.125$ were the values used (the resulting images were too bright for multiplier $1$ - the original Lena image). Projector settings were kept unchanged throughout the experiment. Since the projector's output resolution was $800$ by $600$ pixels and the used image was $256$ by $256$ pixels in size, it was possible to insert control features (pixels and crosses) in the otherwise unused part of the projected space (see \ref{fig:testing_image_control_points}). These features were used to align the obtained images and to directly observe PSF shapes. 
 %%%
-\begin{figure}[htb]
+\begin{figure}[h]
  \centering
-  \includegraphics[width=12cm]{testing_setup.png}
- \caption{Setup for real-world testing.}
+  \includegraphics[width=0.9\textwidth]{testing_setup.png}
+ \caption[Experimental setup for real-world testing]{Experimental setup for real-world testing.}
  \label{fig:testing_setup}
 \end{figure}
 %%%
-\begin{figure}[htb]
+%%%
+\begin{figure}[h]
  \centering
-  \includegraphics[width=12cm]{testing_image_control_points.png}
- \caption{An example of a testing image with control features.}
+  \includegraphics[width=0.9\textwidth]{testing_image_control_points.png}
+ \caption[An example of a testing image with control features]{An example of a testing image with control features.}
  \label{fig:testing_image_control_points}
 \end{figure}
 %%%
@@ -878,23 +888,24 @@ Three experiments were carried out, one for each multiplier value. In each exper
 %%%
 
 %%%
-\begin{figure}[htb]
+\begin{figure}[h]
  \centering
-  \includegraphics[width=12cm]{registration_process.png}
- \caption{Image registration process in Matlab, feature point selection.}
+  \includegraphics[width=0.9\textwidth]{registration_process.png}
+ \caption[Image registration process in Matlab, feature point selection]{Image registration process in Matlab, feature point selection.}
  \label{fig:registration_process}
 \end{figure}
 %%%
 
 %%%
-\begin{figure}[htb]
+\begin{figure}[h]
  \centering
-  \includegraphics[width=12cm]{alignment_process.png}
- \caption{The result of image alignment for experiment 1.}
+  \includegraphics[width=0.9\textwidth]{alignment_process.png}
+ \caption[The result of image alignment for experiment 1]{The result of image alignment for experiment 1.}
  \label{fig:alignment_process}
 \end{figure}
 %%%
 
+\clearpage
 
 \section{Results for simulated data}
 \label{sec:simulated_data}
@@ -902,7 +913,7 @@ Three experiments were carried out, one for each multiplier value. In each exper
 From the total of $576$ experiments performed in ISO mode, our modification of the Šroubek's algorithm provided the best results in terms of SNR in 182 cases. Of those 182 cases, 122 were marked with a difference greater than 1 dB from the result of the BM3D algorithm, which provided the best result in 393 cases (277 of which with a difference greater than 1 dB from the result of Šroubek's algorithm). Tico's algorithm provided the best result in a single case (Lena image, diagonal-line shaped PSF of size 3 for the blurred image and ISO 102400 for the noisy image), which is illustrated by figure \ref{fig:tico09_iso_success}.  The SNR of Tico's result was 14.2735 compared to Šroubek's 13.813 and 13.7881 for the BM3D algorithm. A breakdown of individual methods' success rates can be found in table \ref{tab:iso_mode_breakdown}, which provides the number of successful results for Tico's, Šroubek's and the BM3D algorithm for a given combination of input ISO and PSF size, regardless of the type of image or blurring. The most successful algorithm for a given input combination is emphasized in bold. The same layout is used for variance mode test results, to be found in table \ref{tab:var_mode_breakdown}. A detailed overview of the most successful methods for every image, blur kernel, kernel size and input ISO is provided by figures \ref{fig:iso_lena256}, \ref{fig:iso_tree256}, \ref{fig:iso_text256} and \ref{fig:iso_castle256}. Blue color is reserved for Šroubek's, green for Tico's and red for the BM3D algorithm.       
 
 %%%
-\begin{table}[htb]
+\begin{table}[h]
   \centering
   \begin{tabular}{ | l | c | c | c | c | c | c | c | c | c |}
     \hline
@@ -917,15 +928,33 @@ From the total of $576$ experiments performed in ISO mode, our modification of t
 	25600  & 0 - \textbf{16} - 0 & 0 - \textbf{15} - 1 & 0 - \textbf{10} - 6 & 0 - 4 - \textbf{12} \\ \hline
 	102400 & 1 - \textbf{15} - 0 & 0 - \textbf{13} - 3 & 0 - \textbf{12} - 4 & 0 - \textbf{8} - \textbf{8} \\ \hline
   \end{tabular}
-  \caption{A detailed breakdown of methods' success rates in ISO mode.}
+  \caption[A detailed breakdown of tested methods' success rates in ISO mode]{A detailed breakdown of tested methods' success rates in ISO mode. For a given combination of input ISO (rows) and input PSF size (columns), the table lists the aggregate number of times Tico's, Šroubek's and the BM3D algorithm achieved the best result, regardless of the input image or input PSF.}
   \label{tab:iso_mode_breakdown}
 \end{table}
 %%%
 
+\begin{figure}[t]
+  \centering
+	  \subfloat[]{\label{fig:tico09_iso_success_blurred}\includegraphics[width=0.3\textwidth]{tico09_iso_success_blurred.png}}
+	  ~
+	  \subfloat[]{\label{fig:tico09_iso_success_noisy}\includegraphics[width=0.3\textwidth]{tico09_iso_success_noisy.png}}
+	  ~
+	  \subfloat[]{\label{fig:tico09_iso_success_psfs}\includegraphics[width=0.3\textwidth]{tico09_iso_success_psfs.png}}
+
+	  \subfloat[]{\label{fig:tico09_iso_success_tico09}\includegraphics[width=0.3\textwidth]{tico09_iso_success_tico09.png}}
+	  ~
+	  \subfloat[]{\label{fig:tico09_iso_success_srou03}\includegraphics[width=0.3\textwidth]{tico09_iso_success_srou03.png}}
+	  ~
+	  \subfloat[]{\label{fig:tico09_iso_success_bm3d}\includegraphics[width=0.3\textwidth]{tico09_iso_success_bm3d.png}}
+  \caption[The successful result of the Tico's algorithm in ISO mode]{The successful result of the Tico's algorithm in ISO mode. Top row: the blurred and noisy image pair for the successful result of the Tico's algorithm in ISO mode. Bottom row: the results of Tico's and Šroubek's methods and the BM3D algorithm.}
+  \label{fig:tico09_iso_success}
+\end{figure}
+
+
 Of the total of $256$ experiments performed in variance mode, Šroubek's algorithm provided the best results in terms of SNR in 126 (88) cases, the BM3D was more successful in 128 (85) cases and Tico's algorithm in 2. The relatively higher success rate of Šroubek's algorithm can be explained by lower performance of the BM3D algorithm in extremely noisy conditions (variances 0.01 and 0.1) which were not achieved by ISO simulation. In comparison, the simulated ISO of 25600 corresponds to AWGN variance of about 0.003 for all images, the extreme simulated ISO value of 102400, which is only encountered in high end digital SLRs, if at all, corresponds to AWGN\footnote[6]{Additive white Gaussian noise.} variance of about 0.02, which is still an order of magnitude less than the highest value used in variance mode. Similarly to ISO mode, a more detailed breakdown of individual methods' success rates is given in table \ref{tab:var_mode_breakdown}. A complete overview of the most successful methods for every image, blur kernel, kernel size and input variance is shown in figures \ref{fig:var_lena256}, \ref{fig:var_tree256}, \ref{fig:var_text256} and \ref{fig:var_castle256}. The color scheme used is the same as in ISO mode.
 
 %%%
-\begin{table}[htb]
+\begin{table}[h]
   \centering
   \begin{tabular}{ | l | c | c | c | c |}
     \hline
@@ -935,48 +964,12 @@ Of the total of $256$ experiments performed in variance mode, Šroubek's algorit
 	0.01   & 0 - \textbf{16} - 0 & 0 - \textbf{13} - 3 & 0 - \textbf{12} - 4 & 0 - 6 - \textbf{10} \\ \hline
 	0.1    & 0 - \textbf{16} - 0 & 0 - \textbf{12} - 4 & 1 - \textbf{13} - 2 & 1 - 6 - \textbf{9} \\ \hline
   \end{tabular}
-  \caption{A detailed breakdown of methods' success rates in variance mode.}
+  \caption[A detailed breakdown of tested methods' success rates in variance mode]{A detailed breakdown of tested methods' success rates in variance mode. For a given combination of input variance (rows) and input PSF size (columns), the table lists the aggregate number of times Tico's, Šroubek's and the BM3D algorithm achieved the best result, regardless of the input image or input PSF. The most successful algorithm is written in bold.}
   \label{tab:var_mode_breakdown}
 \end{table}
 %%%	
-	
 
 Both of the two marginally successful results of Tico's algorithm in variance mode were achieved in conditions of extreme noise in the noisy image (variance 0.1) and extreme blurring in the other (PSF sizes 15 and 31), one of which is illustrated by figure \ref{fig:tico09_var_success}. The SNR of Tico's result was 5.3947 compared to Šroubek's 2.5659 and 5.0676 for the BM3D algorithm. 
-
-% \begin{figure}[htb]
- % \begin{center}
-  % \includegraphics[width=12cm]{tico09_iso_success.png}
- % \end{center}
- % \caption{Top row: the blurred and noisy image pair for the successful result of the Tico's algorithm in ISO mode. Bottom row: the results of Tico's and Šroubek's methods and the BM3D algorithm.}
- % \label{fig:tico09_iso_success}
-% \end{figure}
-
-\begin{figure}[htb]
-  \centering
-	  \subfloat[]{\label{fig:tico09_iso_success_blurred}\includegraphics[width=0.3\textwidth]{tico09_iso_success_blurred.png}}
-	  ~
-	  \subfloat[]{\label{fig:tico09_iso_success_psfs}\includegraphics[width=0.3\textwidth]{tico09_iso_success_psfs.png}}
-	  ~
-	  \subfloat[]{\label{fig:tico09_iso_success_noisy}\includegraphics[width=0.3\textwidth]{tico09_iso_success_noisy.png}}
-
-	  \subfloat[]{\label{fig:tico09_iso_success_tico09}\includegraphics[width=0.3\textwidth]{tico09_iso_success_tico09.png}}
-	  ~
-	  \subfloat[]{\label{fig:tico09_iso_success_srou03}\includegraphics[width=0.3\textwidth]{tico09_iso_success_srou03.png}}
-	  ~
-	  \subfloat[]{\label{fig:tico09_iso_success_bm3d}\includegraphics[width=0.3\textwidth]{tico09_iso_success_bm3d.png}}
-  \caption[The successful result of the Tico's algorithm in ISO mode.]{The successful result of the Tico's algorithm in ISO mode. Top row: the blurred and noisy image pair for the successful result of the Tico's algorithm in ISO mode. Bottom row: the results of Tico's and Šroubek's methods and the BM3D algorithm.}
-  \label{fig:tico09_iso_success}
-\end{figure}
-
-
-
-% \begin{figure}[htb]
- % \begin{center}
-  % \includegraphics[width=12cm]{tico09_var_success.png}
- % \end{center}
- % \caption{Top row: the blurred and noisy image pair for the successful result of the Tico's algorithm in variance mode. Bottom row: the results of Tico's and Šroubek's methods and the BM3D algorithm.}
- % \label{fig:tico09_var_success}
-% \end{figure}
 
 \begin{figure}[htb]
   \centering
@@ -991,10 +984,10 @@ Both of the two marginally successful results of Tico's algorithm in variance mo
 	  \subfloat[]{\label{fig:tico09_var_success_srou03}\includegraphics[width=0.3\textwidth]{tico09_var_success_srou03.png}}
 	  ~
 	  \subfloat[]{\label{fig:tico09_var_success_bm3d}\includegraphics[width=0.3\textwidth]{tico09_var_success_bm3d.png}}
-  \caption[The successful result of the Tico's algorithm in variance mode.]{The successful result of the Tico's algorithm in variance mode. Top row: the blurred and noisy image pair for the successful result of the Tico's algorithm in ISO mode. Bottom row: the results of Tico's and Šroubek's methods and the BM3D algorithm.}
+  \caption[The successful result of the Tico's algorithm in variance mode]{The successful result of the Tico's algorithm in variance mode. Top row: the blurred and noisy image pair for the successful result of the Tico's algorithm in ISO mode. Bottom row: the results of Tico's and Šroubek's methods and the BM3D algorithm. The most successful algorithm is written in bold.}
   \label{fig:tico09_var_success}
 \end{figure}
-
+	
 \clearpage
 
 \begin{figure}[htb]
@@ -1004,9 +997,11 @@ Both of the two marginally successful results of Tico's algorithm in variance mo
 
 	  \subfloat[]{\label{fig:iso_lena256_blurkernel8}\includegraphics[width=0.5\textwidth]{iso_lena256_blurkernel8.pdf}}
 	  \subfloat[]{\label{fig:iso_lena256_blurkernel10}\includegraphics[width=0.5\textwidth]{iso_lena256_blurkernel10.pdf}}
-  \caption[Results for the lena image in ISO mode.]{Results of the simulated data experiment on the lena image in ISO mode. \ref{fig:iso_lena256_line} Results for diagonal line-shaped blur kernel. \ref{fig:iso_lena256_blurkernel7} Results for blur kernel 7. \ref{fig:iso_lena256_blurkernel8} Results for blur kernel 8. \ref{fig:iso_lena256_blurkernel10} Results for blur kernel 10.}
+  \caption[Results for the lena image in ISO mode]{Results of the simulated data experiment on the lena image in ISO mode. \ref{fig:iso_lena256_line} Results for diagonal line-shaped blur kernel. \ref{fig:iso_lena256_blurkernel7} Results for blur kernel 7. \ref{fig:iso_lena256_blurkernel8} Results for blur kernel 8. \ref{fig:iso_lena256_blurkernel10} Results for blur kernel 10.}
   \label{fig:iso_lena256}
 \end{figure}
+
+\clearpage
 
 \begin{figure}[htb]
   \centering
@@ -1015,7 +1010,7 @@ Both of the two marginally successful results of Tico's algorithm in variance mo
 
 	  \subfloat[]{\label{fig:iso_tree256_blurkernel8}\includegraphics[width=0.5\textwidth]{iso_tree256_blurkernel8.pdf}}
 	  \subfloat[]{\label{fig:iso_tree256_blurkernel10}\includegraphics[width=0.5\textwidth]{iso_tree256_blurkernel10.pdf}}
-  \caption[Results for the tree image in ISO mode.]{Results of the simulated data experiment on the tree image in ISO mode. \ref{fig:iso_lena256_line} Results for diagonal line-shaped blur kernel. \ref{fig:iso_lena256_blurkernel7} Results for blur kernel 7. \ref{fig:iso_lena256_blurkernel8} Results for blur kernel 8. \ref{fig:iso_lena256_blurkernel10} Results for blur kernel 10.}
+  \caption[Results for the tree image in ISO mode]{Results of the simulated data experiment on the tree image in ISO mode. \ref{fig:iso_lena256_line} Results for diagonal line-shaped blur kernel. \ref{fig:iso_lena256_blurkernel7} Results for blur kernel 7. \ref{fig:iso_lena256_blurkernel8} Results for blur kernel 8. \ref{fig:iso_lena256_blurkernel10} Results for blur kernel 10.}
   \label{fig:iso_tree256}
 \end{figure}
 
@@ -1028,9 +1023,11 @@ Both of the two marginally successful results of Tico's algorithm in variance mo
 
 	  \subfloat[]{\label{fig:iso_text256_blurkernel8}\includegraphics[width=0.5\textwidth]{iso_text256_blurkernel8.pdf}}
 	  \subfloat[]{\label{fig:iso_text256_blurkernel10}\includegraphics[width=0.5\textwidth]{iso_text256_blurkernel10.pdf}}
-  \caption[Results for the text image in ISO mode.]{Results of the simulated data experiment on the text image in ISO mode. \ref{fig:iso_lena256_line} Results for diagonal line-shaped blur kernel. \ref{fig:iso_lena256_blurkernel7} Results for blur kernel 7. \ref{fig:iso_lena256_blurkernel8} Results for blur kernel 8. \ref{fig:iso_lena256_blurkernel10} Results for blur kernel 10.}
+  \caption[Results for the text image in ISO mode]{Results of the simulated data experiment on the text image in ISO mode. \ref{fig:iso_lena256_line} Results for diagonal line-shaped blur kernel. \ref{fig:iso_lena256_blurkernel7} Results for blur kernel 7. \ref{fig:iso_lena256_blurkernel8} Results for blur kernel 8. \ref{fig:iso_lena256_blurkernel10} Results for blur kernel 10.}
   \label{fig:iso_text256}
 \end{figure}
+
+\clearpage
 
 \begin{figure}[htb]
   \centering
@@ -1039,7 +1036,7 @@ Both of the two marginally successful results of Tico's algorithm in variance mo
 
 	  \subfloat[]{\label{fig:iso_castle256_blurkernel8}\includegraphics[width=0.5\textwidth]{iso_castle256_blurkernel8.pdf}}
 	  \subfloat[]{\label{fig:iso_castle256_blurkernel10}\includegraphics[width=0.5\textwidth]{iso_castle256_blurkernel10.pdf}}
-  \caption[Results for the castle image in ISO mode.]{Results of the simulated data experiment on the castle image in ISO mode. \ref{fig:iso_lena256_line} Results for diagonal line-shaped blur kernel. \ref{fig:iso_lena256_blurkernel7} Results for blur kernel 7. \ref{fig:iso_lena256_blurkernel8} Results for blur kernel 8. \ref{fig:iso_lena256_blurkernel10} Results for blur kernel 10.}
+  \caption[Results for the castle image in ISO mode]{Results of the simulated data experiment on the castle image in ISO mode. \ref{fig:iso_lena256_line} Results for diagonal line-shaped blur kernel. \ref{fig:iso_lena256_blurkernel7} Results for blur kernel 7. \ref{fig:iso_lena256_blurkernel8} Results for blur kernel 8. \ref{fig:iso_lena256_blurkernel10} Results for blur kernel 10.}
   \label{fig:iso_castle256}
 \end{figure}
 
@@ -1052,9 +1049,11 @@ Both of the two marginally successful results of Tico's algorithm in variance mo
 
 	  \subfloat[]{\label{fig:var_lena256_blurkernel8}\includegraphics[width=0.5\textwidth]{var_lena256_blurkernel8.pdf}}
 	  \subfloat[]{\label{fig:var_lena256_blurkernel10}\includegraphics[width=0.5\textwidth]{var_lena256_blurkernel10.pdf}}
-  \caption[Results for the lena image in variance mode.]{Results of the simulated data experiment on the lena image in variance mode. \ref{fig:iso_lena256_line} Results for diagonal line-shaped blur kernel. \ref{fig:iso_lena256_blurkernel7} Results for blur kernel 7. \ref{fig:iso_lena256_blurkernel8} Results for blur kernel 8. \ref{fig:iso_lena256_blurkernel10} Results for blur kernel 10.}
+  \caption[Results for the lena image in variance mode]{Results of the simulated data experiment on the lena image in variance mode. \ref{fig:iso_lena256_line} Results for diagonal line-shaped blur kernel. \ref{fig:iso_lena256_blurkernel7} Results for blur kernel 7. \ref{fig:iso_lena256_blurkernel8} Results for blur kernel 8. \ref{fig:iso_lena256_blurkernel10} Results for blur kernel 10.}
   \label{fig:var_lena256}
 \end{figure}
+
+\clearpage
 
 \begin{figure}[htb]
   \centering
@@ -1063,7 +1062,7 @@ Both of the two marginally successful results of Tico's algorithm in variance mo
 
 	  \subfloat[]{\label{fig:var_tree256_blurkernel8}\includegraphics[width=0.5\textwidth]{var_tree256_blurkernel8.pdf}}
 	  \subfloat[]{\label{fig:var_tree256_blurkernel10}\includegraphics[width=0.5\textwidth]{var_tree256_blurkernel10.pdf}}
-  \caption[Results for the tree image in variance mode.]{Results of the simulated data experiment on the tree image in variance mode. \ref{fig:iso_lena256_line} Results for diagonal line-shaped blur kernel. \ref{fig:iso_lena256_blurkernel7} Results for blur kernel 7. \ref{fig:iso_lena256_blurkernel8} Results for blur kernel 8. \ref{fig:iso_lena256_blurkernel10} Results for blur kernel 10.}
+  \caption[Results for the tree image in variance mode]{Results of the simulated data experiment on the tree image in variance mode. \ref{fig:iso_lena256_line} Results for diagonal line-shaped blur kernel. \ref{fig:iso_lena256_blurkernel7} Results for blur kernel 7. \ref{fig:iso_lena256_blurkernel8} Results for blur kernel 8. \ref{fig:iso_lena256_blurkernel10} Results for blur kernel 10.}
   \label{fig:var_tree256}
 \end{figure}
 
@@ -1076,9 +1075,11 @@ Both of the two marginally successful results of Tico's algorithm in variance mo
 
 	  \subfloat[]{\label{fig:var_text256_blurkernel8}\includegraphics[width=0.5\textwidth]{var_text256_blurkernel8.pdf}}
 	  \subfloat[]{\label{fig:var_text256_blurkernel10}\includegraphics[width=0.5\textwidth]{var_text256_blurkernel10.pdf}}
-  \caption[Results for the text image in variance mode.]{Results of the simulated data experiment on the text image in variance mode. \ref{fig:iso_lena256_line} Results for diagonal line-shaped blur kernel. \ref{fig:iso_lena256_blurkernel7} Results for blur kernel 7. \ref{fig:iso_lena256_blurkernel8} Results for blur kernel 8. \ref{fig:iso_lena256_blurkernel10} Results for blur kernel 10.}
+  \caption[Results for the text image in variance mode]{Results of the simulated data experiment on the text image in variance mode. \ref{fig:iso_lena256_line} Results for diagonal line-shaped blur kernel. \ref{fig:iso_lena256_blurkernel7} Results for blur kernel 7. \ref{fig:iso_lena256_blurkernel8} Results for blur kernel 8. \ref{fig:iso_lena256_blurkernel10} Results for blur kernel 10.}
   \label{fig:var_text256}
 \end{figure}
+
+\clearpage
 
 \begin{figure}[htb]
   \centering
@@ -1087,7 +1088,7 @@ Both of the two marginally successful results of Tico's algorithm in variance mo
 
 	  \subfloat[]{\label{fig:var_castle256_blurkernel8}\includegraphics[width=0.5\textwidth]{var_castle256_blurkernel8.pdf}}
 	  \subfloat[]{\label{fig:var_castle256_blurkernel10}\includegraphics[width=0.5\textwidth]{var_castle256_blurkernel10.pdf}}
-  \caption[Results for the castle image in variance mode.]{Results of the simulated data experiment on the castle image in variance mode. \ref{fig:iso_lena256_line} Results for diagonal line-shaped blur kernel. \ref{fig:iso_lena256_blurkernel7} Results for blur kernel 7. \ref{fig:iso_lena256_blurkernel8} Results for blur kernel 8. \ref{fig:iso_lena256_blurkernel10} Results for blur kernel 10.}
+  \caption[Results for the castle image in variance mode]{Results of the simulated data experiment on the castle image in variance mode. \ref{fig:iso_lena256_line} Results for diagonal line-shaped blur kernel. \ref{fig:iso_lena256_blurkernel7} Results for blur kernel 7. \ref{fig:iso_lena256_blurkernel8} Results for blur kernel 8. \ref{fig:iso_lena256_blurkernel10} Results for blur kernel 10.}
   \label{fig:var_castle256}
 \end{figure}
 
@@ -1096,60 +1097,11 @@ Both of the two marginally successful results of Tico's algorithm in variance mo
 \section{Results for real-world data}
 \label{sec:real_world_data}
 
-As we've mentioned earlier, we'd performed 3 experiments, one for each input image multiplier value.   
+As we've mentioned earlier, we'd performed 3 experiments, one for each value of the image multiplier that was used to control the level of illumination for a particular experiment.   
 
 \noindent \textbf{Experiment 1}, multiplier 0.125.
 
-In this experiment, we simulated extremely low-light conditions, which is evident from the 2.5 second exposure time needed to obtain the blurred image with ISO set to 100. The noisy image was obtained with the ISO setting of 1600 and $1/6$ second exposure time. The blurred image's blur kernel size was determined to be 31 by 31 pixels, blurring was also present in the noisy image with blur kernel size 9 by 9 pixels. Setting the ISO to a higher value would have eventually removed blurring in the noisy image completely, we were however limited by the highest possible ISO setting of the camera, which was 1600. The original unmodified blurred and noisy image pair, albeit converted to grayscale, is illustrated in figure \ref{fig:experiment_001_blurred_noisy}. The experiment's result images are shown in figure \ref{fig:experiment_001_complete}. Experiment statistics are listed in table \ref{tab:experiment_001_statistics}. 
-
-%%
-% \begin{figure}[htb]
- % \begin{center}
-  % \includegraphics[width=12cm]{experiment_001_blurred_noisy.png}
- % \end{center}
- % \caption{The original blurred-noisy image pair from experiment 1.}
- % \label{fig:experiment_001_blurred_noisy}
-% \end{figure}
-%%
-
-\begin{figure}[htb]
-  \centering
-	  \subfloat[]{\label{fig:experiment_001_blurred_orig}\includegraphics[width=0.5\textwidth]{experiment_001_blurred_orig.png}}
-	  ~
-	  \subfloat[]{\label{fig:experiment_001_noisy_orig}\includegraphics[width=0.5\textwidth]{experiment_001_noisy_orig.png}}
-  \caption[The original blurred-noisy image pair from experiment 1.]{The original blurred-noisy image pair from experiment 1.}
-  \label{fig:experiment_001_blurred_noisy}
-\end{figure}
-
-
-%%
-% \begin{figure}[htb]
- % \begin{center}
-  % \includegraphics[width=12cm]{experiment_001_complete.png}
- % \end{center}
- % \caption{Experiment 1.}
- % \label{fig:experiment_001_complete}
-% \end{figure}
-%%
-
-%% subfloat version
-\begin{figure}[htb]
-  \centering
-	  \subfloat[]{\label{fig:experiment_001_blurred}\includegraphics[width=0.3\textwidth]{experiment_001_blurred.png}}
-	  ~
-  	  \subfloat[]{\label{fig:experiment_001_psfs}\includegraphics[width=0.3\textwidth]{experiment_001_psfs.png}}
-	  ~
-	  \subfloat[]{\label{fig:experiment_001_noisy}\includegraphics[width=0.3\textwidth]{experiment_001_noisy.png}}
-
-	  \subfloat[]{\label{fig:experiment_001_tico09}\includegraphics[width=0.3\textwidth]{experiment_001_tico09.png}}
-	  ~
-	  \subfloat[]{\label{fig:experiment_001_srou03}\includegraphics[width=0.3\textwidth]{experiment_001_srou03.png}}
-	  ~
-	  \subfloat[]{\label{fig:experiment_001_bm3d}\includegraphics[width=0.3\textwidth]{experiment_001_bm3d.png}}
-  \caption[Experiment 1.]{Experiment 1.}
-  \label{fig:experiment_001_complete}
-\end{figure}
-
+In this experiment, we simulated extremely low-light conditions, which is evident from the 2.5 second exposure time needed to obtain the blurred image with ISO set to 100. The noisy image was obtained with the ISO setting of 1600 and $1/6$ second exposure time. The blurred image's blur kernel size was determined to be 31 by 31 pixels, blurring was also present in the noisy image with blur kernel size 9 by 9 pixels. Setting the ISO to a higher value would have eventually removed blurring in the noisy image completely, we were however limited by the highest possible ISO setting of the camera, which was 1600. The original unmodified blurred and noisy image pair, albeit converted to grayscale, as well as the experiment's result images are shown in figure \ref{fig:experiment_001_complete}. Experiment statistics are listed in table \ref{tab:experiment_001_statistics}. 
 
 %%%
 \begin{table}[htb]
@@ -1175,62 +1127,9 @@ In this experiment, we simulated extremely low-light conditions, which is eviden
 \end{table}
 %%%
 
-
 \noindent \textbf{Experiment 2}, multiplier 0.25.
 
-In this case, the blurred image was obtained using the ISO setting of 100 and 1 second exposure time. The noisy image was again obtained with the ISO setting of 1600 and $1/15$ second exposure time. The blurred image's blur kernel size was determined to be 21 by 21 pixels, blurring in the noisy image was also present, at 5 by 5 pixels. The original blurred and noisy image pair (converted to grayscale), is illustrated in figure \ref{fig:experiment_002_blurred_noisy}. Resulting images are shown in figure \ref{fig:experiment_002_complete} and their statistics are listed in table \ref{tab:experiment_002_statistics}.
-
-%%
-% \begin{figure}[htb]
- % \begin{center}
-  % \includegraphics[width=12cm]{experiment_002_blurred_noisy.png}
- % \end{center}
- % \caption{The original blurred-noisy image pair from experiment 2.}
- % \label{fig:experiment_002_blurred_noisy}
-% \end{figure}
-%%
-
-%% subfloat version
-\begin{figure}[htb]
-  \centering
-	  \subfloat[]{\label{fig:experiment_002_blurred_orig}\includegraphics[width=0.5\textwidth]{experiment_002_blurred_orig.png}}
-	  ~
-	  \subfloat[]{\label{fig:experiment_002_noisy_orig}\includegraphics[width=0.5\textwidth]{experiment_002_noisy_orig.png}}
-  \caption[The original blurred-noisy image pair from experiment 2.]{The original blurred-noisy image pair from experiment 2.}
-  \label{fig:experiment_002_blurred_noisy}
-\end{figure}
-
-
-
-%%
-% \begin{figure}[htb]
- % \begin{center}
-  % \includegraphics[width=12cm]{experiment_002_complete.png}
- % \end{center}
- % \caption{Experiment 2.}
- % \label{fig:experiment_002_complete}
-% \end{figure}
-%%
-
-%% subfloat version
-\begin{figure}[htb]
-  \centering
-	  \subfloat[]{\label{fig:experiment_002_blurred}\includegraphics[width=0.3\textwidth]{experiment_002_blurred.png}}
-	  ~
-	  \subfloat[]{\label{fig:experiment_002_psfs}\includegraphics[width=0.3\textwidth]{experiment_002_psfs.png}}
-	  ~
-	  \subfloat[]{\label{fig:experiment_002_noisy}\includegraphics[width=0.3\textwidth]{experiment_002_noisy.png}}
-
-	  \subfloat[]{\label{fig:experiment_002_tico09}\includegraphics[width=0.3\textwidth]{experiment_002_tico09.png}}
-	  ~
-	  \subfloat[]{\label{fig:experiment_002_srou03}\includegraphics[width=0.3\textwidth]{experiment_002_srou03.png}}
-	  ~
-	  \subfloat[]{\label{fig:experiment_002_bm3d}\includegraphics[width=0.3\textwidth]{experiment_002_bm3d.png}}
-  \caption[Experiment 2.]{Experiment 2.}
-  \label{fig:experiment_002_complete}
-\end{figure}
-
-
+In this case, the blurred image was obtained using the ISO setting of 100 and 1 second exposure time. The noisy image was again obtained with the ISO setting of 1600 and $1/15$ second exposure time. The blurred image's blur kernel size was determined to be 21 by 21 pixels, blurring in the noisy image was also present, at 5 by 5 pixels. The original blurred and noisy image pair (converted to grayscale), and the resulting images are shown in figure \ref{fig:experiment_002_complete} and their statistics are listed in table \ref{tab:experiment_002_statistics}.
 
 %%%
 \begin{table}[htb]
@@ -1258,56 +1157,7 @@ In this case, the blurred image was obtained using the ISO setting of 100 and 1 
 
 \noindent \textbf{Experiment 3}, multiplier 0.5.
 
-The blurred image was taken using the ISO setting of 100 and $1/3$ second exposure time, resulting in a blur kernel 17 by 17 pixels in size. The noisy image, obtained with the ISO setting of 1000 and $1/30$ second exposure time, was blurred by a kernel 5 by 5 pixels in size. The original grayscale blurred and noisy image pair is illustrated in figure \ref{fig:experiment_003_blurred_noisy}. Resulting images are shown in figure \ref{fig:experiment_003_complete}. Experiment statistics are listed in table \ref{tab:experiment_003_statistics}.
-
-%%
-% \begin{figure}[htb]
- % \begin{center}
-  % \includegraphics[width=12cm]{experiment_003_blurred_noisy.png}
- % \end{center}
- % \caption{The original blurred-noisy image pair from experiment 3.}
- % \label{fig:experiment_003_blurred_noisy}
-% \end{figure}
-%%
-
-%% subfloat version
-\begin{figure}[htb]
-  \centering
-	  \subfloat[]{\label{fig:experiment_003_blurred_orig}\includegraphics[width=0.5\textwidth]{experiment_003_blurred_orig.png}}
-	  ~
-	  \subfloat[]{\label{fig:experiment_003_noisy_orig}\includegraphics[width=0.5\textwidth]{experiment_003_noisy_orig.png}}
-  \caption[The original blurred-noisy image pair from experiment 3.]{The original blurred-noisy image pair from experiment 3.}
-  \label{fig:experiment_003_blurred_noisy}
-\end{figure}
-
-%%
-% \begin{figure}[htb]
- % \begin{center}
-  % \includegraphics[width=12cm]{experiment_003_complete.png}
- % \end{center}
- % \caption{Experiment 3.}
- % \label{fig:experiment_003_complete}
-% \end{figure}
-%%
-
-%% subfloat version
-\begin{figure}[htb]
-  \centering
-	  \subfloat[]{\label{fig:experiment_003_blurred}\includegraphics[width=0.3\textwidth]{experiment_003_blurred.png}}
-	  ~
-	  \subfloat[]{\label{fig:experiment_003_psfs}\includegraphics[width=0.3\textwidth]{experiment_003_psfs.png}}
-	  ~
-	  \subfloat[]{\label{fig:experiment_003_noisy}\includegraphics[width=0.3\textwidth]{experiment_003_noisy.png}}
-
-	  \subfloat[]{\label{fig:experiment_003_tico09}\includegraphics[width=0.3\textwidth]{experiment_003_tico09.png}}
-	  ~
-	  \subfloat[]{\label{fig:experiment_003_srou03}\includegraphics[width=0.3\textwidth]{experiment_003_srou03.png}}
-	  ~
-	  \subfloat[]{\label{fig:experiment_003_bm3d}\includegraphics[width=0.3\textwidth]{experiment_003_bm3d.png}}
-  \caption[Experiment 3.]{Experiment 3.}
-  \label{fig:experiment_003_complete}
-\end{figure}
-
+The blurred image was taken using the ISO setting of 100 and $1/3$ second exposure time, resulting in a blur kernel 17 by 17 pixels in size. The noisy image, obtained with the ISO setting of 1000 and $1/30$ second exposure time, was blurred by a kernel 5 by 5 pixels in size. The original grayscale blurred and noisy image pair along with resulting images are shown in figure \ref{fig:experiment_003_complete}. Experiment statistics are listed in table \ref{tab:experiment_003_statistics}.
 
 %%%
 \begin{table}[htb]
@@ -1333,6 +1183,81 @@ The blurred image was taken using the ISO setting of 100 and $1/3$ second exposu
 \end{table}
 %%%
 
+\clearpage
+
+%% subfloat version
+\begin{figure}[t]
+  \centering
+	  \subfloat[]{\label{fig:experiment_001_blurred_orig}\includegraphics[width=0.459\textwidth]{experiment_001_blurred_orig.png}}
+	  ~
+	  \subfloat[]{\label{fig:experiment_001_noisy_orig}\includegraphics[width=0.459\textwidth]{experiment_001_noisy_orig.png}}	
+  
+	  \subfloat[]{\label{fig:experiment_001_blurred}\includegraphics[width=0.3\textwidth]{experiment_001_blurred.png}}
+	  ~
+  	  \subfloat[]{\label{fig:experiment_001_noisy}\includegraphics[width=0.3\textwidth]{experiment_001_noisy.png}}
+	  ~
+  	  \subfloat[]{\label{fig:experiment_001_psfs}\includegraphics[width=0.3\textwidth]{experiment_001_psfs.png}}
+
+	  \subfloat[]{\label{fig:experiment_001_tico09}\includegraphics[width=0.3\textwidth]{experiment_001_tico09.png}}
+	  ~
+	  \subfloat[]{\label{fig:experiment_001_srou03}\includegraphics[width=0.3\textwidth]{experiment_001_srou03.png}}
+	  ~
+	  \subfloat[]{\label{fig:experiment_001_bm3d}\includegraphics[width=0.3\textwidth]{experiment_001_bm3d.png}}
+  \caption[A complete visual record of experiment 1]{A complete visual record of experiment 1. Figures \ref{fig:experiment_001_blurred_orig} and \ref{fig:experiment_001_noisy_orig} show the original, unmodified blurred and noisy image pair. Figures \ref{fig:experiment_001_blurred} and \ref{fig:experiment_001_noisy} show the registered and cropped images which were used as algorithm inputs. Figures \ref{fig:experiment_001_tico09}, \ref{fig:experiment_001_srou03} and \ref{fig:experiment_001_bm3d} display the results of Tico's, Šroubek's and the BM3D algorithm, respectively. Figure \ref{fig:experiment_001_psfs} shows the original (top row) and recovered (bottom row) blur PSFs from the blurred and noisy image. The output of Šroubek's algorithm is smaller by the size of the blur PSF diminished by 1, which was 35, overestimated over the } 
+  \label{fig:experiment_001_complete}
+\end{figure}
+
+\clearpage
+
+%% subfloat version
+\begin{figure}[t]
+  \centering
+	  \subfloat[]{\label{fig:experiment_002_blurred_orig}\includegraphics[width=0.459\textwidth]{experiment_002_blurred_orig.png}}
+	  ~
+	  \subfloat[]{\label{fig:experiment_002_noisy_orig}\includegraphics[width=0.459\textwidth]{experiment_002_noisy_orig.png}}	
+  
+	  \subfloat[]{\label{fig:experiment_002_blurred}\includegraphics[width=0.3\textwidth]{experiment_002_blurred.png}}
+	  ~
+	  \subfloat[]{\label{fig:experiment_002_noisy}\includegraphics[width=0.3\textwidth]{experiment_002_noisy.png}}
+	  ~
+	  \subfloat[]{\label{fig:experiment_002_psfs}\includegraphics[width=0.3\textwidth]{experiment_002_psfs.png}}
+
+	  \subfloat[]{\label{fig:experiment_002_tico09}\includegraphics[width=0.3\textwidth]{experiment_002_tico09.png}}
+	  ~
+	  \subfloat[]{\label{fig:experiment_002_srou03}\includegraphics[width=0.3\textwidth]{experiment_002_srou03.png}}
+	  ~
+	  \subfloat[]{\label{fig:experiment_002_bm3d}\includegraphics[width=0.3\textwidth]{experiment_002_bm3d.png}}
+  \caption[A complete visual record of experiment 2]{A complete visual record of experiment 2. Figures \ref{fig:experiment_002_blurred_orig} and \ref{fig:experiment_002_noisy_orig} show the original, unmodified blurred and noisy image pair. Figures \ref{fig:experiment_002_blurred} and \ref{fig:experiment_002_noisy} show the registered and cropped images which were used as algorithm inputs. Figures \ref{fig:experiment_002_tico09}, \ref{fig:experiment_002_srou03} and \ref{fig:experiment_002_bm3d} display the results of Tico's, Šroubek's and the BM3D algorithm, respectively. Figure \ref{fig:experiment_002_psfs} shows the original (top row) and recovered (bottom row) blur PSFs from the blurred and noisy image. The output of Šroubek's algorithm is smaller by the size of the blur PSF diminished by 1, which was 25.}
+  \label{fig:experiment_002_complete}
+\end{figure}
+
+\clearpage
+
+%% subfloat version
+\begin{figure}[t]
+  \centering
+  	  \subfloat[]{\label{fig:experiment_003_blurred_orig}\includegraphics[width=0.459\textwidth]{experiment_003_blurred_orig.png}}
+	  ~
+	  \subfloat[]{\label{fig:experiment_003_noisy_orig}\includegraphics[width=0.459\textwidth]{experiment_003_noisy_orig.png}}
+  
+	  \subfloat[]{\label{fig:experiment_003_blurred}\includegraphics[width=0.3\textwidth]{experiment_003_blurred.png}}
+	  ~
+	  \subfloat[]{\label{fig:experiment_003_noisy}\includegraphics[width=0.3\textwidth]{experiment_003_noisy.png}}
+	  ~
+	  \subfloat[]{\label{fig:experiment_003_psfs}\includegraphics[width=0.3\textwidth]{experiment_003_psfs.png}}
+
+	  \subfloat[]{\label{fig:experiment_003_tico09}\includegraphics[width=0.3\textwidth]{experiment_003_tico09.png}}
+	  ~
+	  \subfloat[]{\label{fig:experiment_003_srou03}\includegraphics[width=0.3\textwidth]{experiment_003_srou03.png}}
+	  ~
+	  \subfloat[]{\label{fig:experiment_003_bm3d}\includegraphics[width=0.3\textwidth]{experiment_003_bm3d.png}}
+  \caption[A complete visual record of experiment 3]{A complete visual record of experiment 3. Figures \ref{fig:experiment_003_blurred_orig} and \ref{fig:experiment_003_noisy_orig} show the original, unmodified blurred and noisy image pair. Figures \ref{fig:experiment_003_blurred} and \ref{fig:experiment_003_noisy} show the registered and cropped images which were used as algorithm inputs. Figures \ref{fig:experiment_003_tico09}, \ref{fig:experiment_003_srou03} and \ref{fig:experiment_003_bm3d} display the results of Tico's, Šroubek's and the BM3D algorithm, respectively. Figure \ref{fig:experiment_003_psfs} shows the original (top row) and recovered (bottom row) blur PSFs from the blurred and noisy image. The output of Šroubek's algorithm is smaller by the size of the blur PSF diminished by 1, which was 21.}
+  \label{fig:experiment_003_complete}
+\end{figure}
+
+\clearpage
+
+
 \section{Evaluation}
 \label{sec:evaluation}
 
@@ -1341,7 +1266,7 @@ From simulated experimental data, we observe that on average, the presence of no
 %%%
 \begin{figure}[htb]
  \centering
-  \includegraphics[width=12cm]{avg_methods_vs_var.pdf}
+  \includegraphics[width=0.9\textwidth]{avg_methods_vs_var.pdf}
  \caption{Average dependence of tested algorithms on the level of noise.}
  \label{fig:avg_methods_vs_var}
 \end{figure}
@@ -1350,7 +1275,7 @@ From simulated experimental data, we observe that on average, the presence of no
 %%%
 \begin{figure}[htb]
  \centering
-  \includegraphics[width=12cm]{avg_methods_vs_ISO.pdf}
+  \includegraphics[width=0.9\textwidth]{avg_methods_vs_ISO.pdf}
  \caption{Average dependence of tested algorithms on the input ISO.}
  \label{fig:avg_methods_vs_ISO}
 \end{figure}
@@ -1359,7 +1284,7 @@ From simulated experimental data, we observe that on average, the presence of no
 %%%
 \begin{figure}[htb]
  \centering
-  \includegraphics[width=12cm]{avg_methods_vs_var_psf_size.pdf}
+  \includegraphics[width=0.9\textwidth]{avg_methods_vs_var_psf_size.pdf}
  \caption{Average dependence of tested algorithms on the size of blurring (for variance data).}
  \label{fig:avg_methods_vs_psf_size}
 \end{figure}
@@ -1368,7 +1293,7 @@ From simulated experimental data, we observe that on average, the presence of no
 %%%
 \begin{figure}[htb]
  \centering
-  \includegraphics[width=12cm]{avg_methods_vs_ISO_psf_size.pdf}
+  \includegraphics[width=0.9\textwidth]{avg_methods_vs_ISO_psf_size.pdf}
  \caption{Average dependence of tested algorithms on the size of blurring (for ISO data).}
  \label{fig:avg_methods_vs_ISO_psf_size}
 \end{figure}
@@ -1382,24 +1307,25 @@ From simulated experimental data, we observe that on average, the presence of no
 We've observed that the BM3D denoising algorithm provides consistent results irrespective of the underlying image (also of the type and size of the blur PSF, since blurred images were not denoised); the only exception to this rule are images that exhibit self-similar (fractal) behavior, such the as tree image used in our tests. These features disrupt the block matching process as more matching blocks are found all across the image than is normally the case. The performance of this algorithm is also dependent on the type of noise present and the precision of the estimation of noise standard deviation $\sigma$. The algorithm performs very well in case of zero mean-Gaussian additive noise (even for variances as high as 0.01) and also for most ISO values, where the noise roughly corresponds to Gaussian. In case of high variance, or non-Gaussian noise, block-matching artifacts become more evident, resulting in reduced performance, as can be seen figure \ref{fig:bm3d_failure}, which also illustrates the lowered performance on an image containing self-similarity. 
 
 %% subfloat version
-\begin{figure}[htb]
+\begin{figure}[t]
   \centering
+	  \subfloat[]{\label{fig:bm3d_failure_lena}\includegraphics[width=0.3\textwidth]{bm3d_failure_lena.png}}
+	  ~
+	  \subfloat[]{\label{fig:bm3d_failure_text}\includegraphics[width=0.3\textwidth]{bm3d_failure_text.png}}
+	  ~
 	  \subfloat[]{\label{fig:bm3d_failure_tree}\includegraphics[width=0.3\textwidth]{bm3d_failure_tree.png}}
-	  ~
-	  \subfloat[]{\label{fig:bm3d_failure_ISO_102400}\includegraphics[width=0.3\textwidth]{bm3d_failure_ISO_102400.png}}
-	  ~
-	  \subfloat[]{\label{fig:bm3d_failure_var_ISO_102400}\includegraphics[width=0.3\textwidth]{bm3d_failure_var_ISO_102400.png}}
 
+	  \subfloat[]{\label{fig:bm3d_failure_lena_res}\includegraphics[width=0.3\textwidth]{bm3d_failure_lena_res.png}}
+	  ~
+	  \subfloat[]{\label{fig:bm3d_failure_text_res}\includegraphics[width=0.3\textwidth]{bm3d_failure_text_res.png}}
+	  ~
 	  \subfloat[]{\label{fig:bm3d_failure_tree_res}\includegraphics[width=0.3\textwidth]{bm3d_failure_tree_res.png}}
-	  ~
-	  \subfloat[]{\label{fig:bm3d_failure_ISO_102400_res}\includegraphics[width=0.3\textwidth]{bm3d_failure_ISO_102400_res.png}}
-	  ~
-	  \subfloat[]{\label{fig:bm3d_failure_var_ISO_102400_res}\includegraphics[width=0.3\textwidth]{bm3d_failure_var_ISO_102400_res.png}}
-  \caption[Failures of the BM3D algorithm.]{Failures of the BM3D algorithm.}
+  %%%%
+  \caption[Failure of the BM3D algorithm]{Failure of the BM3D algorithm. \ref{fig:bm3d_failure_lena}, \ref{fig:bm3d_failure_text} and \ref{fig:bm3d_failure_tree} are images of Lena, Text and Tree corrupted by additive white Gaussian noise of $\mu = 0$ and $\sigma^2 = 0.01$. Images  \ref{fig:bm3d_failure_lena_res}, \ref{fig:bm3d_failure_text_res} and \ref{fig:bm3d_failure_tree_res} are the respective results of denoising using the BM3D algorithm. While \ref{fig:bm3d_failure_lena_res} and \ref{fig:bm3d_failure_text_res} prove visually satisfactory, most of the fine detail is lost from image \ref{fig:bm3d_failure_tree_res}. This is due to a relatively larger amount of self-similar regions being present in the Tree image which affect the block-matching process, causing more matching blocks to be found than is normally the case, negatively affecting the outcome. The SNR of the denoised Lena image is 15.8378 versus 15.027 and 9.8666 for the Text and Tree image, respectively.}
   \label{fig:bm3d_failure}
 \end{figure}
 
-
+\clearpage
 
 The added value of deconvolution in case of Šroubek's algorithm is apparent in the setting of little to moderate blurring in the long-exposed image and high noise in the short exposed image. Here, the blurred image contributes information that the BM3D algorithm simply cannot obtain. In rare cases, Šroubek's algorithm outperforms the BM3D algorithm even for highly blurred images. However, a significant disadvantage of Šroubek's algorithm is the need to fine-tune the $\lambda$ and $\gamma$ parameters, since the theoretically computed ones do not produce satisfying results, as we've observed in real-world data. There are, however, other parameters to be tweaked (such as the number of iterations, both external and internal) that expand the space that could potentially be searched for the best result. 
 
@@ -1428,6 +1354,16 @@ This leads us to a general conclusion that an efficient single image denoising a
 
 \chapter{Contents of the CD}
 
+Structure of the CD corresponds to the structure of the 
+
+\begin{itemize}
+	\item \textbf{Docs}
+	\item \textbf{Images} item 2
+	\item \textbf{Input} item 2
+	\item \textbf{Matlab} source files
+	\item \textbf{Output}
+	\item \textbf{TeX} 
+\end{itemize} 
 
 \chapter{Implementation and testing notes}
 \label{chap:notes}
