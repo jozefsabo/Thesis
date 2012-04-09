@@ -105,13 +105,13 @@ Department of Software and Computer Science Education\\ % doplňte název katedr
 \setcounter{page}{2} % nastavení číslování stránek
 \ \vspace{10mm}
 
-\noindent The author would like to thank the thesis supervisor, {\em Ing. Filip Šroubek, PhD.}, for his patience, goodwill and advice provided to him while writing this thesis and his family and friends for continued support.
+\noindent I would hereby like to thank the thesis supervisor, {\em Ing. Filip Šroubek, PhD.}, for his patience, goodwill and advice provided to me while writing this thesis and to my family and friends for continued support.
 
 \vspace{\fill} % nastavuje dynamické umístění následujícího textu do spodní části stránky
 \noindent I declare that I wrote the thesis by myself and listed all used sources. I agree to make the thesis publicly available. \\[2cm]
 
 %\bigskip
-\noindent Prague, March 30, 2012 \hspace{\fill}Jozef Sabo\\ % doplňte patřičné datum, jméno a příjmení
+\noindent Prague, April 13, 2012 \hspace{\fill}Jozef Sabo\\ % doplňte patřičné datum, jméno a příjmení
 
 %%%   Výtisk pak na tomto míste nezapomeňte PODEPSAT!
 %%%                                         *********
@@ -849,6 +849,25 @@ As we've mentioned earlier, we had also performed experiments using the same ima
 
 The resulting *.csv report files are then processed to obtain useful data. The images and *.csv records from all experiments are included on the CD in their entirety.
 
+We adopt Šroubek's method to evaluate signal-to-noise ratios of resulting images. Given the original image $f$ and its estimate $\hat{f}$, a linear transform 
+%%%%
+%%%% E = ((E(:)-mean(E(:))).'*(I(:)-mean(I(:))))/var(E(:))/numel(E) * E;
+\begin{equation}
+\label{eq:sroubek_snr_01}
+	\hat{f}_t(x,y) = \hat{f}(x,y)  \frac{1}{{N\sigma^2_{\hat{f}}}} \sum_{x,y \in \Omega}^{}(\hat{f}(x,y) - \mu_{\hat{f}})(f(x,y) - \mu_{f})  
+\end{equation}
+%%%%
+is first applied on the estimated image $\hat{f}$ yielding the transformed estimate $\hat{f}_t$. We then compute the signal-to-noise ratio using the formula
+%%%%
+\begin{equation}
+\label{eq:sroubek_snr_02}
+	SNR(f,\hat{f}) = 10 \log_{10} \sigma^2_f / \sigma^2_{f\hat{f}_t}
+\end{equation}
+%%%%
+where $\sigma^2_f$ is the variance of the original image $f$ and $\sigma^2_{f\hat{f}_t}$ is the variance of the difference between the original image $f$ and the transformed estimate $\hat{f}_t$. In the first formula, $\mu_{f}$ and $\mu_{\hat{f}}$ are the means of the original and estimated image, respectively; $\sigma^2_{\hat{f}}$ is the variance of the estimated image, $N$ is the number of pixels assumed to be the same in both $f$ and $\hat{f}$ and $\Omega$ is the image support.   
+ 
+Due to the fact that the output of Šroubek's as well as Tico's algorithms can be shifted compared to the original image (the amount largely depends on the shape of blur PSF) we employ a sliding window in order to compute the best value of the signal-to-noise ratio in a matching position. 
+
 \subsection{Setup for real-world data}
 \label{sec:setup_for_real_world_data}
 
@@ -920,7 +939,7 @@ From the total of $576$ experiments performed in ISO mode, our modification of t
 		   & 3 & 7 & 15 & 31 \\ \hline
 	200    & 0 - 0 - \textbf{16} & 0 - 0 - \textbf{16} & 0 - 0 - \textbf{16} & 0 - 0 - \textbf{16} \\ \hline
 	400    & 0 - 3 - \textbf{13} & 0 - 0 - \textbf{16} & 0 - 0 - \textbf{16} & 0 - 0 - \textbf{16} \\ \hline
-	800    & 0 - \textbf{8} - \textbf{8}  & 0 - 0 - \textbf{16} & 0 - 0 - \textbf{16} & 0 - 0 - \textbf{16} \\ \hline
+	800    & 0 - \textbf{8} - \textbf{8}~ & 0 - 0 - \textbf{16} & 0 - 0 - \textbf{16} & 0 - 0 - \textbf{16} \\ \hline
 	1600   & 0 - \textbf{15} - 1 & 0 - 0 - \textbf{16} & 0 - 0 - \textbf{16} & 0 - 0 - \textbf{16} \\ \hline
 	3200   & 0 - \textbf{15} - 1 & 0 - 0 - \textbf{16} & 0 - 0 - \textbf{16} & 0 - 0 - \textbf{16} \\ \hline
 	6400   & 0 - \textbf{16} - 0 & 0 - 2 - \textbf{14} & 0 - 0 - \textbf{16} & 0 - 0 - \textbf{16} \\ \hline
@@ -928,7 +947,7 @@ From the total of $576$ experiments performed in ISO mode, our modification of t
 	25600  & 0 - \textbf{16} - 0 & 0 - \textbf{15} - 1 & 0 - \textbf{10} - 6 & 0 - 4 - \textbf{12} \\ \hline
 	102400 & 1 - \textbf{15} - 0 & 0 - \textbf{13} - 3 & 0 - \textbf{12} - 4 & 0 - \textbf{8} - \textbf{8} \\ \hline
   \end{tabular}
-  \caption[A detailed breakdown of tested methods' success rates in ISO mode]{A detailed breakdown of tested methods' success rates in ISO mode. For a given combination of input ISO (rows) and input PSF size (columns), the table lists the aggregate number of times Tico's, Šroubek's and the BM3D algorithm achieved the best result, regardless of the input image or input PSF.}
+  \caption[A detailed breakdown of tested methods' success rates in ISO mode]{A detailed breakdown of tested methods' success rates in ISO mode. For a given combination of input ISO (rows) and input PSF size (columns), the table lists the aggregate number of times Tico's, Šroubek's and the BM3D algorithm achieved the best result, regardless of the input image or input PSF. The most successful algorithm is written in bold.}
   \label{tab:iso_mode_breakdown}
 \end{table}
 %%%
@@ -940,13 +959,13 @@ From the total of $576$ experiments performed in ISO mode, our modification of t
 	  \subfloat[]{\label{fig:tico09_iso_success_noisy}\includegraphics[width=0.3\textwidth]{tico09_iso_success_noisy.png}}
 	  ~
 	  \subfloat[]{\label{fig:tico09_iso_success_psfs}\includegraphics[width=0.3\textwidth]{tico09_iso_success_psfs.png}}
-
+	  
 	  \subfloat[]{\label{fig:tico09_iso_success_tico09}\includegraphics[width=0.3\textwidth]{tico09_iso_success_tico09.png}}
 	  ~
 	  \subfloat[]{\label{fig:tico09_iso_success_srou03}\includegraphics[width=0.3\textwidth]{tico09_iso_success_srou03.png}}
 	  ~
 	  \subfloat[]{\label{fig:tico09_iso_success_bm3d}\includegraphics[width=0.3\textwidth]{tico09_iso_success_bm3d.png}}
-  \caption[The successful result of the Tico's algorithm in ISO mode]{The successful result of the Tico's algorithm in ISO mode. Top row: the blurred and noisy image pair for the successful result of the Tico's algorithm in ISO mode. Bottom row: the results of Tico's and Šroubek's methods and the BM3D algorithm.}
+  \caption[The successful result of Tico's algorithm in ISO mode]{The successful result of Tico's algorithm in ISO mode. Figures \ref{fig:tico09_iso_success_blurred} and \ref{fig:tico09_iso_success_noisy} show the blurred and noisy image pair. Figures \ref{fig:tico09_iso_success_tico09}, \ref{fig:tico09_iso_success_srou03} and \ref{fig:tico09_iso_success_bm3d} display the results of Tico's, Šroubek's and the BM3D algorithm, respectively. Figure \ref{fig:tico09_iso_success_psfs} shows the enlarged original (top row) and recovered (bottom row) blurred and noisy image PSFs.}
   \label{fig:tico09_iso_success}
 \end{figure}
 
@@ -969,22 +988,24 @@ Of the total of $256$ experiments performed in variance mode, Šroubek's algorit
 \end{table}
 %%%	
 
-Both of the two marginally successful results of Tico's algorithm in variance mode were achieved in conditions of extreme noise in the noisy image (variance 0.1) and extreme blurring in the other (PSF sizes 15 and 31), one of which is illustrated by figure \ref{fig:tico09_var_success}. The SNR of Tico's result was 5.3947 compared to Šroubek's 2.5659 and 5.0676 for the BM3D algorithm. 
+Both of the two marginally successful results of Tico's algorithm in variance mode were achieved in conditions of extreme noise in the noisy image (variance 0.1) and extreme blurring in the other (PSF sizes 15 and 31), one of which is illustrated by figure \ref{fig:tico09_var_success}. The SNR of Tico's result was 5.3947 compared to Šroubek's 2.5659 and 5.0676 for the BM3D algorithm.
+
+The rather unexpected single case of Tico's method success for the Lena image, a high ISO of 102400 and a small PSF 3 pixels wide (where Šroubek's algorithm typically provides the best result) can be explained by the shape of the recovered blur PSF which in turn negatively affected the shape of the resulting image, causing it to ``jitter'' and yield a lower SNR value. The other three experiments that used the same input image, ISO value and PSF size, albeit different PSF shapes, led to Šroubek's algorithm providing the best result.   
 
 \begin{figure}[htb]
   \centering
 	  \subfloat[]{\label{fig:tico09_var_success_blurred}\includegraphics[width=0.3\textwidth]{tico09_var_success_blurred.png}}
 	  ~
-	  \subfloat[]{\label{fig:tico09_var_success_psfs}\includegraphics[width=0.3\textwidth]{tico09_var_success_psfs.png}}
-	  ~
 	  \subfloat[]{\label{fig:tico09_var_success_noisy}\includegraphics[width=0.3\textwidth]{tico09_var_success_noisy.png}}
+	  ~
+	  \subfloat[]{\label{fig:tico09_var_success_psfs}\includegraphics[width=0.3\textwidth]{tico09_var_success_psfs.png}}
 
 	  \subfloat[]{\label{fig:tico09_var_success_tico09}\includegraphics[width=0.3\textwidth]{tico09_var_success_tico09.png}}
 	  ~
 	  \subfloat[]{\label{fig:tico09_var_success_srou03}\includegraphics[width=0.3\textwidth]{tico09_var_success_srou03.png}}
 	  ~
 	  \subfloat[]{\label{fig:tico09_var_success_bm3d}\includegraphics[width=0.3\textwidth]{tico09_var_success_bm3d.png}}
-  \caption[The successful result of the Tico's algorithm in variance mode]{The successful result of the Tico's algorithm in variance mode. Top row: the blurred and noisy image pair for the successful result of the Tico's algorithm in ISO mode. Bottom row: the results of Tico's and Šroubek's methods and the BM3D algorithm. The most successful algorithm is written in bold.}
+  \caption[The successful result of Tico's algorithm in variance mode]{The successful result of Tico's algorithm in variance mode. Figures \ref{fig:tico09_var_success_blurred} and \ref{fig:tico09_var_success_noisy} show the blurred and noisy image pair. Figures \ref{fig:tico09_var_success_tico09}, \ref{fig:tico09_var_success_srou03} and \ref{fig:tico09_var_success_bm3d} display the results of Tico's, Šroubek's and the BM3D algorithm, respectively. Figure \ref{fig:tico09_var_success_psfs} shows the enlarged original (top row) and recovered (bottom row) blurred and noisy image PSFs.}
   \label{fig:tico09_var_success}
 \end{figure}
 	
@@ -1116,7 +1137,7 @@ In this experiment, we simulated extremely low-light conditions, which is eviden
 	DWT07 std   & 0.0087   & 0.0058  & 0.0145  & 0.0109  & 0.0083  & 0.0062  \\ \hline
 	SWT07 std   & 0.0087   & 0.0058  & 0.0145  & 0.0109  & 0.0085  & 0.0063  \\ \hline
 	Avg est std & 0.0082   & 0.0044  & 0.0115  & 0.0071  & 0.0061  & 0.0039  \\ \hline
-	Exp std     & -        &         &         & -       & -       & -       \\ \hline
+	Exp std     & -        & 0.0058  & 0.0097  & -       & -       & -       \\ \hline
 	SNR         & -        & 3.4323  & 11.0442 & 9.5644  & 11.5003 & 11.7639 \\ \hline
 	Gamma       & -        & -       & -       & 25.0000 & -       & -       \\ \hline
 	Lambda      & -        & -       & -       & 0.0005  & -       & -       \\ \hline
@@ -1144,7 +1165,7 @@ In this case, the blurred image was obtained using the ISO setting of 100 and 1 
 	DWT07 std   & 0.0087   & 0.0058  & 0.0116  & 0.0095  & 0.0079  & 0.0067  \\ \hline
 	SWT07 std   & 0.0087   & 0.0058  & 0.0116  & 0.0095  & 0.0081  & 0.0067  \\ \hline
 	Avg est std & 0.0082   & 0.0043  & 0.0101  & 0.0078  & 0.0063  & 0.0051  \\ \hline
-	Exp std     & -        &         &         & -       & -       & -       \\ \hline
+	Exp std     & -        & 0.0040  & 0.0080  & -       & -       & -       \\ \hline
 	SNR         & -        & 4.8812  & 10.5967 & 10.4295 & 10.7121 & 10.7885 \\ \hline
 	Gamma       & -        & -       & -       & 50.0000 & -       & -       \\ \hline
 	Lambda      & -        & -       & -       & 0.0010  & -       & -       \\ \hline
@@ -1172,7 +1193,7 @@ The blurred image was taken using the ISO setting of 100 and $1/3$ second exposu
 	DWT07 std   & 0.0087   & 0.0058  & 0.0116 & 0.0069  & 0.0072 & 0.0056 \\ \hline 
 	SWT07 std   & 0.0087   & 0.0058  & 0.0116 & 0.0069  & 0.0074 & 0.0057 \\ \hline 
 	Avg est std & 0.0082   & 0.0043  & 0.0091 & 0.0051  & 0.0058 & 0.0041 \\ \hline 
-	Exp std     & -        &         &        & -       & -      & -      \\ \hline 
+	Exp std     & -        & 0.0045  & 0.0055 & -       & -      & -      \\ \hline 
 	SNR         & -        & 3.8498  & 9.1393 & 8.2007  & 9.8502 & 9.8939 \\ \hline 
 	Gamma       & -        & -       & -      &         & -      & -      \\ \hline 
 	Lambda      & -        & -       & -      &         & -      & -      \\ \hline 
@@ -1203,7 +1224,7 @@ The blurred image was taken using the ISO setting of 100 and $1/3$ second exposu
 	  \subfloat[]{\label{fig:experiment_001_srou03}\includegraphics[width=0.3\textwidth]{experiment_001_srou03.png}}
 	  ~
 	  \subfloat[]{\label{fig:experiment_001_bm3d}\includegraphics[width=0.3\textwidth]{experiment_001_bm3d.png}}
-  \caption[A complete visual record of experiment 1]{A complete visual record of experiment 1. Figures \ref{fig:experiment_001_blurred_orig} and \ref{fig:experiment_001_noisy_orig} show the original, unmodified blurred and noisy image pair. Figures \ref{fig:experiment_001_blurred} and \ref{fig:experiment_001_noisy} show the registered and cropped images which were used as algorithm inputs. Figures \ref{fig:experiment_001_tico09}, \ref{fig:experiment_001_srou03} and \ref{fig:experiment_001_bm3d} display the results of Tico's, Šroubek's and the BM3D algorithm, respectively. Figure \ref{fig:experiment_001_psfs} shows the original (top row) and recovered (bottom row) blur PSFs from the blurred and noisy image. The output of Šroubek's algorithm is smaller by the size of the blur PSF diminished by 1, which was 35, overestimated over the } 
+  \caption[A complete visual record of experiment 1]{A complete visual record of experiment 1. Figures \ref{fig:experiment_001_blurred_orig} and \ref{fig:experiment_001_noisy_orig} show the original, unmodified blurred and noisy image pair. Figures \ref{fig:experiment_001_blurred} and \ref{fig:experiment_001_noisy} show the registered and cropped images which were used as algorithm inputs. Figures \ref{fig:experiment_001_tico09}, \ref{fig:experiment_001_srou03} and \ref{fig:experiment_001_bm3d} display the results of Tico's, Šroubek's and the BM3D algorithm, respectively. Figure \ref{fig:experiment_001_psfs} shows the original (top row) and recovered (bottom row) blur PSFs from the blurred and noisy image. The output of Šroubek's algorithm is smaller by the size of the blur PSF diminished by 1, which was 35, overestimated over the PSF size detected from input images, which was 31.} 
   \label{fig:experiment_001_complete}
 \end{figure}
 
@@ -1227,7 +1248,7 @@ The blurred image was taken using the ISO setting of 100 and $1/3$ second exposu
 	  \subfloat[]{\label{fig:experiment_002_srou03}\includegraphics[width=0.3\textwidth]{experiment_002_srou03.png}}
 	  ~
 	  \subfloat[]{\label{fig:experiment_002_bm3d}\includegraphics[width=0.3\textwidth]{experiment_002_bm3d.png}}
-  \caption[A complete visual record of experiment 2]{A complete visual record of experiment 2. Figures \ref{fig:experiment_002_blurred_orig} and \ref{fig:experiment_002_noisy_orig} show the original, unmodified blurred and noisy image pair. Figures \ref{fig:experiment_002_blurred} and \ref{fig:experiment_002_noisy} show the registered and cropped images which were used as algorithm inputs. Figures \ref{fig:experiment_002_tico09}, \ref{fig:experiment_002_srou03} and \ref{fig:experiment_002_bm3d} display the results of Tico's, Šroubek's and the BM3D algorithm, respectively. Figure \ref{fig:experiment_002_psfs} shows the original (top row) and recovered (bottom row) blur PSFs from the blurred and noisy image. The output of Šroubek's algorithm is smaller by the size of the blur PSF diminished by 1, which was 25.}
+  \caption[A complete visual record of experiment 2]{A complete visual record of experiment 2. Figures \ref{fig:experiment_002_blurred_orig} and \ref{fig:experiment_002_noisy_orig} show the original, unmodified blurred and noisy image pair. Figures \ref{fig:experiment_002_blurred} and \ref{fig:experiment_002_noisy} show the registered and cropped images which were used as algorithm inputs. Figures \ref{fig:experiment_002_tico09}, \ref{fig:experiment_002_srou03} and \ref{fig:experiment_002_bm3d} display the results of Tico's, Šroubek's and the BM3D algorithm, respectively. Figure \ref{fig:experiment_002_psfs} shows the original (top row) and recovered (bottom row) blur PSFs from the blurred and noisy image. The output of Šroubek's algorithm is smaller by the size of the blur PSF diminished by 1, which was 25, overestimated over the PSF size detected from input images, which was 21.}
   \label{fig:experiment_002_complete}
 \end{figure}
 
@@ -1251,7 +1272,7 @@ The blurred image was taken using the ISO setting of 100 and $1/3$ second exposu
 	  \subfloat[]{\label{fig:experiment_003_srou03}\includegraphics[width=0.3\textwidth]{experiment_003_srou03.png}}
 	  ~
 	  \subfloat[]{\label{fig:experiment_003_bm3d}\includegraphics[width=0.3\textwidth]{experiment_003_bm3d.png}}
-  \caption[A complete visual record of experiment 3]{A complete visual record of experiment 3. Figures \ref{fig:experiment_003_blurred_orig} and \ref{fig:experiment_003_noisy_orig} show the original, unmodified blurred and noisy image pair. Figures \ref{fig:experiment_003_blurred} and \ref{fig:experiment_003_noisy} show the registered and cropped images which were used as algorithm inputs. Figures \ref{fig:experiment_003_tico09}, \ref{fig:experiment_003_srou03} and \ref{fig:experiment_003_bm3d} display the results of Tico's, Šroubek's and the BM3D algorithm, respectively. Figure \ref{fig:experiment_003_psfs} shows the original (top row) and recovered (bottom row) blur PSFs from the blurred and noisy image. The output of Šroubek's algorithm is smaller by the size of the blur PSF diminished by 1, which was 21.}
+  \caption[A complete visual record of experiment 3]{A complete visual record of experiment 3. Figures \ref{fig:experiment_003_blurred_orig} and \ref{fig:experiment_003_noisy_orig} show the original, unmodified blurred and noisy image pair. Figures \ref{fig:experiment_003_blurred} and \ref{fig:experiment_003_noisy} show the registered and cropped images which were used as algorithm inputs. Figures \ref{fig:experiment_003_tico09}, \ref{fig:experiment_003_srou03} and \ref{fig:experiment_003_bm3d} display the results of Tico's, Šroubek's and the BM3D algorithm, respectively. Figure \ref{fig:experiment_003_psfs} shows the original (top row) and recovered (bottom row) blur PSFs from the blurred and noisy image. The output of Šroubek's algorithm is smaller by the size of the blur PSF diminished by 1, which was 21, overestimated over the PSF size detected from input images, which was 17.}
   \label{fig:experiment_003_complete}
 \end{figure}
 
@@ -1298,10 +1319,6 @@ From simulated experimental data, we observe that on average, the presence of no
  \label{fig:avg_methods_vs_ISO_psf_size}
 \end{figure}
 %%%
-
-
-
-
 
 
 We've observed that the BM3D denoising algorithm provides consistent results irrespective of the underlying image (also of the type and size of the blur PSF, since blurred images were not denoised); the only exception to this rule are images that exhibit self-similar (fractal) behavior, such the as tree image used in our tests. These features disrupt the block matching process as more matching blocks are found all across the image than is normally the case. The performance of this algorithm is also dependent on the type of noise present and the precision of the estimation of noise standard deviation $\sigma$. The algorithm performs very well in case of zero mean-Gaussian additive noise (even for variances as high as 0.01) and also for most ISO values, where the noise roughly corresponds to Gaussian. In case of high variance, or non-Gaussian noise, block-matching artifacts become more evident, resulting in reduced performance, as can be seen figure \ref{fig:bm3d_failure}, which also illustrates the lowered performance on an image containing self-similarity. 
