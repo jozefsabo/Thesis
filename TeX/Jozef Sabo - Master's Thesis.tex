@@ -1385,21 +1385,27 @@ This leads us to a general conclusion that an efficient single image denoising a
 
 \section{Possible future improvements}
 
-\textbf{TODO}
+A particular area for improvement could be the implementation of methods. Due to the fact that this thesis did not focus at computational efficiency and partially due to the fact that MATLAB was used, the algorithms' performance could be significantly improved by re-writing them in a programming language such as C or C++. This would nonetheless be necessary for potential future deployment, especially on devices with limited resources. There is room for improvement and optimization in Matlab source code as well. 
+
+For a better overall picture, simulated experiments could be extended to include more image fusion methods. Moreover, Šroubek's algorithm offers potential for more tweaking beyond the number of iterations and the $\lambda$ and $\gamma$ parameter, exploring its potential exhaustively could effectively constitute a thesis on its own.
+
+Real-world experiments would benenefit from the inclusion of lower-end imaging devices, such as cellphones; these however often lack even the simplest of controls, such as ISO or exposure time; placing serious restrictions on a reasonable analysis of results. It would also be experimentaly valuable to obtain a digital SLR capable of very high ISO settings, such as 25600, to achieve conditions similar to the simulated ones. 
+
+Although real-world experiments were carefully designed and performed, we were unable to completely avoid optical distortion further away from the optical axis. Some degree of inaccuracy was introduced by the analog projector and the interaction between the projected image and the process of taking an image of it. It is however important not to grow too distant from real-world photography, of which these imperfections are a daily part. 
 
 \appendix
 
 \chapter{Contents of the CD}
 
-Structure of the CD corresponds to the structure of the 
+Structure of the CD corresponds to the structure of the author's working directory and the structure of the online Git repository, where the thesis was maintained. 
 
 \begin{itemize}
-	\item \textbf{Docs}
-	\item \textbf{Images} item 2
-	\item \textbf{Input} item 2
-	\item \textbf{Matlab} source files
-	\item \textbf{Output}
-	\item \textbf{TeX} 
+	\item \textbf{Docs} Miscellaneous thesis-related documents, stored herein is the previous version of the thesis written in Microsoft Word, the Visio diagram illustrating a general overview of the blurred-noisy image pair overview solution as well as an Excel file used for a computation of average parameters for Ojala's noise model
+	\item \textbf{Images} Images selected for use in testing, blur kernels and their working versions
+	\item \textbf{Input} The source and processed images of the 3 real-world experiments, stored in 3 subdirectories named 001, 002 and 003. 
+	\item \textbf{Matlab} Matlab source files
+	\item \textbf{Output} 
+	\item \textbf{TeX} The TeX source file along with the included images.
 \end{itemize} 
 
 \chapter{Implementation and testing notes}
@@ -1416,7 +1422,7 @@ No GUI was implemented and tests were performed in batch mode, results being wri
 
 Image registration was performed directly in MATLAB using control point selection routine \texttt{cpselect} which produces a set of corresponding control points, the \texttt{cp2tform} routine, which takes the set of control points and computes an image transformation structure from them depending on the desired transformation type and the routine \texttt{imtransform}, which performs the transformation itself. Projective transformation was used as the desired transformation to correct for possible perspective deformation that could occur when projecting the image or taking picture of it.  
 
-The thesis was developed and maintained using the Git versioning system and placed (with the exception of generated image data) into a public Git repository at \texttt{https://github.com:jozefsabo/Thesis.git} to facilitate accessibility from multiple locations.
+The thesis was developed and maintained using the Git versioning system and placed (with the exception of generated image data) into a public Git repository at \texttt{https://github.com/jozefsabo/Thesis} to facilitate accessibility from multiple locations.
 
 Image editing tasks were handled in Paint.NET and IrfanView.
 
