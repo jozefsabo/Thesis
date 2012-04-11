@@ -1218,8 +1218,8 @@ The blurred image was taken using the ISO setting of 100 and $1/3$ second exposu
 	Mean st. dev.  & 0.0082   & 0.0043  & 0.0091 & 0.0051  & 0.0058 & 0.0041 \\ \hline 
 	Exper. st. dev.& -        & 0.0045  & 0.0055 & -       & -      & -      \\ \hline 
 	SNR            & -        & 3.8498  & 9.1393 & 8.2007  & 9.8502 & 9.8939 \\ \hline 
-	Lambda         & -        & -       & -      &         & -      & -      \\ \hline 
-	Gamma          & -        & -       & -      &         & -      & -      \\ \hline 
+	Lambda         & -        & -       & -      & 125.0000& -      & -      \\ \hline 
+	Gamma          & -        & -       & -      & 0.001   & -      & -      \\ \hline 
 
 	\end{tabular}
 	\caption[Image statistics for real-world experiment 3]{Image statistics for real-world experiment 3. The table features statistics for the original Lena image, the (registered and cropped) blurred and noisy images and the results of Šroubek's, Tico's and the BM3D algorihm, respectively. {\em Mean} and {\em st. dev.} are the mean and standard deviation for a particular image, {\em IMM96 st. dev.}, {\em TAI98 st. dev.}, {\em DWT07 st. dev.} and {\em SWT07 st. dev.} are the results of noise estimation methods described in section \ref{sec:estimation_of_noise_from_images}, while {\em mean st. dev.} is the average of those results. The {\em exper. st. dev.} is the noise standard deviation determined directly from the uncropped, albeit registered, blurred and noisy images. {\em SNR} is the signal-to-noise ratio with respect to the original Lena image and {\em lambda} and {\em gamma} are the parameters used for the computation of Šroubek's algorithm.}
@@ -1343,7 +1343,7 @@ From simulated experimental data, we observe that on average, the presence of no
 \end{figure}
 %%%
 
-We've observed that the BM3D denoising algorithm provides consistent results irrespective of the underlying image (also of the type and size of the blur PSF, since blurred images were not denoised); the only exception to this rule are images that exhibit self-similar (fractal) behavior, such the as tree image used in our tests. These features disrupt the block matching process as more matching blocks are found all across the image than is normally the case. The performance of this algorithm is largely independent on the type of noise present and the precision of the estimation of noise standard deviation $\sigma$. The algorithm performs very well in case of zero mean-Gaussian additive noise (even for variances as high as 0.01) and also for most ISO values, where the noise roughly corresponds to Gaussian. In case of high variance, or non-Gaussian noise, block-matching artifacts become more evident, resulting in reduced performance, as can be seen figure \ref{fig:bm3d_failure}, which also illustrates the lowered performance on an image containing self-similarity. 
+We've observed that the BM3D denoising algorithm provides consistent results irrespective of the underlying image (also of the type and size of the blur PSF, since blurred images were not denoised); the only exception to this rule are images that exhibit self-similar (fractal) behavior, such the as tree image used in our tests. These features disrupt the block matching process as more matching blocks are found all across the image than is normally the case. The performance of this algorithm is largely independent on the type of noise present (ISO mode vs. variance mode) but is dependent on the precision of the estimation of noise standard deviation $\sigma$. The algorithm performs very well in even for variances as high as 0.01 and also for most ISO values, In case of high variance, or ISO value, block-matching artifacts become more evident, resulting in reduced performance, as can be seen figure \ref{fig:bm3d_failure}, which also illustrates the lowered performance on an image containing self-similarity. 
 
 %% subfloat version
 \begin{figure}[t]
@@ -1366,22 +1366,91 @@ We've observed that the BM3D denoising algorithm provides consistent results irr
 
 \clearpage
 
-Although simulated experimental data suggest a certain degree of dependence on the type of input image and input PSF, we observe that Šroubek's algorithm is more successful in the setting of little to moderate blurring in the long-exposed image and high noise in the short exposed image. Here, the blurred image contributes information that the BM3D algorithm simply cannot obtain from a . In rare cases, Šroubek's algorithm outperforms the BM3D algorithm even for highly blurred images. However, a significant disadvantage of Šroubek's algorithm is the need to fine-tune the $\lambda$ and $\gamma$ parameters, since the theoretically computed ones do not produce satisfying results, as we've observed in real-world data. There are, however, other parameters to be tweaked (such as the number of iterations, both external and internal) that expand the space that could potentially be searched for the best result. 
+Although simulated experimental data suggest a certain degree of dependence on the type of input image and input PSF, we observe that Šroubek's algorithm is more successful in the setting of little to moderate blurring in the long-exposed image and high noise in the short exposed image. Here, the blurred image contributes information that the BM3D algorithm simply cannot obtain from the inevitably “destroyed” noisy image. In rare cases, Šroubek's algorithm outperforms the BM3D algorithm even for highly blurred images. However, a significant disadvantage of Šroubek's algorithm is the need to fine-tune the $\lambda$ and $\gamma$ parameters, since the theoretically computed ones do not produce satisfying results, as we've observed in real-world data. There are, however, other parameters to be tweaked (such as the number of iterations, both external and internal) that expand the space that could potentially be searched for the best result. 
 
-Although the output of Tico's algorithm is plagued by artifacts at high noise values which lower its potential, the algorithm itself has outperformed either Šroubek's or the BM3D algorithm on only 3 occasions, none of which occured in the real-world setting. This may at first seem statistically insignificant and lead us to quick conclusions; however, the gap between the results of Šroubek's, BM3D and Tico's algorithm is much narrower in real-world experiments, where it even outperforms Šroubek's algorithm. This can be attributed to its internal design which makes it less sensitive to space-variant blurring and statistical variations, which did not occur in simulations yet can never be completely avoided in real-world experiments. These properties would make Tico's algorithm well suited for lower-fidelity equipment, such as camera phones, where high noise levels could pose diffulties for the BM3D algorithm. On the other hand, obtaining a suitable image pair with low fidelity equipment presents yet another obstacle. The better the available equipment is, the lower the noise levels are which again makes the BM3D algorithm a more suitable candidate, especially if the long-exposure image is highly blurred.
+Although the output of Tico's algorithm is plagued by artifacts at high noise values which lower its potential, the algorithm itself has outperformed either Šroubek's or the BM3D algorithm on only 3 occasions, none of which occured in the real-world setting. This may at first seem statistically insignificant and lead us to quick conclusions; however, the gap between the results of Šroubek's, BM3D and Tico's algorithm is much narrower in real-world experiments, where it even outperforms Šroubek's algorithm. This can be attributed to its internal design which makes it less sensitive to local or space-variant blurring and statistical variations, which did not occur in simulations yet can never be completely avoided in real-world situations. These properties would make Tico's algorithm well suited for lower-fidelity equipment, such as camera phones, where high noise levels could pose diffulties for the BM3D algorithm as could potential spatial variability of blurring pose difficulties for Šroubek's. On the other hand, obtaining a suitable image pair with low fidelity equipment presents yet another obstacle. The better the available equipment is, the lower the noise levels generally are which again makes the BM3D algorithm a more suitable candidate, especially if the long-exposure image is highly blurred.
+
+Results of real-world experiments were considerably lower in terms of SNR when compared to simulated experiments with similar parameters. The primary cause was the signal-to-noise ratio being computed against the original Lena image. While intensity ranges of the real-world blurred-image pairs were consistent, all of them were placed higher than the original Lena image, yielding the lower result SNR, despite the internal normalization of the SNR computation procedure. 
+
+A number of factors may have contributed to the lower performance of Šroubek's algorithm in the real-world setting. The most important can be summarized as follows:
+%%%
+\begin{itemize}
+	\item Space-variant blurring. Figure \ref{fig:experiment_001_psf_variations} clearly illustrates variations in shape and intensity of the 4 PSFs cut from the original, registered blurred image from real-world experiment 1. 
+	\item Greater statistical variations in illumination and noise stemming from the imperfection in the experimental apparatus. This is apparent from histograms of blurred and noisy images, which show a greater degree of variability when compared to simulated data. Variations in illumination are directly observable from the original uncropped blurred and noisy image pairs, and are also hinted at by their means and standard deviations, which are listed in tables \ref{tab:experiment_001_statistics}, \ref{tab:experiment_002_statistics} and \ref{tab:experiment_003_statistics}. 
+	\item Lesser precision in the estimation of noise from blurred and noisy images. For simulated data, noise standard deviation is directly calculated, not estimated. Estimated noise standard deviations enter Šroubek's algorithm as parameters and can therefore negatively affect the outcome when over- or underestimated.
+\end{itemize}
+%%%
+
+For comparison, Figure \ref{fig:experiment_001_similar} presents the results of a simulated experiment parametrically similar to real-world experiment 1. The PSFs were equal in size, albeit different in shape; the simulated noisy image was created by adding Gaussian noise of $\sigma^2 = 1 \times 10^{-4}$ to the Lena image, whereas the estimated noise variance in the real-world noisy image was $\hat{\sigma}^2 = 1.3225 \times 10^{-4}$. Noise data for the simulated and real-world blurred image were $\sigma^2 = 1 \times 10^{-5}$ and $\hat{\sigma}^2 = 1.93600 \times 10^{-5}$, respectively. The results are of much higher quality both visually and in terms of SNR, which is significantly higher (although this is not a determining factor, as we've mentioned earlier). Differences between resulting images are barely discernible, but statistically detectable. It is also important to note that the precision of the blur PSF and image recovery from simulated data is much higher even for highly blurred and noisy images, as can be seen in figure \ref{fig:srou03_precision_demo}.
+
+We have also observed that the best value of the signal-to-noise ratio does not always correspond with the visually best result. Since visual quality is a somewhat subjective notion and there are no methods known to us that could reasonably quantify it, we were left with the normalized signal-to-noise ratio as the only available option.   
+
+%% subfloat version
+\begin{figure}[h]
+  \centering
+	  \subfloat[]{\label{fig:experiment_001_psf_01}\includegraphics[width=0.225\textwidth]{experiment_001_psf_01.png}}
+	  ~
+	  \subfloat[]{\label{fig:experiment_001_psf_02}\includegraphics[width=0.225\textwidth]{experiment_001_psf_02.png}}
+	  ~
+	  \subfloat[]{\label{fig:experiment_001_psf_03}\includegraphics[width=0.225\textwidth]{experiment_001_psf_03.png}}
+	  ~
+	  \subfloat[]{\label{fig:experiment_001_psf_04}\includegraphics[width=0.225\textwidth]{experiment_001_psf_04.png}}
+  \caption[Space-variant blurring in the real-world experiment 1]{Space-variant blurring in the real-world experiment 1. Figures \ref{fig:experiment_001_psf_01} through \ref{fig:experiment_001_psf_04} show the magnified blur PSFs cut from the uncropped blurred image from real-world experiment 1. Variations in shape and intensity are clearly visible. Also observable are variations in PSF background intensity.}
+  \label{fig:experiment_001_psf_variations}
+\end{figure}
+
+%% subfloat version
+\begin{figure}[h]
+  \centering
+	  \subfloat[]{\label{fig:srou03_precision_demo_001_blurred}\includegraphics[width=0.3\textwidth]{srou03_precision_demo_001_blurred.png}}
+	  ~
+	  \subfloat[]{\label{fig:srou03_precision_demo_001_noisy}\includegraphics[width=0.3\textwidth]{srou03_precision_demo_001_noisy.png}}
+	  ~
+	  \subfloat[]{\label{fig:srou03_precision_demo_001_psfs}\includegraphics[width=0.3\textwidth]{srou03_precision_demo_001_psfs.png}}
+
+	  \subfloat[]{\label{fig:srou03_precision_demo_002_blurred}\includegraphics[width=0.3\textwidth]{srou03_precision_demo_002_blurred.png}}
+	  ~
+	  \subfloat[]{\label{fig:srou03_precision_demo_002_noisy}\includegraphics[width=0.3\textwidth]{srou03_precision_demo_002_noisy.png}}
+	  ~
+	  \subfloat[]{\label{fig:srou03_precision_demo_002_psfs}\includegraphics[width=0.3\textwidth]{srou03_precision_demo_002_psfs.png}}
+  \caption[Precision of PSF recovery from simulated data.]{Precision of PSF recovery from simulated data. Images \ref{fig:srou03_precision_demo_001_blurred} and \ref{fig:srou03_precision_demo_002_blurred} are blurred using blur kernel 8 resized to 31 by 31 pixels (see \ref{fig:blurkernel8}) and corrupted by zero-mean Gaussian noise of $\sigma^2 = 10^{-5}$. Images \ref{fig:srou03_precision_demo_001_noisy} and \ref{fig:srou03_precision_demo_001_noisy} are corrupted by zero-mean Gaussian noise of $\sigma^2 = 0.01$ and $\sigma^2 = 0.1$, respectively. Figures \ref{fig:srou03_precision_demo_001_psfs} and \ref{fig:srou03_precision_demo_002_psfs} show the original (top rows) and recovered (bottom rows) blur PSFs. The original PSF shapes are discernible even for noise variance as high as $0.1$, in contrast to real-world experiments, where similar degradation occurs for much lower estimated noise variances.}  
+  \label{fig:srou03_precision_demo}
+\end{figure}
+
+\clearpage 
+
+%% subfloat version
+\begin{figure}[h]
+  \centering
+	  \subfloat[$SNR = 5.3045$]{\label{fig:experiment_001_similar_blurred}\includegraphics[width=0.3\textwidth]{experiment_001_similar_blurred.png}}
+	  ~
+	  \subfloat[$SNR = 25.4126$]{\label{fig:experiment_001_similar_noisy}\includegraphics[width=0.3\textwidth]{experiment_001_similar_noisy.png}}
+	  ~
+	  \subfloat[]{\label{fig:experiment_001_similar_psfs}\includegraphics[width=0.3\textwidth]{experiment_001_similar_psfs.png}}
+
+	  \subfloat[$SNR = 21.2689$]{\label{fig:experiment_001_similar_tico09}\includegraphics[width=0.3\textwidth]{experiment_001_similar_tico09.png}}
+	  ~
+	  \subfloat[$SNR = 26.1773$]{\label{fig:experiment_001_similar_srou03}\includegraphics[width=0.3\textwidth]{experiment_001_similar_srou03.png}}
+	  ~
+	  \subfloat[$SNR = 29.3353$]{\label{fig:experiment_001_similar_bm3d}\includegraphics[width=0.3\textwidth]{experiment_001_similar_bm3d.png}}
+  \caption[Simulated data experiment similar emulating real-world experiment 1]{Simulated data experiment emulating real-world experiment 1. Figures \ref{fig:experiment_001_similar_blurred} and \ref{fig:experiment_001_similar_noisy} show the blurred and noisy image. Figures \ref{fig:experiment_001_similar_tico09}, \ref{fig:experiment_001_similar_srou03} and \ref{fig:experiment_001_similar_bm3d} display the results of Tico's, Šroubek's and the BM3D algorithm, respectively. Figure \ref{fig:experiment_001_similar_psfs} shows the original (top row) and recovered (bottom row) blur PSFs from the blurred and noisy image. This simulated-data experiment closely mirrors real-world experiment 1 in terms of noise variance in the blurred image ($1 \times 10^{-5}$ in simulation, $1.93600 \times 10^{-5}$ in real world) and in the noisy image ($1 \times 10^{-4}$ in simulation, $1.3225 \times 10^{-4}$ in real world). Resulting images are barely discernible from each other, differences are apparent from signal-to-noise ratios, however.}
+  \label{fig:experiment_001_similar}
+\end{figure}
+
 
 \chapter{Conclusion}
 
-We have studied and described several methods of image deblurring using two images with different exposure times. We have established two categories, the {\em deconvolution} and {\em non-deconvolution} methods.  We have selected one method from each category, tested them on generated as well as real-world data and compared them to each other and to the results of a state-of-the-art denoising algorithm (BM3D) performed on the noisy image ($g_1$ from equation \ref{eq:general_model}, specifically). We have, given the experimental results, demonstrated that: 
+We have studied and described several methods of image deblurring using two images with different exposure times. We have established two categories, the {\em deconvolution} and {\em non-deconvolution} methods.  We have selected one method from each category, tested them on simulated as well as real-world data and compared them to each other and to the results of a state-of-the-art denoising algorithm (BM3D) performed on the noisy image ($g_1$ from equation \ref{eq:general_model}, specifically). We have, given the experimental results, demonstrated that: 
 
 \begin{itemize}
-\item In a majority of cases, using two images with different exposure times provides no additional benefit over single-image denoising
-\item Two-image deblurring algorithms “defeat” single image denoising in rare cases and in conditions too extreme to be attained by conventional photography
-\item In low-noise conditions, using a {\em non-deconvolution} method generally provides better results than using a {\em deconvolution} method
-\item All tested methods generally fail on data exhibiting self-similarity and other non-standard behavior rarely present in conventional photographs
+\item In a majority of simulated cases, using two images with different exposure times provides no additional benefit over single-image denoising
+\item Image fusion using two images with different exposure times, particularly methods involving deconvolution, “defeat” single-image denoising in a significant number of simulated cases; however, those conditions are usually too unlikely or extreme to be attained by conventional real-world photography (very high noise, blurring, or a combination thereof). These conditions could however be achieved in microscopy, infrared sensors or thermal imaging, where noise levels can be considerably higher
+\item In simulated low-noise conditions, using a single-image denoising method provided the best results
+\item In real-world experiments, using a single-image denoising algorithm provided the best results as well
+\item The tested single-image denoising method encounters a certain degree of difficulty when faced with data exhibiting self-similarity. In some cases, this resulted in a two-image fusion method gaining the upper hand over single-image denoising; however, these cases were once again too extreme or unlikely to be achieved by real-world photography and did not upset the overall balance of results
 \end{itemize}
 
-This leads us to a general conclusion that an efficient single image denoising algorithm provides better results than using two images with different exposure times. 
+This leads us to a general conclusion that an efficient single image denoising algorithm is provides better results than image fusion using two images with different exposure times, which makes it a better and for most situations the only choice. 
 
 \section{Possible future improvements}
 
@@ -1389,9 +1458,9 @@ A particular area for improvement could be the implementation of methods. Due to
 
 For a better overall picture, simulated experiments could be extended to include more image fusion methods. Moreover, Šroubek's algorithm offers potential for more tweaking beyond the number of iterations and the $\lambda$ and $\gamma$ parameter, exploring its potential exhaustively could effectively constitute a thesis on its own.
 
-Real-world experiments would benenefit from the inclusion of lower-end imaging devices, such as cellphones; these however often lack even the simplest of controls, such as ISO or exposure time; placing serious restrictions on a reasonable analysis of results. It would also be experimentaly valuable to obtain a digital SLR capable of very high ISO settings, such as 25600, to achieve conditions similar to the simulated ones. 
+Real-world experiments would benenefit from the inclusion of lower-end imaging devices, such as cellphones; these however often lack even the simplest of controls, such as ISO or exposure time; placing considerable restrictions on a reasonable analysis of results. It would also be experimentaly valuable to obtain a digital SLR capable of very high ISO settings, such as 25600, to achieve conditions similar to simulated ones. 
 
-Although real-world experiments were carefully designed and performed, we were unable to completely avoid optical distortion further away from the optical axis. Some degree of inaccuracy was introduced by the analog projector and the interaction between the projected image and the process of taking an image of it. It is however important not to grow too distant from real-world photography, of which these imperfections are a daily part. 
+Although real-world experiments were carefully designed and performed, we were unable to completely avoid optical distortion further away from the optical axis. Some degree of inaccuracy was introduced by the analog projector and the interaction between the process of image projection and image capture. It is however important not to grow too distant from real-world photography, of which these imperfections are a daily part. 
 
 \appendix
 
@@ -1400,12 +1469,16 @@ Although real-world experiments were carefully designed and performed, we were u
 Structure of the CD corresponds to the structure of the author's working directory and the structure of the online Git repository, where the thesis was maintained. 
 
 \begin{itemize}
-	\item \textbf{Docs} Miscellaneous thesis-related documents, stored herein is the previous version of the thesis written in Microsoft Word, the Visio diagram illustrating a general overview of the blurred-noisy image pair overview solution as well as an Excel file used for a computation of average parameters for Ojala's noise model
-	\item \textbf{Images} Images selected for use in testing, blur kernels and their working versions
-	\item \textbf{Input} The source and processed images of the 3 real-world experiments, stored in 3 subdirectories named 001, 002 and 003. 
-	\item \textbf{Matlab} Matlab source files
-	\item \textbf{Output} 
-	\item \textbf{TeX} The TeX source file along with the included images.
+	\item \texttt{Docs} - miscellaneous thesis-related documents, stored herein is the previous version of the thesis written in Microsoft Word, the Visio diagram illustrating a general overview of the blurred-noisy image pair overview solution as well as an Excel file used for a computation of average parameters for Ojala's noise model
+	\item \texttt{Images} - images selected for use in testing, blur kernels and their working versions
+	\item \texttt{Input} - the source and processed images of the 3 real-world experiments, stored in 3 subdirectories named \texttt{001}, \texttt{002} and \texttt{003}. 
+	\item \texttt{Matlab} - Matlab source files
+	\item \texttt{Output} - the output of all testing, containing generated images as well as report files. 
+	\begin{itemize}
+		\item \texttt{REAL WORLD DATA} - the output of real-world experiments. Results are summarized in the \texttt{report REAL WORLD DATA.xlsm} document. 
+		\item \texttt{SIMULATED DATA} - the output of simulated-data experiments. Results are summarized in \texttt{report COMPLETE ISO DATA.xlsm} and \texttt{report COMPLETE VAR DATA.xlsm} documents for the ISO and variance testing mode, respectively.
+	\end{itemize}
+	\item \texttt{TeX} - TeX source files along with the included images. The pdf version of the thesis, \texttt{Jozef Sabo - Master's Thesis.pdf}, is also located here.
 \end{itemize} 
 
 \chapter{Implementation and testing notes}
