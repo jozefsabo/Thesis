@@ -39,7 +39,7 @@
 
 %\newindex{default}{idx}{ind}{Rejstřík} % zavádí rejstřík v případě použití balíku index
 
-\title{Image de-blurring using two images with different exposure times}   % tyto dvě položky jsou zde v podstatě formálně, ve skutečnosti nejsou nikde
+\title{Image deblurring using two images with different exposure times}   % tyto dvě položky jsou zde v podstatě formálně, ve skutečnosti nejsou nikde
 \author{Jozef Sabo} % dále v dokumentu použity
 
 %\date{}
@@ -78,7 +78,7 @@ Faculty of Mathematics and Physics\\
 
 {\Large Jozef Sabo}\\ % doplňte vaše jméno
 \vspace{5mm}
-{\Large\bf Image de-blurring using two images with different exposure times}\\
+{\Large\bf Image deblurring using two images with different exposure times}\\
 \vspace{5mm}
 Department of Software and Computer Science Education\\ % doplňte název katedry či ústavu
 \end{center}
@@ -132,7 +132,7 @@ Department of Software and Computer Science Education\\ % doplňte název katedr
 \textbf{Vedoucí diplomové práce:} Ing. Filip Šroubek, Ph.D.\\
 \textbf{e-mail vedoucího:} sroubekf@utia.cas.cz\\
 
-\noindent \textbf{Abstrakt:} V předložené práci studujeme metody odstranění rozmazání pomocí dvou snímků stejné předlohy s různou dobou expozicie, přičemž se soustředíme na dvě hlavní kategorie těchto metod, tzv. dekonvoluční a nedekonvoluční. U obou kategorií rozebíráme jejich teoretické základy a zkoumáme jejich výhody a omezení. Samostatnou kapitolu věnujeme vyhodnocení a srovnání kategorií metod na testovacích datech (obrázky), k testování používáme metody implementovány v jazyku MATLAB. Účinnost zkoumaných metod srovnáváme i s vybraným odšumovacím algoritmem pracujícím s jedním vstupním obrázkem. Nesoustředíme se na výpočetní složitost srovnávaných algoritmů a pracujeme pouze se šedotónovými obrázky.\\
+\noindent \textbf{Abstrakt:} V předložené práci studujeme metody odstranění rozmazání pomocí dvou snímků stejné předlohy s různou dobou expozice, přičemž se soustředíme na dvě hlavní kategorie těchto metod, tzv. dekonvoluční a nedekonvoluční. U obou kategorií rozebíráme jejich teoretické základy a zkoumáme jejich výhody a omezení. Samostatnou kapitolu věnujeme vyhodnocení a srovnání kategorií metod na testovacích datech (obrázky), k testování používáme metody implementovány v jazyku MATLAB. Účinnost zkoumaných metod srovnáváme i s vybraným odšumovacím algoritmem pracujícím s jedním vstupním obrázkem. Nesoustředíme se na výpočetní složitost srovnávaných algoritmů a pracujeme pouze se šedotónovými obrázky.\\
 
 \noindent \textbf{Klíčová slova:} krátká a dlouhá, expozice, odstranění rozmazání, šum,  odšumení, dekonvoluce
 
@@ -140,15 +140,15 @@ Department of Software and Computer Science Education\\ % doplňte název katedr
 \clearpage
 
 \noindent
-\textbf{Title:} Image de-blurring using two images with different exposure times\\
+\textbf{Title:} Image deblurring using two images with different exposure times\\
 \textbf{Author:} Jozef Sabo\\
 \textbf{Department:} Department of Software and Computer Science Education\\
 \textbf{Supervisor:} Ing. Filip Šroubek, Ph.D.\\
 \textbf{Supervisor's e-mail address:} sroubekf@utia.cas.cz\\
 
-\noindent \textbf{Abstract:} In the presented work we study methods of image de-blurring using two images of the same scene with different exposure times, focusing on two main approach categories, so called deconvolution and non-deconvolution methods. We present theoretical backgrounds on both categories and evaluate their limitations and advantages. We dedicate one section to a comparison of both method categories on test data (images) for which we use our MATLAB implementation of the methods. We also compare the effectiveness of said methods against the results of a selected single-image de-noising algorithm. We do not focus at computational efficiency of algorithms and work with grayscale images only.\\
+\noindent \textbf{Abstract:} In the presented work we study methods of image deblurring using two images of the same scene with different exposure times, focusing on two main approach categories, the so called deconvolution and non-deconvolution methods. We present theoretical backgrounds on both categories and evaluate their limitations and advantages. We dedicate one section to a comparison of both method categories on test data (images) for which we use a MATLAB implementation of the methods. We also compare the effectiveness of said methods against the results of a selected single-image de-noising algorithm. We do not focus at computational efficiency of algorithms and work with grayscale images only.\\
 
-\noindent \textbf{Keywords:} long and short, exposure, image de-blurring, noise, denoising, deconvolution
+\noindent \textbf{Keywords:} long and short, exposure, image deblurring, noise, denoising, deconvolution
 
 %\end{small}
 \clearpage
@@ -161,7 +161,7 @@ Department of Software and Computer Science Education\\ % doplňte název katedr
 \chapter{Introduction}
 \label{chap:introduction}
 
-{\em Image restoration}\footnote[1]{Image restoration aims to reconstruct the original pre-degradation image as faithfully as possible as opposed to image enhancement, which aims to make desired features more visible. Contrast ehnancement, sharpening etc. are examples of image enhancement operations.} techniques have always been a subject of great interest within the domain of digital image processing. Their significance increases as digital photography undergoes rapid development with many digital imaging devices becoming readily available in countless forms, such as cell-phones, cameras and video cameras, to name a few. 
+{\em Image restoration}\footnote[1]{Image restoration aims to reconstruct the original pre-degradation image as faithfully as possible as opposed to image enhancement, which aims to make desired features more visible. Contrast enhancement, sharpening etc. are examples of image enhancement operations.} techniques have always been a subject of great interest within the domain of digital image processing. Their significance increases as digital photography undergoes rapid development with many digital imaging devices becoming readily available in countless forms, such as cell-phones, cameras and video cameras, to name a few. 
 
 We know from experience that it is quite difficult to obtain a quality image especially in insufficient lighting conditions requiring longer exposure times. In other words, taking “bad images” is easy. One of the most prevalent image degrading factors in photography is {\em motion blur}, caused either by motion in the photographed scene, the camera itself, or both. Suppression or complete removal of motion blur is highly desirable especially in hand-held devices.
 
@@ -180,14 +180,14 @@ The aim of this thesis is to analyze selected methods and evaluate their degree 
 \chapter{Research}
 \label{chap:research}
 
-In this chapter, we present a theoretical background to a wide array of subjects that are related to the problem of image restoration from the blurred - noisy (long and short exposure) image pair. We begin by presenting the model of our situation in section \ref{sec:model}, which follows this introduction. We briefly describe several methods of solving the the problem in section \ref{sec:blurred_noisy}. Since one of the methods we test makes use of deconvolution, we elaborate more on the subject in section \ref{sec:the_deconvolution_problem}. To be able to generate testing data, we need to understand the nature of noise in digital photography and its relationship to digital camera settings. We discuss this matter in section  \ref{sec:image_noise_in_photography}. The BM3D algorithm, which we use as a reference alongside the other two methods, is briefly described in section \ref{sec:bm3d_denoising_algorithm}. Both BM3D denoising algorithm and our extension of the Šroubek's multichannel blind deconvolution method assume image noise to be known a priori; we have therefore studied and used several methods to estimate it from images, which are desribed in section \ref{sec:estimation_of_noise_from_images}. The chapter is concluded with the description of Tico's wavelet image fusion algorithm, which we've chosen as a representative non-deconvolution method and Šroubek's multichannel blind deconvolution method including our extension, which enables it to operate on data featuring different noise in each channel.    
+In this chapter, we present a theoretical background to a wide array of subjects that are related to the problem of image restoration from the blurred - noisy (long and short exposure) image pair. We begin by presenting the model of our situation in section \ref{sec:model}, which follows this introduction. We briefly describe several methods of solving the the problem in section \ref{sec:blurred_noisy}. Since one of the methods we test makes use of deconvolution, we elaborate more on the subject in section \ref{sec:the_deconvolution_problem}. To be able to generate testing data, we need to understand the nature of noise in digital photography and its relationship to digital camera settings. We discuss this matter in section  \ref{sec:image_noise_in_photography}. The BM3D algorithm, which we use as a reference alongside the other two methods, is briefly described in section \ref{sec:bm3d_denoising_algorithm}. Both BM3D denoising algorithm and our extension of the Šroubek's multichannel blind deconvolution method assume image noise to be known a priori; we have therefore studied and used several methods to estimate it from images, which are described in section \ref{sec:estimation_of_noise_from_images}. The chapter is concluded with the description of Tico's wavelet image fusion algorithm, which we've chosen as a representative non-deconvolution method and Šroubek's multichannel blind deconvolution method including our extension, which enables it to operate on data featuring different noise in each channel.    
 
 \clearpage
 
 \section{Model}
 \label{sec:model}
 
-For the purpose of de-blurring algorithms listed in the following chapters, we present a mathematical model of the short and long exposure image pair as mentioned above. Let $f(\mathbf{x})$ be the image function of the original, discrete, non-degraded grayscale image $N^2$ pixels in size. Let $g_2(\mathbf{x})$ be the image function of the original image subject to blurring and additive noise  and finally let $g_1(\mathbf{x})$ be the image function of the underexposed image subject to additive noise only. According to Tico \cite{tico06} we have:
+For the purpose of deblurring algorithms listed in the following chapters, we present a mathematical model of the short and long exposure image pair as mentioned above. Let $f(\mathbf{x})$ be the image function of the original, discrete, non-degraded grayscale image $N^2$ pixels in size. Let $g_2(\mathbf{x})$ be the image function of the original image subject to blurring and additive noise  and finally let $g_1(\mathbf{x})$ be the image function of the underexposed image subject to additive noise only. According to Tico \cite{tico06} we have:
 %%%  
 \begin{equation}
 	\label{eq:general_model}
@@ -199,7 +199,7 @@ For the purpose of de-blurring algorithms listed in the following chapters, we p
 %%% 
 where $\mathbf{x}=(x,y)$ are pixel coordinates, $d(\mathbf{x})$ is the point-spread function describing motion blur, $\alpha$ is the change in brightness as a result of shorter exposure (clearly $\alpha \leq 1$), $\star$ denotes the convolution operation and $n_1$, $n_2$ are noise terms. We assume additive Gaussian noise with $\mu_1 = \mu_2 = 0$ and $\sigma_1^2 \gg \sigma_2^2$ (where $\mu_i$ and $\sigma_i^2$ are the mean and variance respectively). We assume that $g_1$ is not blurred; however, the multichannel blind deconvolution method by Šroubek and Flusser (see section \ref{sec:srou03}) and our extension can also handle blurring in the noisy image. Please note that in the following text, we denote the size of image $f$ as $m_f n_f$ and the size of blur PSF as $m_d n_d$.
 
-It is important to note that the assumption of zero-mean Gaussian noise is only used for the de-blurring process. Experimental data are generated in accordance with Foi's \cite{foi07} noise model and Petteri M. Ojala's measurements \cite{ojal08}. These assumptions simplify theoretical derivation of de-blurring alghorithms; however, they do not significantly affect their efficiency, as is shown in experimental results.     
+It is important to note that the assumption of zero-mean Gaussian noise is only used for the deblurring process. Experimental data are generated in accordance with Foi's \cite{foi07} noise model and Petteri M. Ojala's measurements \cite{ojal08}. These assumptions simplify theoretical derivation of deblurring algorithms; however, they do not significantly affect their efficiency, as is shown in experimental results.     
 
 \section{Blurred-noisy image pair problem}
 \label{sec:blurred_noisy}
@@ -211,7 +211,7 @@ Several approaches can be taken:
 \begin{enumerate}
 	\item Enhance the short-exposure (noisy) image $g_1$ by removing noise, not considering the long-exposure (blurred) image $g_2$ at all. The BM3D denoising algorithm \cite{bm3d}, used as a reference, fits into this category.
 	\item Enhance the short-exposure (noisy) image $g_1$ by using image statistics (standard deviation, mean) of the long-exposure (blurred) image $g_2$. This is the approach taken by Reinhard et al. \cite{rein01}. A similar approach, aimed at enhancing image brightness and contrast by successive applications of 2 specialized functions is used by Razligh and Kehtarnavaz \cite{razl07}. Since noise is present and is amplified by both methods, noise removal is necessary. 
-	\item Regardless of $\alpha$, perform blind deconvolution of the long-exposure (blurred) image $g_2$ making use of the image information present in short-exposure image $g_1$. Attempting blind deconvolution using only image $g_2$ is an underdetermined problem yielding unsatisfactory results. This is the approach taken by Lim and Silverstein \cite{lim08}, Tico in his 2006 and 2007 papers \cite{tico06} \cite{tico07},  Babacan et al. \cite{baba09}, Yuan et al. \cite{yuan07} and others. The MCAM algoritm of Šroubek and Flusser \cite{srou03}, used in this thesis, is a multi-channel, multi-PSF generalization of the long-short exposure image pair problem, and is extended to accomodate different levels of noise in each channel. A more detailed description of the deconvolution problem is presented in section \ref{sec:the_deconvolution_problem}, Šroubek and Flusser's MCAM algorithm is presented in section \ref{sec:srou03}.
+	\item Regardless of $\alpha$, perform blind deconvolution of the long-exposure (blurred) image $g_2$ making use of the image information present in short-exposure image $g_1$. Attempting blind deconvolution using only image $g_2$ is an under-determined problem yielding unsatisfactory results. This is the approach taken by Lim and Silverstein \cite{lim08}, Tico in his 2006 and 2007 papers \cite{tico06} \cite{tico07},  Babacan et al. \cite{baba09}, Yuan et al. \cite{yuan07} and others. The MC-AM algorithm of Šroubek and Flusser \cite{srou03}, used in this thesis, is a multi-channel, multi-PSF generalization of the long-short exposure image pair problem, and is extended to accommodate different levels of noise in each channel. A more detailed description of the deconvolution problem is presented in section \ref{sec:the_deconvolution_problem}, Šroubek and Flusser's MC-AM algorithm is presented in section \ref{sec:srou03}.
 	\item Fuse images $g_1$ and $g_2$ without using deconvolution. The wavelet-based image fusion by Tico \cite{tico09}, described in section \ref{sec:tico09} and used in this thesis, is a fitting example. The primary advantage of this algorithm stems from its inherent independence on the type of blurring, which can even be local (movement of individual objects) or space-variant.
 \end{enumerate}  
 
@@ -251,7 +251,7 @@ An improved solution presented by Wiener in 1949 aims to minimize mean square er
 %%%
 where $SNR$ is the signal-to-noise ratio. 
 
-The requirement of mean square error minimization is often a starting point not only for the design of deconvolution algoritms, but optimization problems in general. However, due to the ill-posed nature of the problem, simple mean square error minimization results rarely prove satisfactory. Regularization, or in other words introducing additional information in order to attain a better final solution, is often employed both to improve numerical stability of the computation and to enforce desired properties on the eventual result. Usually, regularization has the form of penalty for complexity. Regularization terms in the energy functional used by Šroubek and Flusser's MC-AM algorithm, discussed in section \ref{sec:srou03}, serve as a good example; the term $Q(f) = \int |\nabla f|$ yields higher values, thus in effect penalizes solutions that are ``rough'', in other words, enforces smoothnes on the estimated image function $f$.        	 
+The requirement of mean square error minimization is often a starting point not only for the design of deconvolution algorithms, but optimization problems in general. However, due to the ill-posed nature of the problem, simple mean square error minimization results rarely prove satisfactory. Regularization, or in other words introducing additional information in order to attain a better final solution, is often employed both to improve numerical stability of the computation and to enforce desired properties on the eventual result. Usually, regularization has the form of penalty for complexity. Regularization terms in the energy functional used by Šroubek and Flusser's MC-AM algorithm, discussed in section \ref{sec:srou03}, serve as a good example; the term $Q(f) = \int |\nabla f|$ yields higher values, thus in effect penalizes solutions that are ``rough'', in other words, enforces smoothness on the estimated image function $f$.        	 
 
 A different approach is to view deconvolution, or image restoration as a whole, in terms of Bayesian probability. Given the observed images $g_1, g_2 \dots g_P$, the ideal restored image $\hat{f}$ is one for which the posterior probability $p(f|g_1 \dots g_P)$ is maximized, in other words 
 %%%
@@ -361,7 +361,7 @@ which combined with \ref{eq:noise_model_6} and \ref{eq:noise_model_7} yields
 \end{equation}
 %%%
 
-The relationship between the ISO setting of a particular camera and parameters $a$ and $b$ was studied by Petteri M. Ojala in \cite{ojal08} who performed a set of experiments with a Nikon D300 digital camera and discovered a linear relationship between the ISO number and parameter $a$ and a quadratic relationship between the ISO number and parameter $b$. Moreover, his experiments showed neglegible dependence of these parameters on shutter time and the temperature at which photos are being taken. 
+The relationship between the ISO setting of a particular camera and parameters $a$ and $b$ was studied by Petteri M. Ojala in \cite{ojal08} who performed a set of experiments with a Nikon D300 digital camera and discovered a linear relationship between the ISO number and parameter $a$ and a quadratic relationship between the ISO number and parameter $b$. Moreover, his experiments showed negligible dependence of these parameters on shutter time and the temperature at which photos are being taken. 
 We adopt Ojala's measurements from table \ref{tab:ojal}
 %%%
 \begin{table}
@@ -385,7 +385,7 @@ and employ polynomial fitting (MATLAB's \texttt{polyfit} and \texttt{polyval} fu
 \section{Estimation of noise from images}
 \label{sec:estimation_of_noise_from_images}
 
-The BM3D denoising algorithm, described in section \ref{sec:bm3d_denoising_algorithm} as well as our extension of the Šroubek and Flusser's MCAM algorithm (see section \ref{sec:srou03_extension}) both require noise standard deviation(s) $\sigma$ as one of its input parameters. Hence, several methods to estimate $\sigma$ from images are presented. Zero mean Gaussian noise is assumed in all cases. We present the methods in order of increasing complexity. 
+The BM3D denoising algorithm, described in section \ref{sec:bm3d_denoising_algorithm} as well as our extension of the Šroubek and Flusser's MC-AM algorithm (see section \ref{sec:srou03_extension}) both require noise standard deviation(s) $\sigma$ as one of its input parameters. Hence, several methods to estimate $\sigma$ from images are presented. Zero mean Gaussian noise is assumed in all cases. We present the methods in order of increasing complexity. 
 
 \noindent \textbf{Immerkaer's method} \cite{imm96}, published in 1996, is a simple and fast method that first applies the Laplacian operator on the image 
 %%%
@@ -405,7 +405,7 @@ and follows with a direct estimation of the noise standard deviation $\sigma$ us
 	\sigma = \sqrt{\frac{\pi}{2}} \frac{1}{6(W-2)(H-2)}\sum_{\mathbf{x} \in I}^{}\left|I(\mathbf{x}) \star N \right|  
 \end{equation}
 %%%%
-where $W$ is the width of the image and $H$ its height. Altough the method is fast, its inherent simplicity causes it to perceive fine details (lines etc.) as noise, especially in highly textured images. An adaptive approach is therefore needed. 
+where $W$ is the width of the image and $H$ its height. Although the method is fast, its inherent simplicity causes it to perceive fine details (lines etc.) as noise, especially in highly textured images. An adaptive approach is therefore needed. 
 
 \noindent \textbf{Tai and Yang's method} \cite{tai08}, published in 1998, is an extension of the previous approach. First, the Sobel operator
 %%%%
@@ -418,9 +418,9 @@ where $W$ is the width of the image and $H$ its height. Altough the method is fa
 \end{aligned}
 \end{equation}
 %%%%
-is used to detect edges. In the following stage, it is necessary to estimate which regions are consired to be edges and therefore excluded from the computation of $\sigma$. This is achieved by thresholding $G$ using threshold value $G_{thr}$, which is determined adaptively as a percentage $p$\% of the image area that is to be considered as edge information. $G_{thr}$ is set to a value where the cumulative histogram of $G$ reaches $p$\%. This way, even if $p$ is fixed, $G_{thr}$ varies depending on the input image. After the exlusion of edge pixels, noise standard deviation is computed using Immerkaer's formula (\ref{eq:imm96_sigma}). Authors fix the $p$ value at $10$\%. 
+is used to detect edges. In the following stage, it is necessary to estimate which regions are considered to be edges and therefore excluded from the computation of $\sigma$. This is achieved by thresholding $G$ using threshold value $G_{thr}$, which is determined adaptively as a percentage $p$\% of the image area that is to be considered as edge information. $G_{thr}$ is set to a value where the cumulative histogram of $G$ reaches $p$\%. This way, even if $p$ is fixed, $G_{thr}$ varies depending on the input image. After the exclusion of edge pixels, noise standard deviation is computed using Immerkaer's formula (\ref{eq:imm96_sigma}). Authors fix the $p$ value at $10$\%. 
 
-\noindent \textbf{Wavelet approach} \cite{mall09}. The wavelet approach to $\sigma$ estimation uses the observation that wavelet transform distributes noise evenly across all scales, whereas image details are emphasized only at specific ones. First, the input image $I$ is subject to discrete wavelet transform to obtain the first level, i.e. the finest detail coefficients $I_{1_{HVD}}$. The detail, horizontal and vertical transform coeffients are then grouped together to form a single array $C_{HVD}$. Median absolute deviation 
+\noindent \textbf{Wavelet approach} \cite{mall09}. The wavelet approach to $\sigma$ estimation uses the observation that wavelet transform distributes noise evenly across all scales, whereas image details are emphasized only at specific ones. First, the input image $I$ is subject to discrete wavelet transform to obtain the first level, i.e. the finest detail coefficients $I_{1_{HVD}}$. The detail, horizontal and vertical transform coefficients are then grouped together to form a single array $C_{HVD}$. Median absolute deviation 
 %%%%
 \begin{equation}
 \label{eq:mall09_sigma}
@@ -434,9 +434,9 @@ is then used to yield the $\sigma$ estimate\footnote[3]{In other words, a median
 
 The BM3D denoising algorithm, short for block matching and 3D filtering, is a novel, highly efficient algorithm for still image denoising, introduced in 2006 by Alessandro Foi et al. in \cite{bm3d}. It is used in this thesis as a reference to verify the efficiency of the blurred-noisy image fusion.
 
-Historically, still image denoising algorithms predominantly work by attenuating noise in a suitable transform domain (FFT or wavelet transformation are amongst the most used). Altough transform-based methods are generally effective, they share common disadvantages such as introduction of unwanted artifacts and loss of detail often characteristic of a given approach. 
+Historically, still image denoising algorithms predominantly work by attenuating noise in a suitable transform domain (FFT or wavelet transformation are among the most used). Although transform-based methods are generally effective, they share common disadvantages such as introduction of unwanted artifacts and loss of detail often characteristic of a given approach. 
 
-The BM3D algorithm computes pixel values of the original image from image regions similar to the region centered at the estimated pixel. This approach introduces very few artifacts and, to prevent oversmoothing the image, regions are weighed adaptively. The image is processed pixel-by-pixel by means of a sliding window, regions similar to the currently processed window are stacked to form 3D arrays, inducing a high corellation between regions. A 3D decorrelating unitary transform $\tau_{3D}$ (such as DFT or DCT) which produces a sparse representation of the true signal in 3D transform domain is then performed, followed by efficient noise attenuation which is done by applying a shrinkage operator (e.g. hard-thresholding or Wiener filtering) on the transform coefficients. Blocks are then are reconstructed by an inverse 3D transform of the filtered coefficients. The final estimate is the weighted average of all overlapping local block-estimates. Because of overcompleteness which is due to overlapping, blocking artifacts are avoided and estimation ability is further improved. 
+The BM3D algorithm computes pixel values of the original image from image regions similar to the region centered at the estimated pixel. This approach introduces very few artifacts and, to prevent over-smoothing the image, regions are weighed adaptively. The image is processed pixel-by-pixel by means of a sliding window, regions similar to the currently processed window are stacked to form 3D arrays, inducing a high correlation between regions. A 3D decorrelating unitary transform $\tau_{3D}$ (such as DFT or DCT) which produces a sparse representation of the true signal in 3D transform domain is then performed, followed by efficient noise attenuation which is done by applying a shrinkage operator (e.g. hard-thresholding or Wiener filtering) on the transform coefficients. Blocks are then are reconstructed by an inverse 3D transform of the filtered coefficients. The final estimate is the weighted average of all overlapping local block-estimates. Because of over-completeness which is due to overlapping, blocking artifacts are avoided and estimation ability is further improved. 
 
 Since the BM3D algorithm is not the focus of this thesis and has only been reused, we only present a brief description of the algorithm; more details can be found in \cite{bm3d}. It is important to note that the algorithm assumes noise standard deviation $\sigma$ to be known a-priori; section \ref{sec:estimation_of_noise_from_images} elaborates on methods of estimating it from images. 
 
@@ -499,7 +499,7 @@ As a consequence, the weight $W(k)$ emphasizes the short exposed image in areas 
 \section{Šroubek and Flusser's method (2003)}
 \label{sec:srou03}
 
-Šroubek and Flusser's MCAM algorithm, published in 2003 \cite{srou03}, presents a solution to the SIMO ({\em single input, multiple output}) multichannel blind deconvolution in the presence of noise, which is assumed to be Gaussian of zero mean and variance $\sigma^2$. We extend this algorithm to accomodate noise of different variance per each channel and use it in our 2 channel setting. It has been selected due to its high resilience to noise, no assumptions on the input PSFs and its potential to better accomodate real-life situations, as some amount of blurring typically occurs even in the short-exposed image. 
+Šroubek and Flusser's MC-AM algorithm, published in 2003 \cite{srou03}, presents a solution to the SIMO ({\em single input, multiple output}) multichannel blind deconvolution in the presence of noise, which is assumed to be Gaussian of zero mean and variance $\sigma^2$. We extend this algorithm to accommodate noise of different variance per each channel and use it in our 2 channel setting. It has been selected due to its high resilience to noise, no assumptions on the input PSFs and its potential to better accommodate real-life situations, as some amount of blurring typically occurs even in the short-exposed image. 
 
 Expressed mathematically, the algorithm assumes the input to be in the form
 %%%
@@ -647,7 +647,7 @@ We propose and implement an extension to the MC-AM algorithm to allow for variab
 \end{equation}
 %%%
 
-To achieve this task, we need to balance the contribution of each channel to the overall minimization process. To this end, we need to analyze and assess the influence of variable noise on each of the terms in the energy fuctional described by equation \ref{eq:srou03_energy} and modify it accordingly. 
+To achieve this task, we need to balance the contribution of each channel to the overall minimization process. To this end, we need to analyze and assess the influence of variable noise on each of the terms in the energy functional described by equation \ref{eq:srou03_energy} and modify it accordingly. 
 
 The first term  
 %%%
@@ -845,7 +845,7 @@ We have used a set of 4 point spread functions (see figure \ref{fig:used_psfs}) 
 
 
 
-Testing images used were 256 by 256 pixels in size. We avoided the use of larger resolutions since they tend to be computationally expensive, especially in case of Šroubek's algorithm. The PSF sizes were $2^n - 1$, with $n$ being an integer in range $\lbrace 2 \dots 5 \rbrace$. Odd-sized PSFs are preferred due to the fact that they have a well-defined center. The range of used PSF sizes corresponds to results attained in real-world experiments which, altough greatly dependent on the individual photographer's steadiness while taking pictures,  did not exceed 31 pixels. This is described in section \ref{sec:real_world_data}. We've performed experiments for both simulated ISOs (the ``ISO mode'') and additive white Gaussian noise  (the ``variance mode'').
+Testing images used were 256 by 256 pixels in size. We avoided the use of larger resolutions since they tend to be computationally expensive, especially in case of Šroubek's algorithm. The PSF sizes were $2^n - 1$, with $n$ being an integer in range $\lbrace 2 \dots 5 \rbrace$. Odd-sized PSFs are preferred due to the fact that they have a well-defined center. The range of used PSF sizes corresponds to results attained in real-world experiments which, although greatly dependent on the individual photographer's steadiness while taking pictures,  did not exceed 31 pixels. This is described in section \ref{sec:real_world_data}. We've performed experiments for both simulated ISOs (the ``ISO mode'') and additive white Gaussian noise  (the ``variance mode'').
 
 Since Ojala in \cite{ojal08} demonstrated that temperature and exposure time have very little influence on the level of noise present in a digital photograph, we chose to abandon these parameters completely, leaving ISO as the only parameter. ISO 100 was chosen as the base value for both generated and real-world data. 
 
@@ -905,7 +905,7 @@ Three experiments were carried out, one for each multiplier value. In each exper
 %%%
 \begin{enumerate}
 \item Images are converted from $24$ bits per pixel color JPEG to $8$ bits per pixel PNG.
-\item Images are semi-manually registered in Matlab using the \texttt{cpselect}, \texttt{cp2tform} and \texttt{imtransform} routines. The registration process (see figure \ref{fig:registration_process}) also downsamples the images from their original $4368$ by $2912$ pixels resolution to less than $800$ by $600$ needed for further processing. 
+\item Images are semi-manually registered in MATLAB using the \texttt{cpselect}, \texttt{cp2tform} and \texttt{imtransform} routines. The registration process (see figure \ref{fig:registration_process}) also down-samples the images from their original $4368$ by $2912$ pixels resolution to less than $800$ by $600$ needed for further processing. 
 \item Registered images are manually aligned (Paint.NET image editor was used). Figure \ref{fig:alignment_process} illustrates the result of one such alignment.
 \item PSF size for the blurred image is determined by fitting the blur kernel in the smallest possible odd-sized square region with a small margin.
 \item A region of the same size as the input image is cut from the blurred and noisy image in their aligned position.
@@ -933,7 +933,7 @@ Apart from the estimation of noise using the four methods (see section \ref{sec:
 \begin{figure}[h]
  \centering
   \includegraphics[width=0.9\textwidth]{registration_process.png}
- \caption[Image registration process in Matlab, feature point selection]{Image registration process in Matlab, feature point selection.}
+ \caption[Image registration process in MATLAB, feature point selection]{Image registration process in MATLAB, feature point selection.}
  \label{fig:registration_process}
 \end{figure}
 %%%
@@ -1166,7 +1166,7 @@ In this experiment, we simulated extremely low-light conditions, which is eviden
 	Gamma          & -        & -       & -       & 0.0005  & -       & -       \\ \hline
 
   \end{tabular}
-  \caption[Image statistics for real-world experiment 1]{Image statistics for real-world experiment 1. Featured are the experiment's statistics for the original Lena image, the (registered and cropped) blurred and noisy images and the results of Šroubek's, Tico's and the BM3D algorihm, respectively. {\em Mean} and {\em st. dev.} are the mean and standard deviation for a particular image, {\em IMM96 st. dev.}, {\em TAI98 st. dev.}, {\em DWT07 st. dev.} and {\em SWT07 st. dev.} are the results of noise estimation methods described in section \ref{sec:estimation_of_noise_from_images}, while {\em mean st. dev.} is the average of those results. The {\em exper. st. dev.} is the noise standard deviation determined directly from the uncropped, albeit registered, blurred and noisy images. {\em SNR} is the signal-to-noise ratio with respect to the original Lena image and {\em lambda} and {\em gamma} are the parameters used for the computation of Šroubek's algorithm.}
+  \caption[Image statistics for real-world experiment 1]{Image statistics for real-world experiment 1. Featured are the experiment's statistics for the original Lena image, the (registered and cropped) blurred and noisy images and the results of Šroubek's, Tico's and the BM3D algorithm, respectively. {\em Mean} and {\em st. dev.} are the mean and standard deviation for a particular image, {\em IMM96 st. dev.}, {\em TAI98 st. dev.}, {\em DWT07 st. dev.} and {\em SWT07 st. dev.} are the results of noise estimation methods described in section \ref{sec:estimation_of_noise_from_images}, while {\em mean st. dev.} is the average of those results. The {\em exper. st. dev.} is the noise standard deviation determined directly from the uncropped, albeit registered, blurred and noisy images. {\em SNR} is the signal-to-noise ratio with respect to the original Lena image and {\em lambda} and {\em gamma} are the parameters used for the computation of Šroubek's algorithm.}
   \label{tab:experiment_001_statistics}
 \end{table}
 %%%
@@ -1305,7 +1305,7 @@ The blurred image was taken using the ISO setting of 100 and $1/3$ second exposu
 \section{Evaluation}
 \label{sec:evaluation}
 
-From simulated experimental data, we observe that on average, the presence of noise has a greater influence on the eventual outcome of a particular method than the extent of blurring does. This is evident from figures \ref{fig:avg_methods_vs_var}, \ref{fig:avg_methods_vs_ISO}, \ref{fig:avg_methods_vs_psf_size} and \ref{fig:avg_methods_vs_ISO_psf_size}. Results of the BM3D denoising algorithm are completely independent of the blur PSF size, since the algorithm is executed solely on the noisy, blurless image.
+From simulated experimental data, we observe that on average, the presence of noise has a greater influence on the eventual outcome of a particular method than the extent of blurring does. This is evident from figures \ref{fig:avg_methods_vs_var}, \ref{fig:avg_methods_vs_ISO}, \ref{fig:avg_methods_vs_psf_size} and \ref{fig:avg_methods_vs_ISO_psf_size}. Results of the BM3D denoising algorithm are completely independent of the blur PSF size, since the algorithm is executed solely on the noisy, blur-less image.
 
 %%%
 \begin{figure}[htb]
@@ -1368,7 +1368,7 @@ We've observed that the BM3D denoising algorithm provides consistent results irr
 
 Although simulated experimental data suggest a certain degree of dependence on the type of input image and input PSF, we observe that Šroubek's algorithm is more successful in the setting of little to moderate blurring in the long-exposed image and high noise in the short exposed image. Here, the blurred image contributes information that the BM3D algorithm simply cannot obtain from the inevitably “destroyed” noisy image. In rare cases, Šroubek's algorithm outperforms the BM3D algorithm even for highly blurred images. However, a significant disadvantage of Šroubek's algorithm is the need to fine-tune the $\lambda$ and $\gamma$ parameters, since the theoretically computed ones do not produce satisfying results, as we've observed in real-world data. There are, however, other parameters to be tweaked (such as the number of iterations, both external and internal) that expand the space that could potentially be searched for the best result. 
 
-Although the output of Tico's algorithm is plagued by artifacts at high noise values which lower its potential, the algorithm itself has outperformed either Šroubek's or the BM3D algorithm on only 3 occasions, none of which occured in the real-world setting. This may at first seem statistically insignificant and lead us to quick conclusions; however, the gap between the results of Šroubek's, BM3D and Tico's algorithm is much narrower in real-world experiments, where it even outperforms Šroubek's algorithm. This can be attributed to its internal design which makes it less sensitive to local or space-variant blurring and statistical variations, which did not occur in simulations yet can never be completely avoided in real-world situations. These properties would make Tico's algorithm well suited for lower-fidelity equipment, such as camera phones, where high noise levels could pose diffulties for the BM3D algorithm as could potential spatial variability of blurring pose difficulties for Šroubek's. On the other hand, obtaining a suitable image pair with low fidelity equipment presents yet another obstacle. The better the available equipment is, the lower the noise levels generally are which again makes the BM3D algorithm a more suitable candidate, especially if the long-exposure image is highly blurred.
+Although the output of Tico's algorithm is plagued by artifacts at high noise values which lower its potential, the algorithm itself has outperformed either Šroubek's or the BM3D algorithm on only 3 occasions, none of which occurred in the real-world setting. This may at first seem statistically insignificant and lead us to quick conclusions; however, the gap between the results of Šroubek's, BM3D and Tico's algorithm is much narrower in real-world experiments, where it even outperforms Šroubek's algorithm. This can be attributed to its internal design which makes it less sensitive to local or space-variant blurring and statistical variations, which did not occur in simulations yet can never be completely avoided in real-world situations. These properties would make Tico's algorithm well suited for lower-fidelity equipment, such as camera phones, where high noise levels could pose difficulties for the BM3D algorithm as could potential spatial variability of blurring pose difficulties for Šroubek's. On the other hand, obtaining a suitable image pair with low fidelity equipment presents yet another obstacle. The better the available equipment is, the lower the noise levels generally are which again makes the BM3D algorithm a more suitable candidate, especially if the long-exposure image is highly blurred.
 
 Results of real-world experiments were considerably lower in terms of SNR when compared to simulated experiments with similar parameters. The primary cause was the signal-to-noise ratio being computed against the original Lena image. While intensity ranges of the real-world blurred-image pairs were consistent, all of them were placed higher than the original Lena image, yielding the lower result SNR, despite the internal normalization of the SNR computation procedure. 
 
@@ -1454,11 +1454,11 @@ This leads us to a general conclusion that an efficient single image denoising a
 
 \section{Possible future improvements}
 
-A particular area for improvement could be the implementation of methods. Due to the fact that this thesis did not focus at computational efficiency and partially due to the fact that MATLAB was used, the algorithms' performance could be significantly improved by re-writing them in a programming language such as C or C++. This would nonetheless be necessary for potential future deployment, especially on devices with limited resources. There is room for improvement and optimization in Matlab source code as well. 
+A particular area for improvement could be the implementation of methods. Due to the fact that this thesis did not focus at computational efficiency and partially due to the fact that MATLAB was used, the algorithms' performance could be significantly improved by re-writing them in a programming language such as C or C++. This would nonetheless be necessary for potential future deployment, especially on devices with limited resources. There is room for improvement and optimization in MATLAB source code as well. 
 
 For a better overall picture, simulated experiments could be extended to include more image fusion methods. Moreover, Šroubek's algorithm offers potential for more tweaking beyond the number of iterations and the $\lambda$ and $\gamma$ parameter, exploring its potential exhaustively could effectively constitute a thesis on its own.
 
-Real-world experiments would benenefit from the inclusion of lower-end imaging devices, such as cellphones; these however often lack even the simplest of controls, such as ISO or exposure time; placing considerable restrictions on a reasonable analysis of results. It would also be experimentaly valuable to obtain a digital SLR capable of very high ISO settings, such as 25600, to achieve conditions similar to simulated ones. 
+Real-world experiments would benefit from the inclusion of lower-end imaging devices, such as cell phones; these however often lack even the simplest of controls, such as ISO or exposure time; placing considerable restrictions on a reasonable analysis of results. It would also be experimentally valuable to obtain a digital SLR capable of very high ISO settings, such as 25600, to achieve conditions similar to simulated ones. 
 
 Although real-world experiments were carefully designed and performed, we were unable to completely avoid optical distortion further away from the optical axis. Some degree of inaccuracy was introduced by the analog projector and the interaction between the process of image projection and image capture. It is however important not to grow too distant from real-world photography, of which these imperfections are a daily part. 
 
@@ -1466,13 +1466,13 @@ Although real-world experiments were carefully designed and performed, we were u
 
 \chapter{Contents of the CD}
 
-Structure of the CD corresponds to the structure of the author's working directory and the structure of the online Git repository, where the thesis was maintained. 
+Structure of the CD corresponds to the structure of the author's working directory and the structure of the on-line Git repository, where the thesis was maintained. 
 
 \begin{itemize}
 	\item \texttt{Docs} - miscellaneous thesis-related documents, stored herein is the previous version of the thesis written in Microsoft Word, the Visio diagram illustrating a general overview of the blurred-noisy image pair overview solution as well as an Excel file used for a computation of average parameters for Ojala's noise model
 	\item \texttt{Images} - images selected for use in testing, blur kernels and their working versions
 	\item \texttt{Input} - the source and processed images of the 3 real-world experiments, stored in 3 subdirectories named \texttt{001}, \texttt{002} and \texttt{003}. 
-	\item \texttt{Matlab} - Matlab source files
+	\item \texttt{MATLAB} - MATLAB source files
 	\item \texttt{Output} - the output of all testing, containing generated images as well as report files. 
 	\begin{itemize}
 		\item \texttt{REAL WORLD DATA} - the output of real-world experiments. Results are summarized in the \texttt{report REAL WORLD DATA.xlsm} document. 
@@ -1484,14 +1484,14 @@ Structure of the CD corresponds to the structure of the author's working directo
 \chapter{Implementation and testing notes}
 \label{chap:notes}
 
-Methods tested in this thesis have been implemented using Matlab version 7.4.0 running on Microsoft Windows XP Professional SP 2. Apart from standard Matlab functions, the {\em Wavelet Toobox} and {\em Image Processing Toolbox} were used.
+Methods tested in this thesis have been implemented using MATLAB version 7.4.0 running on Microsoft Windows XP Professional SP 2. Apart from standard MATLAB functions, the {\em Wavelet Toolbox} and {\em Image Processing Toolbox} were used.
 
-Tests were performed on two computers, the first being a single-core 1.8 GHz PC running 32-bit Microsoft Windows XP Professional SP 2 with 1792 MB of RAM and the second was a quad-core hyperthreaded laptop PC running 64bit 
-Windows XP 7 Professional with 8192 MB of RAM, on which up to 4 virtual Windows XP Professional PCs configured to have a single processor and 1024 MB of RAM were run in parallel. Virtual Windows XP PCs were required due to the available Matlab version, which is older and incompatible with Windows 7.
+Tests were performed on two computers, the first being a single-core 1.8 GHz PC running 32-bit Microsoft Windows XP Professional SP 2 with 1792 MB of RAM and the second was a quad-core hyper-threaded laptop PC running 64bit 
+Windows XP 7 Professional with 8192 MB of RAM, on which up to 4 virtual Windows XP Professional PCs configured to have a single processor and 1024 MB of RAM were run in parallel. Virtual Windows XP PCs were required due to the available MATLAB version, which is older and incompatible with Windows 7.
 
 The total time needed to generate all BM3D data was approximately 45 minutes, which was due to the fact that the BM3D denoising algorithm was written in C++ and provided in binary form with a MATLAB interface. In case of Tico's wavelet fusion, processing of one blurred - noisy image pair was independent of the blur size and took about 2 minutes, bringing the total time close to 28 hours. The running time of Šroubek's MC-AM algorithm was highly dependent on PSF size and doubling the PSF size approximately quadrupled the running time, which was approximately 20 - 40 (sometimes even an hour) for PSF 31 pixels in size, 5 - 10 minutes for 15, about 2 minutes for 7 and less than a minute for 3, bringing the total time to about 5 and a half days, which was effectively halved due to computations being performed on 2 PCs in parallel. Searching for the best $\lambda$ and $\gamma$ parameters for the computation of Šroubek's algorithm in case of real-world data required its complete execution for each pair; since there were approximately 200 $\lambda$ and $\gamma$ pairs tested for each experiment, the total running time was approximately 500 hours, effectively about one quarter of time was needed due to parallelization.  
 
-No GUI was implemented and tests were performed in batch mode, results being written to a *.csv file. This is readable in plain text, but is better wieved in a spreadsheet processor, such as Microsoft Excel or Libre Office. Graphs were created in both MATLAB and Microsoft Excel 2007, both of which allow them to be created in the eps format, convertible to pdf. 
+No GUI was implemented and tests were performed in batch mode, results being written to a *.csv file. This is readable in plain text, but is better viewed in a spreadsheet processor, such as Microsoft Excel or Libre Office. Graphs were created in both MATLAB and Microsoft Excel 2007, both of which allow them to be created in the eps format, convertible to pdf. 
 
 Image registration was performed directly in MATLAB using control point selection routine \texttt{cpselect} which produces a set of corresponding control points, the \texttt{cp2tform} routine, which takes the set of control points and computes an image transformation structure from them depending on the desired transformation type and the routine \texttt{imtransform}, which performs the transformation itself. Projective transformation was used as the desired transformation to correct for possible perspective deformation that could occur when projecting the image or taking picture of it.  
 
