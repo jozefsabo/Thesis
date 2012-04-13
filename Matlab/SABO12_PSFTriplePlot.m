@@ -1,3 +1,11 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Triple PSF plotting procedure %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% tico09_data  - TICO09 (2-D) data
+%%% srou03_data  - SROU03 (2-D) data
+%%% bm3d_data    - BM3D   (2-D) data
+%%% out_name     - output file name
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function fig_res = SABO12_PSFTriplePlot(tico09_data, srou03_data, bm3d_data, out_name)
 
     figure
@@ -21,8 +29,6 @@ function fig_res = SABO12_PSFTriplePlot(tico09_data, srou03_data, bm3d_data, out
     %set(gca,'XTickLabel',{' ', '0.0001',' ','0.001',' ','0.01',' ','0.1'});
    	xlabel(gca,'Input PSF');
 	ylabel(gca,'SNR');
-	
-    
     
     print(sprintf('-f%d',gcf),'-dpsc2',out_name);
 

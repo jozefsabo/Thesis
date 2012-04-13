@@ -1,7 +1,12 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% 3D ISO plotting procedure %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% tico09  - TICO09 (2-D) data
+%%% srou03  - SROU03 (2-D) data
+%%% bm3d  - BM3D   (2-D) data
+%%% out_name - output file name
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function fig_res = SABO12_ISO3DFigure(tico09, srou03, bm3d, out_name)
-
-    %X  = [3      7     15   31 ];
-    %Y  = [0.0001 0.001 0.01 0.1]; 
 
     figure
     

@@ -1,3 +1,8 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Provide an initial PSF estimate
+%%% An extract from Šroubek's 2003 MC-AM algorithm
+%%% Author : Michal Sorel
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function [h, res] = minh(z,a,hsize,method)
 %MINH optimal mask (array) for image reconstruction
 %

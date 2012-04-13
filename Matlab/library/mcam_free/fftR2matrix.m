@@ -1,7 +1,7 @@
 function R = fftR2matrix(g, hsize, sigmas)
 
 %
-% R = fftR2matrix(g, hsize)
+% R = fftR2matrix(g, hsize, sigmas)
 %
 % Create R matrix for the partial-data case according to
 % Harikuma-Bresler article using FFT, faster for large hsize than
@@ -9,7 +9,7 @@ function R = fftR2matrix(g, hsize, sigmas)
 %
 % g ... blurred images (cell array)
 % hsize ... size of blurs [y,x]
-%
+% sigmas ... noise variances per each input channel
 
 global G
 global FG
@@ -31,15 +31,14 @@ disp('R construction');
 R = zeros(N*length(G));
 for i = 1:length(G)
 %  i
-  %
   r = localr2matrix(i,i,hsize);
   for k = [1:i-1, i+1:length(G)]
-   %R(N*(k-1)+1:N*k,N*(k-1)+1:N*k) = R(N*(k-1)+1:N*k,N*(k-1)+1:N*k) + r; 
+    % modification by Jozef Sabo, 2012 
     R(N*(k-1)+1:N*k,N*(k-1)+1:N*k) = R(N*(k-1)+1:N*k,N*(k-1)+1:N*k) + (1./(sigmas(i) + sigmas(k))).*r;
   end
   for j = i+1:length(G)
 %    j
-   %r = -localr2matrix(i,j,hsize);
+    % modification by Jozef Sabo, 2012
 	r = -(1./(sigmas(i) + sigmas(j))).*localr2matrix(i,j,hsize);
     R(N*(i-1)+1:N*i,N*(j-1)+1:N*j) = r; 
     R(N*(j-1)+1:N*j,N*(i-1)+1:N*i) = r.';

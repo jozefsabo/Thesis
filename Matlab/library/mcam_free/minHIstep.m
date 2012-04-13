@@ -8,12 +8,14 @@ function [iterres, E] = minHIstep(Potfce,sigma2,lambda,sigmas,maxiter,defrelres)
 % of PSFs must lie between 0 and 1. Fmincon is necessary if PSFs 
 % are overestimated. 
 %
+% modified by Jozef Sabo, 2012 (added the sigmas parameter)
+
 
 global hsize FL gU
 global U H G R
 
 maxiter = 1; %it is not an iterative alg. (left for future use)
-
+% modification by Jozef Sabo, 2012
 gammas = 1./sigmas;
 
 if ~exist('defrelres')
@@ -24,7 +26,7 @@ if isempty(defrelres)
 end
 
 %disp('gU construction');
-%gU = kron(eye(length(H)),fftconv2matrix(U,size(H{1})));
+% modification by Jozef Sabo, 2012
 eye_mat = eye(length(H)); 
 for k = 1:length(H)
     eye_mat(k,k) = gammas(k); 
@@ -44,8 +46,8 @@ alpha = lambda;
 b = [];
 for k = 1:length(H)
   iff=ifft2(FUf.*fft2(G{k},size(FUf,1),size(FUf,2)));
-  %b = [b; vec(real(iff(end-hsize(1)+1:end,end-hsize(2)+1:end)))];
-   b = [b; gammas(k).*vec(real(iff(end-hsize(1)+1:end,end-hsize(2)+1:end)))];
+  % modification by Jozef Sabo, 2012
+  b = [b; gammas(k).*vec(real(iff(end-hsize(1)+1:end,end-hsize(2)+1:end)))];
 end
 
 %%%%
@@ -58,10 +60,8 @@ gU = gU+lambda*R;
 %xmin = gU\b;
 %iterres(i,:) = {norm(b-gU*xmin)/norm(b)};
 
-% set H{1} to delta matrix
-% H{1} = make_delta(size(H{1})); 
 %% 2nd minimizer; fmincon with constraints
-%zTz = sum(sum([G{:}].^2));
+% modification by Jozef Sabo, 2012
 zTz = 0; 
 for k=1:length(G)
     zTz = zTz + gammas(k).*sum(sum([G{k}].^2)); 
@@ -71,7 +71,6 @@ lb = zeros(size(x0));
 ub = ones(size(x0));
 options = optimset('GradObj','on','Hessian','on');
 [xmin,fval,flag,output] = fmincon(@minHcon,x0,[],[],[] ,[] ,lb,ub,[]     ,options, gU,b,zTz);
-% from documentation      fmincon(fun     ,x0,A ,b ,Aeq,beq,lb,ub,nonlcon,options) 				
 
 iterres(i,:) = { flag output.iterations};
 %%%%%    
@@ -79,9 +78,6 @@ iterres(i,:) = { flag output.iterations};
 for k=1:length(H)
    H{k} = unvec(xmin(N*(k-1)+1:N*k),hsize);
 end
-% set H{1} to delta matrix again
-%H{1} = make_delta(size(H{1})); 
-
 
 end
 

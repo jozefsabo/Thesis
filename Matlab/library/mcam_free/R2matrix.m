@@ -9,6 +9,7 @@ function R = R2matrix(g, hsize, sigmas)
 % g ... blurred images (cell array)
 % hsize ... size of blurs [y,x]
 %
+% modified by Jozef Sabo, 2012
 
 global G
 
@@ -24,14 +25,13 @@ tic;
 disp('R construction');
 R = zeros(N*length(G));
 for i = 1:length(G)
-   %
    r = localr2matrix(i,i,hsize);
    for k = [1:i-1, i+1:length(G)]
-     %R(N*(k-1)+1:N*k,N*(k-1)+1:N*k) = R(N*(k-1)+1:N*k,N*(k-1)+1:N*k) + r; 
-      R(N*(k-1)+1:N*k,N*(k-1)+1:N*k) = R(N*(k-1)+1:N*k,N*(k-1)+1:N*k) + (1./(sigmas(i) + sigmas(k))).*r;
+     % modification by Jozef Sabo, 2012 
+     R(N*(k-1)+1:N*k,N*(k-1)+1:N*k) = R(N*(k-1)+1:N*k,N*(k-1)+1:N*k) + (1./(sigmas(i) + sigmas(k))).*r;
    end
    for j = i+1:length(G)
-	 %r = -localr2matrix(i,j,hsize);
+	 % modification by Jozef Sabo, 2012
       r = -(1./(sigmas(i) + sigmas(j))).*localr2matrix(i,j,hsize);
       R(N*(i-1)+1:N*i,N*(j-1)+1:N*j) = r; 
       R(N*(j-1)+1:N*j,N*(i-1)+1:N*i) = r.';

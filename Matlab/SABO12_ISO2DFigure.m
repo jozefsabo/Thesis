@@ -1,3 +1,9 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% ISO plotting procedure %%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% in_data  - input (2-D) data
+%%% out_name - output file name
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function fig_res = SABO12_ISO2DFigure(in_data, out_name)
 
     figure
@@ -12,7 +18,6 @@ function fig_res = SABO12_ISO2DFigure(in_data, out_name)
 	grid on
     
     set(gca,'FontSize',15);
-    %set(gca,'YTickLabel',{' ', '3',' ','7',' ','15',' ', '31'});
     set(gca,'YTickLabel',{' ', '31',' ','15',' ','7',' ', '3'});
     
     set(gca,'XTickLabel',{'200','400','800','1600','3200','6400','12800','25600','102400'});

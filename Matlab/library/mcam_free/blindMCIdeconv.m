@@ -7,9 +7,15 @@ function [u, h, rmseu, rmseh, E] = blindMCIdeconv(g, r ,PotFce, ...
 % For mathematical and implementation details see paper
 % Sroubek, Flusser, "Multichannel blind iterative image restoration". 
 % IEEE Trans Image Processing 12(9):1094-1106, 2003.
+% 
+% Extended by Jozef Sabo at the Faculty of Mathematics and Physics 
+% of the Charles University in Prague, Czech Republic
+% as part of his 2012 diploma thesis entitled 
+% "Image deblurring using two images with different exposure times"
+% to accommodate variable noise per each input channel.   
 %
 % [U, H, rmseu, rmseh] = blindMCIdeconv(G,R,potfce,  
-%                           u_lambda, u_mu, h_lambda,
+%                           u_lambda, u_mu, h_lambda, sigmas,
 %                           u0, h0, no_iter, origu, origh)
 %
 % input arguments:
@@ -17,7 +23,9 @@ function [u, h, rmseu, rmseh, E] = blindMCIdeconv(g, r ,PotFce, ...
 % R ... R matrix if empty use R=R2matrix(G,..) 
 % potfce ... potential function (matlab fce) (e.g. 'RudOsh', 'MumShah' or 'HyperSruface')
 % u_lambda, u_mu ... weights for U terms, potential and noise dependant
-% h_lambad ... weight for the H term, noise dependant
+% h_lambda ... weight for the H term, noise dependant
+% sigmas ... noise variances per each channel, a vector of the same
+%            size as cell array G
 % u0, h0 ... initial (starting) values of U and H (h0 cell array
 % could be a set of empty matrices of size equal to overestimated
 % blur size or just a size vector [s_y, s_x])
@@ -46,6 +54,7 @@ function [u, h, rmseu, rmseh, E] = blindMCIdeconv(g, r ,PotFce, ...
 % calculated from a fix product;  variable parprod see bellow (also see the paper)
 % note(24.9.01): R may be defined as one of the input arguments
 % written by Filip Sroubek (C) 2002
+% extended by Jozef Sabo, 2012
 
 % global variables (blurred images, restored image, reconstructed blur masks)
 global G U H R
@@ -73,7 +82,8 @@ end
  
 if isempty(r)
   disp('Calculating R matrix ...');
-  %R = R2matrix([],hsize,sigmas);
+  % Modification by Jozef Sabo, 2012
+  % R = R2matrix([],hsize,sigmas);
   R = fftR2matrix([],hsize,sigmas);
 else
   R = r;
@@ -160,11 +170,12 @@ vrange = [min(vec([G{:}])), max(vec([G{:}]))];
 
 H = h;
 
-% inverted input variances 
+% inverted input variances, modification by Jozef Sabo, 2012 
 gammas = 1./sigmas; 
  
 % param. product 
-%parprod = 1/(4+2*sqrt(2))*sqrt(prod(size(h{1}))/(length(G)*prod(size(G{1}))));
+% parprod = 1/(4+2*sqrt(2))*sqrt(prod(size(h{1}))/(length(G)*prod(size(G{1}))));
+% modification by Jozef Sabo, 2012
 parprod =  (1/((4+2*sqrt(2))*sum(gammas(1:end-1))))*sqrt((prod(size(h{1})) /prod(size(G{1})) )*sum(gammas(:)));
 
 %%% parprod == ?
@@ -177,7 +188,6 @@ if (isempty(u_lambda))
   u_lambda = h_lambda/parprod;
 end
 
-%QUIET = 0
 QUIET = 1;
 if (exist('origu') | exist('origh')) & (~QUIET) 
   errpic = figure('Tag','errpic');
@@ -211,17 +221,19 @@ for j = 1:no_iter
   disp(['Step: ',num2str(j)]);
   % U minimization
   disp('U minimization');
+  % modification by Jozef Sabo, 2012
   [iresu E] = minUstep(PotFce,u_lambda,u_mu,sigmas,1,1e-6);
   % impose constraints on U 
   U = uConstr(U,vrange);
   % H minimization 
   disp('H minimization');
-  %iresh = minHIstep(PotFce,1/u_lambda,h_lambda_set(j),sigmas,5,1e-6);
+  % modification by Jozef Sabo, 2012
   iresh = minHIstep(PotFce,u_lambda,h_lambda_set(j),sigmas,5,1e-6);
   % impose constraints on H
   for k=1:length(H)
     H{k} = hConstr(H{k});
 	% shift kernel towards the center
+	% modification by Jozef Sabo, 2012
 	H{k}  = cntshift(H{k}); 
   end
 

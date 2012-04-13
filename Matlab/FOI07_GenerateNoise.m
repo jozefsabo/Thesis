@@ -3,7 +3,6 @@
 %b          - parameter value 
 %result_img - image with added noise
 function result_img = FOI07_GenerateNoise(img, a, b)
-   % img        = imnoise(img/a,'poisson'        ); 
    
    img_intensity = (0:1:255)/255;
    img_variance  = abs(a * img_intensity + b);   

@@ -1,6 +1,9 @@
-%Shift values for convolution padding
-%blur_kernel           - blur PSF
-%up, down, left, right - respective shift values 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Shift amounts for convolution padding %%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% blur_kernel           - blur PSF
+%%% up, down, left, right - respective shift values
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 function [up down left right] = conv2_shifts(blur_kernel)
 
 	up    = floor(size(blur_kernel, 1) / 2); 

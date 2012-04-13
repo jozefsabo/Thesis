@@ -1,5 +1,7 @@
-%%% SABO11 Master Thesis 
-%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Simulated experimental data generator %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 % run the global settings
 global_settings; 
 
@@ -11,26 +13,19 @@ cd(test_dirname);
 rpt_file = mk_report_file([test_dirname '\'], 'report.csv'); 
 
 % images to test on
-images  = {'text256' 'castle256'}; 
-%images = {'lena256'}; 
+images  = {'lena256' 'tree256' 'text256' 'castle256'}; 
+
 % blur kernels 
 kernels = {'blurkernel7' 'blurkernel8' 'line' 'blurkernel10'};
+
 % psf size
-PSFs     = [31];
-%PSFs    = [3  7]
-%PSFs     = [3];
+PSFs     = [3 7 15 31];
+
 % input noise standard deviations
 VARs     = [0.0001 0.001 0.01 0.1];
-% input noise
-%ISOs     = [200];
-ISOs     =  [102400];   
 
-
-% lambda parameters
-%lambdas  = [0.001]; 
-%lambdas  = [0.001 0.002 0.005 0.007 0.01 0.02 0.03 0.04 0.05 0.06 0.07 0.08 0.09 0.1 0.5 1 2 5 10]; 
-%lambdas  = [3.7897872];
-%gammas   = [0.001288];
+% input ISO
+ISOs     = [200 400 800 1600 3200 6400 12800 25600 102400];   
 
 % base std
 VAR_base = 0.00001;     
@@ -86,16 +81,16 @@ if ISO_MODE
                         img_noise     = OJAL08_CameraNoiseSimulation(img_source, ISOs(m));
                         % estimate standard deviation of noise
                         noise_std_est = std2(img_source - img_noise); 
-                        %[NA, img_bm3d]= BM3D(1, img_noise, 255*noise_std_est);
-
-                        %img_tico09 = TICO09_LuminanceFusion(img_blur, img_noise); 
-
+						% denoise the noisy image using the BM3D algorithm
+						[NA, img_bm3d]= BM3D(1, img_noise, 255*noise_std_est);
+						% TICO09 image fusion
+                        img_tico09 = TICO09_LuminanceFusion(img_blur, img_noise); 
+						
                         %write noisy and BM3D denoised images
                         imwrite(img_noise , sprintf('%s_%s_PSF_%02d_ISO_%05d_%05d_noise.png'  , images{i}, kernels{j}, PSFs(l), ISO_base, ISOs(m)), 'png');    
                         imwrite(img_blur  , sprintf('%s_%s_PSF_%02d_ISO_%05d_%05d_blur.png'   , images{i}, kernels{j}, PSFs(l), ISO_base, ISOs(m)), 'png');
-                        %imwrite(img_bm3d  , sprintf('%s_%s_PSF_%02d_ISO_%05d_%05d_bm3d.png'   , images{i}, kernels{j}, PSFs(l), ISO_base, ISOs(m)), 'png');
-                        %imwrite(img_tico09, sprintf('%s_%s_PSF_%02d_ISO_%05d_%05d_tico09.png' , images{i}, kernels{j}, PSFs(l), ISO_base, ISOs(m)), 'png');
-
+                        imwrite(img_bm3d  , sprintf('%s_%s_PSF_%02d_ISO_%05d_%05d_bm3d.png'   , images{i}, kernels{j}, PSFs(l), ISO_base, ISOs(m)), 'png');
+                        imwrite(img_tico09, sprintf('%s_%s_PSF_%02d_ISO_%05d_%05d_tico09.png' , images{i}, kernels{j}, PSFs(l), ISO_base, ISOs(m)), 'png');
 
                         % evaluate method sucess
                         %blur_snr   = eval_snr        (img_source, img_blur); 
@@ -107,11 +102,11 @@ if ISO_MODE
                         %noise_pmse = eval_pmse       (img_source, img_noise);
 
                         %bm3d_snr   = eval_snr        (img_source, img_bm3d); 
-                        %bm3d_isnr  = eval_sroubek_snr(img_source, img_bm3d);
+                        bm3d_isnr  = eval_sroubek_snr(img_source, img_bm3d);
                         %bm3d_pmse  = eval_pmse       (img_source, img_bm3d);
 
                         %tico09_snr = eval_snr        (img_source, img_tico09); 
-                        %tico09_isnr= eval_sroubek_snr_shift(img_source, img_tico09,PSFs(l));
+                        tico09_isnr= eval_sroubek_snr_shift(img_source, img_tico09, PSFs(l));
                         %tico09_pmse= eval_pmse       (img_source, img_tico09);
 
                         psf_noise = make_delta(PSFs(l),PSFs(l)); 
@@ -201,16 +196,16 @@ if ISO_MODE
                         % generate noisy image using gaussian noise
                         img_noise     = imnoise(img_source, 'gaussian', 0, VARs(m));
                         % denoise the image using the BM3D algorithm
-                        %[NA, img_bm3d]= BM3D(1, img_noise, sqrt(VARs(m))*255);
+                        [NA, img_bm3d]= BM3D(1, img_noise, sqrt(VARs(m))*255);
                         
                         % TICO09 image fusion
-                        %img_tico09 = TICO09_LuminanceFusion(img_blur, img_noise); 
+                        img_tico09 = TICO09_LuminanceFusion(img_blur, img_noise); 
 
                         %write noisy and BM3D denoised images
                         imwrite(img_noise , sprintf('%s_%s_PSF_%02d_VAR_%6.5f_%6.5f_noise.png'  , images{i}, kernels{j}, PSFs(l), VAR_base, VARs(m)), 'png');    
                         imwrite(img_blur  , sprintf('%s_%s_PSF_%02d_VAR_%6.5f_%6.5f_blur.png'   , images{i}, kernels{j}, PSFs(l), VAR_base, VARs(m)), 'png');
-                        %imwrite(img_bm3d  , sprintf('%s_%s_PSF_%02d_VAR_%6.5f_%6.5f_bm3d.png'   , images{i}, kernels{j}, PSFs(l), VAR_base, VARs(m)), 'png');
-                        %imwrite(img_tico09, sprintf('%s_%s_PSF_%02d_VAR_%6.5f_%6.5f_tico09.png' , images{i}, kernels{j}, PSFs(l), VAR_base, VARs(m)), 'png');
+                        imwrite(img_bm3d  , sprintf('%s_%s_PSF_%02d_VAR_%6.5f_%6.5f_bm3d.png'   , images{i}, kernels{j}, PSFs(l), VAR_base, VARs(m)), 'png');
+                        imwrite(img_tico09, sprintf('%s_%s_PSF_%02d_VAR_%6.5f_%6.5f_tico09.png' , images{i}, kernels{j}, PSFs(l), VAR_base, VARs(m)), 'png');
 
                         % evaluate method sucess
                         %blur_snr   = eval_snr        (img_source, img_blur); 
@@ -222,11 +217,11 @@ if ISO_MODE
                         %noise_pmse = eval_pmse       (img_source, img_noise);
 
                         %bm3d_snr   = eval_snr        (img_source, img_bm3d); 
-                        %bm3d_isnr  = eval_sroubek_snr(img_source, img_bm3d);
+                        bm3d_isnr  = eval_sroubek_snr(img_source, img_bm3d);
                         %bm3d_pmse  = eval_pmse       (img_source, img_bm3d);
 
                         %tico09_snr = eval_snr        (img_source, img_tico09); 
-                        %tico09_isnr= eval_sroubek_snr_shift(img_source, img_tico09,PSFs(l));
+                        tico09_isnr= eval_sroubek_snr_shift(img_source, img_tico09,PSFs(l));
                         %tico09_pmse= eval_pmse       (img_source, img_tico09);
                         
                         
@@ -279,8 +274,6 @@ if ISO_MODE
     end
     toc;
 end 
-
-
 
 fclose(rpt_file); 
 cd(THESIS_PATH); 

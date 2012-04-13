@@ -1,3 +1,9 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Calculate median absolute deviation %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% sig     - input signal 
+%%% mad_res - MAD value
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 function mad_res = mad(sig)
     % reshape signal into a 1 by N vector
     res_sig = reshape(signal, 1, []); 

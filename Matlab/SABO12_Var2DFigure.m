@@ -1,3 +1,9 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Variation plotting procedure %%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% in_data  - input (2-D) data
+%%% out_name - output file name
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function fig_res = SABO12_Var2DFigure(in_data, out_name)
 
     figure

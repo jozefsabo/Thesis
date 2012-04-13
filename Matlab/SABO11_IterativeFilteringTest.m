@@ -1,8 +1,12 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% A script used for iterative filtering of images by selected methods, unused in the thesis %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 % run the global settings
 global_settings; 
 
 input_file   = 'lena512_orig'; 
-methods      = {'TAI08_NoiseEstimation' 'IMM96_NoiseEstimation' 'MALL07_SWT_NoiseEstimation' 'MALL07_DWT_NoiseEstimation'}; 
+methods      = {'TAI08_NoiseEstimation' 'IMM96_NoiseEstimation' 'MALL09_SWT_NoiseEstimation' 'MALL09_DWT_NoiseEstimation'}; 
 
 
 test_dirname = mk_test_dir(OUTPUT_PATH, 'SABO11_IterativeFilteringTest'); 

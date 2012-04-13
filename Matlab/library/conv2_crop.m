@@ -1,4 +1,10 @@
-%crop crop_in by the sizes of crop_by
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Crop image %%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% crop_in - input
+%%% crop_by - crop by 
+%%% crop_res- result
+%%%%%%%%%%%%%%%%%%%%%%%%%%
 function crop_res = conv2_crop(crop_in, crop_by)
 
     [up down left right] = conv2_shifts(crop_by); 

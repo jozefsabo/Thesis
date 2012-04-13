@@ -1,6 +1,9 @@
-%Experimental blur PSF deblurring method
-%in_psf  - input PSF
-%out_psf - output PSF
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Experimental blur PSF deblurring method, unused in thesis %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% in_psf  - input PSF
+%%% out_psf - output PSF
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function out_psf = deblur_psf(in_psf)
 
     coef = 4; 

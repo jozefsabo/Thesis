@@ -1,6 +1,8 @@
-%Simple pixel erosion 
-%source_image - source image
-%result_image - result image 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Simple pixel erosion %%%%%%%%%%
+%%% source_image - source image %%%
+%%% result_image - result image %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function result_image = pixel_erosion(source_image)
 
 src_img = source_image; 

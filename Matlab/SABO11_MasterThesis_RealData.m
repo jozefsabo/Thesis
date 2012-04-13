@@ -17,7 +17,7 @@ run_tico09 = 1;
 run_srou03 = 1; 
 
 % equalize images?
-run_imeq   = 1; 
+run_imeq   = 0; 
 
 % create a test directory and switch to it
 test_dirname = mk_test_dir(OUTPUT_PATH, sprintf('%s equalized',mfilename)); 
@@ -65,9 +65,9 @@ for i=1:length(images)
 	fprintf(rpt_file, 'Mean and standard deviation for the noisy    image        : %8.7f, %8.7f \n\n'            ,noise_mean, noise_std);
 	
     % estimate noise standard deviations on equalized files
-    orig_n_stds  = [IMM96_NoiseEstimation(im_orig)  TAI08_NoiseEstimation(im_orig)  MALL07_DWT_NoiseEstimation(im_orig)  MALL07_SWT_NoiseEstimation(im_orig )]; 
-    blur_n_stds  = [IMM96_NoiseEstimation(im_blur)  TAI08_NoiseEstimation(im_blur)  MALL07_DWT_NoiseEstimation(im_blur)  MALL07_SWT_NoiseEstimation(im_blur )]; 
-    noise_n_stds = [IMM96_NoiseEstimation(im_noise) TAI08_NoiseEstimation(im_noise) MALL07_DWT_NoiseEstimation(im_noise) MALL07_SWT_NoiseEstimation(im_noise)]; 
+    orig_n_stds  = [IMM96_NoiseEstimation(im_orig)  TAI08_NoiseEstimation(im_orig)  MALL09_DWT_NoiseEstimation(im_orig)  MALL09_SWT_NoiseEstimation(im_orig )]; 
+    blur_n_stds  = [IMM96_NoiseEstimation(im_blur)  TAI08_NoiseEstimation(im_blur)  MALL09_DWT_NoiseEstimation(im_blur)  MALL09_SWT_NoiseEstimation(im_blur )]; 
+    noise_n_stds = [IMM96_NoiseEstimation(im_noise) TAI08_NoiseEstimation(im_noise) MALL09_DWT_NoiseEstimation(im_noise) MALL09_SWT_NoiseEstimation(im_noise)]; 
 
     fprintf(rpt_file, 'Estimated noise standard deviations for the original image: %8.7f, %8.7f, %8.7f, %8.7f \n'  ,orig_n_stds ); 
     fprintf(rpt_file, 'Estimated noise standard deviations for the blurred  image: %8.7f, %8.7f, %8.7f, %8.7f \n'  ,blur_n_stds ); 
@@ -94,7 +94,7 @@ for i=1:length(images)
         % evaluate bm3d statistics 
         bm3d_mean   = mean(bm3d(:));
 		bm3d_std    = std (bm3d(:));
-		bm3d_n_stds = [IMM96_NoiseEstimation(bm3d) TAI08_NoiseEstimation(bm3d) MALL07_DWT_NoiseEstimation(bm3d) MALL07_SWT_NoiseEstimation(bm3d)]; 
+		bm3d_n_stds = [IMM96_NoiseEstimation(bm3d) TAI08_NoiseEstimation(bm3d) MALL09_DWT_NoiseEstimation(bm3d) MALL09_SWT_NoiseEstimation(bm3d)]; 
 		bm3d_n_std  = mean(bm3d_n_stds); 
 		
 		fprintf(rpt_file, 'Mean and standard deviation for the bm3d image        : %8.7f, %8.7f \n'              ,bm3d_mean  , bm3d_std); 
@@ -117,7 +117,7 @@ for i=1:length(images)
         % evaluate bm3d statistics 
         tico09_mean   = mean(tico09(:));
 		tico09_std    = std (tico09(:));
-		tico09_n_stds = [IMM96_NoiseEstimation(tico09) TAI08_NoiseEstimation(tico09) MALL07_DWT_NoiseEstimation(tico09) MALL07_SWT_NoiseEstimation(tico09)]; 
+		tico09_n_stds = [IMM96_NoiseEstimation(tico09) TAI08_NoiseEstimation(tico09) MALL09_DWT_NoiseEstimation(tico09) MALL09_SWT_NoiseEstimation(tico09)]; 
 		tico09_n_std  = mean(tico09_n_stds); 
 		
 		fprintf(rpt_file, 'Mean and standard deviation for the tico09 image        : %8.7f, %8.7f \n'              ,tico09_mean  , tico09_std); 
@@ -172,7 +172,7 @@ for i=1:length(images)
 				% evaluate bm3d statistics 
 				srou03_mean   = mean(srou03(:));
 				srou03_std    = std (srou03(:));
-				srou03_n_stds = [IMM96_NoiseEstimation(srou03) TAI08_NoiseEstimation(srou03) MALL07_DWT_NoiseEstimation(srou03) MALL07_SWT_NoiseEstimation(srou03)]; 
+				srou03_n_stds = [IMM96_NoiseEstimation(srou03) TAI08_NoiseEstimation(srou03) MALL09_DWT_NoiseEstimation(srou03) MALL09_SWT_NoiseEstimation(srou03)]; 
 				srou03_n_std  = mean(srou03_n_stds); 
 				
 				fprintf(rpt_file, 'Mean and standard deviation for the srou03 image for lambda %6.4f and gamma %6.4f        : %8.7f, %8.7f \n'              , lambdas(k), gammas(j), srou03_mean  , srou03_std   ); 

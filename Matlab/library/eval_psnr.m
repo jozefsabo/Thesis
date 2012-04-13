@@ -1,4 +1,4 @@
-%Evaluate peak signal to noise ratio
+%%% Evaluate peak signal to noise ratio
 
 %Formula taken from "A Novel Architecture for Wavelet based Image Fusion"
 %by Susmitha Vekkot and Pancham Shukla in World Academy of Science,

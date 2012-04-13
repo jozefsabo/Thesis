@@ -1,3 +1,12 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%% Determine padding size %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% psf_size - PSF size
+%%% up       - up pad size
+%%% down     - down pad size
+%%% left     - left pad size
+%%% right    - right pad size  
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function [up down left right] = pad_size(psf_size)
 
     B_w = psf_size(2); 

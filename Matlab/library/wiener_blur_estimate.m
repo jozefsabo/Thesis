@@ -1,9 +1,12 @@
-%psf estimate using a wiener filter 
-%blur_img  - blurred and noisy image
-%noisy_img - noisy image
-%k1        - ratio
-%psf_size  - PSF Size         
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Blur PSF estimate using a Wiener filter %%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% blur_img  - blurred and noisy image
+%%% noisy_img - noisy image
+%%% k1        - ratio
+%%% psf_size  - PSF size         
+%%% b_k       - estimated blur PSF 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function b_k = wiener_blur_estimate(blur_img, noisy_img, k1, psf_size)
 
     %FFT of blurred image

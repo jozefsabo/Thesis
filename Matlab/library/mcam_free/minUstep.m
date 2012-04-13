@@ -5,6 +5,7 @@ function [iterres, E] = minUstep(Potfce,lambda,mu,sigmas,maxiter,defrelres)
 % solving linear problem Ax=b that is (H'H-(1/lambda)*L(v))u = H'g
 % using CG iterative method
 %
+% modified by Jozef Sabo, 2012
 global usize L
 global U H G
 
@@ -21,7 +22,7 @@ end
 if isempty(defrelres)
    defrelres = 1e-4;
 end
-
+% modification by Jozef Sabo, 2012
 gammas = 1./sigmas; 
 
 gH = H;
@@ -31,12 +32,12 @@ fprime = inline([Potfce,'(DU,a)']);
 usize = size(U);
 N = prod(usize);
 beta = mu*pi/8;
-%step2lambda = 1/(lambda*step^2);
+% modification by Jozef Sabo, 2012
 step2lambda = lambda;
 
 b = 0;
 for k=1:length(H)
-  %b = b + vec(conv2(G{k},flipud(fliplr(H{k})),'full'));
+   % modification by Jozef Sabo, 2012
    b = b + gammas(k).*vec(conv2(G{k},flipud(fliplr(H{k})),'full'));
 end
 
@@ -72,9 +73,9 @@ L = -step2lambda*(L - spdiags(sum(L,2),0,N,N));
 
 % min F(u,v) with respect to u (fix v)
 %
-%[xmin,flag,relres,iter,resvec] = pcg(@gradcalcU,b,defrelres,100  ,[],[],vec(U));
+% modification by Jozef Sabo, 2012
 [xmin,flag,relres,iter,resvec] = pcg(@gradcalcU,b,defrelres,100  ,[],[],vec(U),sigmas);
-% from documentation             pcg(A         ,b,tol      ,maxit,M1,M2,x0)								
+							
 iterres(i,:) = {flag relres iter resvec};
 %relres
 %iter

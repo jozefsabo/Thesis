@@ -1,3 +1,11 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Triple variation plotting procedure %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% tico09_data  - TICO09 (2-D) data
+%%% srou03_data  - SROU03 (2-D) data
+%%% bm3d_data    - BM3D   (2-D) data
+%%% out_name     - output file name
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function fig_res = SABO12_VarTriplePlot(tico09_data, srou03_data, bm3d_data, out_name)
 
     figure

@@ -1,3 +1,11 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Evaluate SNR according to Šroubek by meabs of a sliding window %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% I        - original image 
+%%% E        - estimated imagte (same size as I)
+%%% psf_size - size of the scanning window
+%%% best_snr - best obtained SNR value
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function best_snr = eval_sroubek_snr_shift(I,E,psf_size)
 	
 	results = zeros(psf_size,psf_size);  

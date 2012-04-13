@@ -1,5 +1,7 @@
-%make the elements of x greater than or equal to zero and sum up to 1
-%works for real values only
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Make the elements of x greater than or equal to zero and sum up to 1 %%%
+%%% works for real values only                                           %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function y = normshift(x)
 
     x_siz = size(x); 

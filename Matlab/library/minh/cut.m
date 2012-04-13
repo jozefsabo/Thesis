@@ -1,3 +1,7 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Author : Michal Sorel
+%%% used by: minh.m 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function o = cut(a,m0,n0,m,n)
 %CUT cuts out submatrix or centered submatrix or completes with zeros 
 %

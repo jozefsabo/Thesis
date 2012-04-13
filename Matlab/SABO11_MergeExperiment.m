@@ -1,5 +1,8 @@
-% psf_size is ignored
-function out_image = SABO11_MergeExperiment(img_blur, img_noise, psf_size)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Experimental wavelet merge method, eventually unused in the thesis %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+function out_image = SABO11_MergeExperiment(img_blur, img_noise)
+
 % spatial window size - constant
 s_w_siz = 8;
 
